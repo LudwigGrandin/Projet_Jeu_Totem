@@ -22,11 +22,6 @@ typedef struct TMain
 
 } TMain;
 
-int main()
-{
-
-    return 0;
-}
 
 
 void piocher(TMain mainJoueur, TPile pile)
