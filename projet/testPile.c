@@ -16,7 +16,7 @@ int est_pile_vide(TPile p)
 
 	return 0;
 }
-
+//test merge
 void empiler(TPile p, TCarte c)
 {
 	int verif;
