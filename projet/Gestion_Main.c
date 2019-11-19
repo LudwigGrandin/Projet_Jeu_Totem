@@ -1,27 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct Tcellule
-{
-	TCarte cartes;
-	struct Tcellule * suivant;
-} Tcellule;
-
-typedef struct TCarte
-{
-	char nom[100];
-	int num;
-	char effet[100];
-	int type;
-
-} TCarte;
-
-typedef struct TMain
-{
-	TCellule debut;
-
-} TMain;
-
 
 
 void piocher(TMain mainJoueur, TPile pile)
