@@ -16,7 +16,10 @@ int est_pile_vide(TPile p)
 
 	return 0;
 }
+
 //test commit
+
+//test merge
 
 void empiler(TPile p, TCarte c)
 {
