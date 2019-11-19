@@ -41,7 +41,7 @@ void empiler(TPile p, TCarte c)
 		p = newC;
 	}
 	else{
-		p = (*aux).suivant;
+		(*p).premier = (*aux).suivant;
 		aux = newC;
 	}
 }
@@ -59,7 +59,7 @@ void depiler(TPile p)
 	}
 	else
 	{
-		p = (*aux).suivant;
+		(*p).premier = (*aux).suivant;
 		free(aux);
 	}
 

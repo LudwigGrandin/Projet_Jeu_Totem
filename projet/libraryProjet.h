@@ -13,6 +13,7 @@ typedef struct TPilelem
 {
 	TCarte carte;
 	struct TPileElem *suivant;
+	struct TPileElem *premier;
 }TPilelem, *TPile;
 
 int est_pile_vide(TPile p);
