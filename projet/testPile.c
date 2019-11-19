@@ -2,7 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "libraryProjet.h"
+#include "modele_donnees.c"
+
 	/* Définition d'une carte */
+
+
 
 int main(){
 
