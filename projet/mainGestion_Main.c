@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "libraryProjet.h"
+#include "modele_donnees.c"
 
 int main()
 {

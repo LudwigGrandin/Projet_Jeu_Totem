@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-
 
 void piocher(TMain mainJoueur, TPile pile)
 {
