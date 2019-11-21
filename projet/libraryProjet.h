@@ -3,9 +3,9 @@
 #include "modele_donnees.c"
 
 
-int est_pile_vide(TPile p);
-void empiler(TPile, TCarte c);
-void depiler(TPile p);
+int est_pile_vide(TPile * pile);
+void empiler(TPile * pile, TCarte c);
+void depiler(TPile * pile);
 
 
 

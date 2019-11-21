@@ -9,14 +9,18 @@ typedef struct TCarte
 	char effet[100];
 	int num;
 	int type;
-}TCarte;
+} TCarte;
 
 typedef struct TPilelem
 {
 	TCarte carte;
-	struct TPileElem *suivant;
-	struct TPileElem *premier;
-}TPilelem, *TPile;
+	struct TPilelem *suivant;
+}TPilelem;
+
+typedef struct TPile
+{
+	TPilelem *sommet;
+}TPile;
 
 typedef struct Tcellule
 {
@@ -24,17 +28,9 @@ typedef struct Tcellule
 	struct Tcellule * suivant;
 } Tcellule;
 
-typedef struct TCarte
-{
-	char nom[100];
-	int num;
-	char effet[100];
-	int type;
-
-} TCarte;
 
 typedef struct TMain
 {
-	TCellule debut;
+	Tcellule debut;
 
 } TMain;

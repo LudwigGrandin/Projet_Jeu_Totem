@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "libraryProjet.h"
-#include "modele_donnees.c"
+
 
 	/* Définition d'une carte */
 
@@ -10,22 +10,20 @@
 
 int main(){
 
-	struct TPilelem p;
+	struct TPile pile;
+	pile.sommet = NULL;
 }
 
-int est_pile_vide(TPile p)
+int est_pile_vide(TPile * pile)
 {
-	if(p == NULL)
+	if((*pile).sommet == NULL)
 		return 1;
 
 	return 0;
 }
 
-//test commit
 
-//test merge
-
-void empiler(TPile p, TCarte c)
+void empiler(TPile * pile, TCarte c)
 {
 	int verif;
 	struct TPilelem *aux;
@@ -37,33 +35,33 @@ void empiler(TPile p, TCarte c)
 	(*newC).carte.num = c.num;
 	(*newC).carte.type = c.type;
 
-	verif = est_pile_vide(p);
+	verif = est_pile_vide(pile);
 
-	aux = p;
+	aux = (*pile).sommet;
 	if(verif == 1) // la pile est vide
 	{
-		p = newC;
+		(*pile).sommet = newC;
 	}
 	else{
-		(*p).premier = (*aux).suivant;
-		aux = newC;
+		(*newC).suivant = aux;
+		(*pile).sommet = newC;
 	}
 }
 
-void depiler(TPile p)
+void depiler(TPile * pile)
 {
 	int verif;
 	struct TPilelem *aux;
-	verif = est_pile_vide(p);
+	verif = est_pile_vide(pile);
 
-	aux = p;
+	aux = (*pile).sommet;
 	if(verif == 1) // la pile est vide
 	{
 		printf("Rien à dépiler, la pile est vide");
 	}
 	else
 	{
-		(*p).premier = (*aux).suivant;
+		(*pile).sommet = (*aux).suivant;
 		free(aux);
 	}
 
