@@ -14,12 +14,15 @@ int main(){
 	pile.sommet = NULL;
 }
 
-int est_pile_vide(TPile * pile)
+int est_pile_vide(TPile pile)
 {
-	if((*pile).sommet == NULL)
-		return 1;
+	int verif = 0; 
+	if(pile.sommet == NULL){
+		verif = 1;
+		return verif;
+	}
 
-	return 0;
+	return verif;
 }
 
 
@@ -35,7 +38,7 @@ void empiler(TPile * pile, TCarte c)
 	(*newC).carte.num = c.num;
 	(*newC).carte.type = c.type;
 
-	verif = est_pile_vide(pile);
+	verif = est_pile_vide(*pile);
 
 	aux = (*pile).sommet;
 	if(verif == 1) // la pile est vide
@@ -52,12 +55,12 @@ void depiler(TPile * pile)
 {
 	int verif;
 	struct TPilelem *aux;
-	verif = est_pile_vide(pile);
+	verif = est_pile_vide(*pile);
 
 	aux = (*pile).sommet;
 	if(verif == 1) // la pile est vide
 	{
-		printf("Rien à dépiler, la pile est vide");
+		printf("Rien à dépiler, la pile est vide \n");
 	}
 	else
 	{
@@ -65,4 +68,61 @@ void depiler(TPile * pile)
 		free(aux);
 	}
 
+}
+
+void init_pile(TPile * pile)
+{
+	(*pile).sommet = NULL;
+
+}
+
+void afficher_pile(TPile pile)
+{
+	struct TPilelem *aux;
+	int verif;
+
+	verif = est_pile_vide(pile);
+	aux = pile.sommet;
+	if(verif == 1)
+	{
+		printf("La pile est vide, rien à afficher \n");
+	}
+		while(verif == 0)
+	{
+		printf("[%d]\n", (*aux).carte.num);
+		aux = (*aux).suivant;
+		verif = est_pile_vide(pile);
+	}
+}
+
+int taille_pile(TPile pile)
+{
+	struct TPilelem *aux;
+	int verif;
+	int taille = 0;
+
+	verif = est_pile_vide(pile);
+	aux = pile.sommet;
+	if(verif == 1)
+	{
+		taille = 0;
+	}
+		while(verif == 0)
+	{
+		taille++;
+		aux = (*aux).suivant;
+		verif = est_pile_vide(pile);
+	}
+	return taille;
+}
+
+void liberer_pile(TPile * pile)
+{
+	int verif;
+	verif = est_pile_vide(*pile); 
+
+	while(verif == 0){
+		depiler(pile);
+		verif = est_pile_vide(*pile);
+	}
 }
