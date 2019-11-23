@@ -5,7 +5,7 @@
 //modele
 typedef struct TCarte
 {
-	char nom[30];
+	char nom[100];
 	char effet[100];
 	int num;
 	int type;

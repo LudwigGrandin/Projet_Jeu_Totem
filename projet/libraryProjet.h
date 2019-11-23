@@ -4,7 +4,7 @@
 
 
 int est_pile_vide(TPile pile);
-void empiler(TPile * pile, TCarte c);
+void empiler(TPile * pile, TCarte * c);
 void depiler(TPile * pile);
 void init_pile(TPile * pile);
 void afficher_pile(TPile pile);

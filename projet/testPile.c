@@ -10,8 +10,34 @@
 
 int main(){
 
+//test de toutes les procédures.
+/* 
+	int taille = 0;
 	struct TPile pile;
-	pile.sommet = NULL;
+	init_pile(&pile);
+	struct TCarte carte;
+	carte.num = 0;
+	for(int i = 0; i <= 3; i ++){
+		printf("Entrer un nom de carte \n");
+		fflush(stdout);
+		scanf("%s", carte.nom);
+
+		printf("Entrer un effet de carte \n");
+		fflush(stdout);
+		scanf("%s", carte.effet);
+	
+		carte.num++;
+		carte.type = 1;
+
+		empiler(&pile, &carte);
+	}
+	afficher_pile(pile);
+	taille = taille_pile(pile);
+	printf("%d", taille);
+	liberer_pile(&pile);
+	afficher_pile(pile);
+*/
+	return 0;
 }
 
 int est_pile_vide(TPile pile)
@@ -26,29 +52,20 @@ int est_pile_vide(TPile pile)
 }
 
 
-void empiler(TPile * pile, TCarte c)
+void empiler(TPile * pile, TCarte * c)
 {
-	int verif;
 	struct TPilelem *aux;
 	struct TPilelem *newC;
 
-	newC = malloc(sizeof(*newC));
-	strcpy((*newC).carte.nom , c.nom);
-	strcpy((*newC).carte.effet , c.effet);
-	(*newC).carte.num = c.num;
-	(*newC).carte.type = c.type;
-
-	verif = est_pile_vide(*pile);
+	newC = (TPilelem*) malloc(sizeof(TPilelem));
+	strcpy((*newC).carte.nom , (*c).nom);
+	strcpy((*newC).carte.effet , (*c).effet);
+	(*newC).carte.num = (*c).num;
+	(*newC).carte.type = (*c).type;
 
 	aux = (*pile).sommet;
-	if(verif == 1) // la pile est vide
-	{
-		(*pile).sommet = newC;
-	}
-	else{
-		(*newC).suivant = aux;
-		(*pile).sommet = newC;
-	}
+	(*newC).suivant = (*pile).sommet;
+	(*pile).sommet = newC;
 }
 
 void depiler(TPile * pile)
@@ -87,12 +104,11 @@ void afficher_pile(TPile pile)
 	{
 		printf("La pile est vide, rien à afficher \n");
 	}
-		while(verif == 0)
+		while(aux != NULL)
 	{
 		printf("[%d]\n", (*aux).carte.num);
 		aux = (*aux).suivant;
-		verif = est_pile_vide(pile);
-	}
+	} 
 }
 
 int taille_pile(TPile pile)
@@ -107,17 +123,17 @@ int taille_pile(TPile pile)
 	{
 		taille = 0;
 	}
-		while(verif == 0)
+		while(aux != NULL)
 	{
 		taille++;
 		aux = (*aux).suivant;
-		verif = est_pile_vide(pile);
 	}
 	return taille;
 }
 
 void liberer_pile(TPile * pile)
 {
+	printf("test \n");
 	int verif;
 	verif = est_pile_vide(*pile); 
 
