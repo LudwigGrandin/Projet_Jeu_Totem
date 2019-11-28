@@ -34,3 +34,11 @@ typedef struct TMain
 	Tcellule debut;
 
 } TMain;
+
+typedef struct TJoueur
+{
+	TPile totem;
+	TMain main;
+	int pion;
+	int points;
+} TJoueur;

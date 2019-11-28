@@ -133,7 +133,7 @@ int taille_pile(TPile pile)
 
 void liberer_pile(TPile * pile)
 {
-	printf("test \n");
+
 	int verif;
 	verif = est_pile_vide(*pile); 
 
@@ -141,4 +141,10 @@ void liberer_pile(TPile * pile)
 		depiler(pile);
 		verif = est_pile_vide(*pile);
 	}
+}
+
+void ajout_totem(TPile * pile, TMain * main)
+{
+
+
 }
