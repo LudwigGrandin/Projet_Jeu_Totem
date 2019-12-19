@@ -12,4 +12,5 @@ int taille_pile(TPile pile);
 void liberer_pile(TPile * pile);
 void supprimer_carte_totem(TPile * pile, TMain * main, int num);
 
+
 #endif
