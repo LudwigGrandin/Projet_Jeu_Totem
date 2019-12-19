@@ -1,11 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "libraryProjet.h"
+
+
 
 void piocher(TMain mainJoueur, TPile pile)
 {
-    Tcellule *aux = mainJoueur.debut;
-    Tcellule *prec = mainJoueur.debut;
-    Tcellule *newCell;
+    TPilelem *aux = mainJoueur.debut;
+    TPilelem *prec = mainJoueur.debut;
+    TPilelem *newCell;
 
-    aux = mainJoueur;
+    aux = mainJoueur.debut;
 
     while(aux != NULL)
     {
@@ -13,37 +18,57 @@ void piocher(TMain mainJoueur, TPile pile)
         aux = (*aux).suivant;
     }
 
-    (*newCell).cartes = depiler(pile); //Mettre depiler C
+    depiler(&pile);
+    (*newCell).carte = (*pile.sommet).carte;  //Mettre depiler C
     (*prec).suivant = newCell;
     (*newCell).suivant = aux;
 }
 
-void DeposerCarteTotem(TPile totem,TMain *mainJoueur ,int IDCarte)
+
+void DeposerCarteTotem(TPile totem, int numCarteMain, TMain *main)
 {
-    int trouve = 0;
-    Tcellule *aux =  (*mainJoueur).debut;
-    Tcellule *prec =  (*mainJoueur).debut;
+    TPilelem *emplacementCartePrecedente;
+    TPilelem *emplacementCarteActuelle;
+    TCarte carte;
 
-    while(aux != NULL && trouve == 0 )
+    emplacementCarteActuelle = choix_Carte_Main(main,&numCarteMain,emplacementCartePrecedente);
+    (*emplacementCartePrecedente).suivant = (*emplacementCarteActuelle).suivant;
+
+    carte = (*emplacementCarteActuelle).carte;
+
+    if((*emplacementCarteActuelle).carte.type == 1)
     {
-        if( (*aux).cartes.num  == IDCarte)
-        {
-            //si la carte est une tête
-            if((*aux).cartes.type = 1)
-            {
-                trouve = 1;
-                empiler()
-            }
-
-
-       }
-       prec = aux;
-       aux = (*aux).suivant;
+        empiler(&totem,&carte);
     }
+}
+
+
+TPilelem choix_Emplacement_Carte_Main(TMain *main, int numCarteMain, TPilelem *emplacementCartePrecedente)
+{
+    int trouve = 0, compteur = 1;
+    TPilelem aux;
+    aux = (*main).debut;
+    emplacementCartePrecedente = (*main).debut;
+
+    while(aux != null && trouve==0)
+    {
+        if(compteur == numCarteMain)
+        {
+            trouve = 1;
+        }
+        else
+        {
+            prec = aux;
+            aux = (aux).suivant;
+            compteur ++;
+        }
+    }
+
+return aux;
 
 }
 
-void JouerCarteCoupBas(Tcellule *mainJoueur, TPile pile, )
+void JouerCarteCoupBas(TCarte Carte_Joue, TPile pile)
 {
 
 }

@@ -8,10 +8,10 @@
 
 
 
-int main(){
+/*int main(){
 
 //test de toutes les procédures.
-/* 
+/*
 	int taille = 0;
 	struct TPile pile;
 	init_pile(&pile);
@@ -25,7 +25,7 @@ int main(){
 		printf("Entrer un effet de carte \n");
 		fflush(stdout);
 		scanf("%s", carte.effet);
-	
+
 		carte.num++;
 		carte.type = 1;
 
@@ -37,12 +37,12 @@ int main(){
 	liberer_pile(&pile);
 	afficher_pile(pile);
 */
-	return 0;
-}
+//	return 0;
+//}
 
 int est_pile_vide(TPile pile)
 {
-	int verif = 0; 
+	int verif = 0;
 	if(pile.sommet == NULL){
 		verif = 1;
 		return verif;
@@ -108,7 +108,7 @@ void afficher_pile(TPile pile)
 	{
 		printf("[%d]\n", (*aux).carte.num);
 		aux = (*aux).suivant;
-	} 
+	}
 }
 
 int taille_pile(TPile pile)
@@ -135,7 +135,7 @@ void liberer_pile(TPile * pile)
 {
 
 	int verif;
-	verif = est_pile_vide(*pile); 
+	verif = est_pile_vide(*pile);
 
 	while(verif == 0){
 		depiler(pile);

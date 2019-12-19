@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+
 //modele
 typedef struct TCarte
 {
@@ -22,16 +24,17 @@ typedef struct TPile
 	TPilelem *sommet;
 }TPile;
 
+/*typedef struct Tcellule Tcellule;
 typedef struct Tcellule
 {
 	TCarte cartes;
-	struct Tcellule * suivant;
-} Tcellule;
+    Tcellule *suivant;
+} Tcellule;*/
 
 
 typedef struct TMain
 {
-	Tcellule debut;
+	TPilelem *debut;
 
 } TMain;
 
