@@ -5,6 +5,11 @@
 
 int main()
 {
-    printf("Hello world!\n");
+    TMain mainJoueur;
+    TPile pioche;
+
+    /*printf("Piocher une carte : \n");
+    piocher(mainJoueur,pioche);
+    printf("La carte piochee est : %s",pioche.sommet);*/
     return 0;
 }

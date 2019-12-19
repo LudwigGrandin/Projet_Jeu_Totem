@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "libraryProjet.h"
 
 void piocher(TMain mainJoueur, TPile pile)
@@ -15,11 +16,12 @@ void piocher(TMain mainJoueur, TPile pile)
         prec = aux;
         aux = (*aux).suivant;
     }
+    //On tire une nouvelle carte
 
-    depiler(&pile);
-    (*newCell).carte = (*pile.sommet).carte;  //Mettre depiler C
+    (*newCell).carte = (*pile.sommet).carte;  //On met la carte en haut de la pioche dans newCell
     (*prec).suivant = newCell;
     (*newCell).suivant = aux;
+    depiler(&pile);//La pile ne devrait elle pas renvoyer un TPileElem?????
 }
 
 
@@ -36,6 +38,7 @@ void DeposerCarteTotem(TPile totem, int numCarteMain, TMain *main)
     //Sauvegarde de la carte de la main
     carte = (*emplacementCarteActuelle).carte;
     //Il faut désallouer l'emplacement qui a été supprimé de la main
+    //Si c'est une carte totem alors on l'ajoute à la pile totem
     if((*emplacementCarteActuelle).carte.type == 1)
     {
         empiler(&totem,&carte);
@@ -66,8 +69,45 @@ void  choix_Emplacement_Carte_Main(TMain *main, int numCarteMain, TPilelem *empl
 
 }
 
-void JouerCarteCoupBas(TCarte Carte_Joue, TPile pile)
+void JouerCarteCoupBas(TCarte carte, TPile pile)
 {
+    //Montrer la carte à jouer
+    printf("La carte jouee est : %s ",carte.nom);
+    //Plusieurs actions possibles:
+
+    //Carte
+    //On arrive
+    //Et paf
+    //Esprit Farceur
+    //Bison Dingo
+    //Faux PAs
+    //Pillage
+    //Eau de Feu
+    if(strcmp(carte.nom,"OnArrive"))
+    {
+
+    }
+    else if(strcmp(carte.nom,"EspritFarceur"))
+    {
+
+    }
+    else if(strcmp(carte.nom,"BisonDingo"))
+    {
+
+    }
+    else if(strcmp(carte.nom,"FauxPas"))
+    {
+
+    }
+    else if(strcmp(carte.nom,"Pillage"))
+    {
+
+    }
+    else if(strcmp(carte.nom,"EaudeFeu"))
+    {
+
+    }
+
 
 }
 
