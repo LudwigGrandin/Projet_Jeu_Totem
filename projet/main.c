@@ -3,8 +3,8 @@
 #include "libraryProjet.h"
 
 
-int main()
+/*int main()
 {
     printf("Helldo world!\n");
     return 0;
-}
+}*/

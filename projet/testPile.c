@@ -75,12 +75,14 @@
 
 /**Main Lucas**/
 
-	//int taille = 0;
-/*	struct TPile pile;
 
 
 
-/*int main(){
+
+int main(){
+
+    //int taille = 0;
+	//struct TPile pile;
 
 //test de toutes les procédures.
 /*
@@ -248,7 +250,7 @@ void tete_coyote(TJoueur * j1, TJoueur * j2, TJoueur * jint) // créer un joueur
 
 }
 
-void cadeau(TPile * totem1, TPile * totem2)
+/*void cadeau(TPile * totem1, TPile * totem2)
 {
 	struct TCarte *aux;
 
@@ -256,7 +258,7 @@ void cadeau(TPile * totem1, TPile * totem2)
 
 	empiler(totem1, (*(*totem2).sommet).carte);
 
-}
+}*/
 
 //suivant la carte que le joueur joue
 void immunite_totem(TJoueur * j)
@@ -267,15 +269,18 @@ void immunite_totem(TJoueur * j)
 
 
 
-void DeposerCarteTotem(TPile *totem,TMain *mainJoueur ,int IDCarte)
+/*void DeposerCarteTotem(TPile totem, int numCarteMain, TMain *mainJoueur)
 {
     int trouve = 0;
-    TCarte *aux =  (*mainJoueur).debut;
-    TCarte *prec =  (*mainJoueur).debut;
+    TPilelem *aux;
+    TPilelem *prec;
+
+    aux =  (*mainJoueur).debut;
+    prec = (*mainJoueur).debut;
 
     while(aux != NULL && trouve == 0 )
     {
-        if( (*aux).carte.num  == IDCarte)
+        if( (*aux).carte.num  == )
         {
             //si la carte est une tête
             if((*aux).carte.type = 1)
@@ -290,7 +295,7 @@ void DeposerCarteTotem(TPile *totem,TMain *mainJoueur ,int IDCarte)
        aux = (*aux).suivant;
     }
 
-}
+}*/
 
 
 

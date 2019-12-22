@@ -3,13 +3,16 @@
 #include <string.h>
 #include "libraryProjet.h"
 
-void piocher(TMain mainJoueur, TPile pile)
+void piocher(TMain *mainJoueur, TPile *pile, TCarte *carte)
 {
-    TPilelem *aux = mainJoueur.debut;
-    TPilelem *prec = mainJoueur.debut;
+    TPilelem *aux;
+    TPilelem *prec;
     TPilelem *newCell;
 
-    aux = mainJoueur.debut;
+    newCell = (TPilelem*) malloc(sizeof(TPilelem));
+
+    aux = (*mainJoueur).debut;
+    prec = (*mainJoueur).debut;
 
     while(aux != NULL)
     {
@@ -18,7 +21,7 @@ void piocher(TMain mainJoueur, TPile pile)
     }
     //On tire une nouvelle carte
 
-    (*newCell).carte = (*pile.sommet).carte;  //On met la carte en haut de la pioche dans newCell
+    (*newCell).carte = (*(*pile).sommet).carte;  //On met la carte en haut de la pioche dans newCell
     (*prec).suivant = newCell;
     (*newCell).suivant = aux;
     depiler(&pile);//La pile ne devrait elle pas renvoyer un TPileElem?????
@@ -46,7 +49,7 @@ void DeposerCarteTotem(TPile totem, int numCarteMain, TMain *main)
 }
 
 //Fonction Permetta,t de récupérer l'adresse d'une carte contenue dans la liste chaînée de la main
-void  choix_Emplacement_Carte_Main(TMain *main, int numCarteMain, TPilelem *emplacementCartePrecedente,TPilelem *emplacementCarteActuelle)
+void choix_Emplacement_Carte_Main(TMain *main, int numCarteMain, TCarte *emplacementCartePrecedente,TCarte *emplacementCarteActuelle)
 {
     int trouve = 0, compteur = 1;
     TPilelem *aux;
