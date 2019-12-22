@@ -155,11 +155,13 @@ void empiler(TPile * pile, TCarte * c)
 	aux = (*pile).sommet;
 	(*newC).suivant = (*pile).sommet;
 	(*pile).sommet = newC;
+
 }
 
-void depiler(TPile * pile)
+TCarte * depiler(TPile * pile)
 {
 	int verif;
+	TCarte * c;
 	struct TPilelem *aux;
 	verif = est_pile_vide(*pile);
 
@@ -171,9 +173,10 @@ void depiler(TPile * pile)
 	else
 	{
 		(*pile).sommet = (*aux).suivant;
+		c = aux;
 		free(aux);
 	}
-
+return c;
 }
 
 void init_pile(TPile * pile)
