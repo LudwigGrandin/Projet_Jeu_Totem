@@ -3,7 +3,7 @@
 #include "libraryProjet.h"
 
 
-int main()
+/*int main()
 {
     TMain mainJoueur;
     TPile pioche;
@@ -11,5 +11,5 @@ int main()
     /*printf("Piocher une carte : \n");
     piocher(mainJoueur,pioche);
     printf("La carte piochee est : %s",pioche.sommet);*/
-    return 0;
-}
+//    return 0;
+//}

@@ -6,10 +6,14 @@
 
 int main(){
 
+/**MainLudwig**/
+
+/**Main Lucas**/
 //test de toutes les procédures.
 
+
 	//int taille = 0;
-	struct TPile pile;
+/*	struct TPile pile;
 	init_pile(&pile);
 	struct TCarte carte;
 	struct TCarte cartest;
@@ -22,7 +26,7 @@ int main(){
 		printf("Entrer un effet de carte \n");
 		fflush(stdout);
 		scanf("%s", carte.effet);
-	
+
 		carte.num++;
 		carte.type = 1;
 
@@ -36,7 +40,7 @@ int main(){
 //	taille = taille_pile(pile);
 //	printf("%d", taille);
 	liberer_pile(&pile, &cartest); // libère toute la pile
-	afficher_pile(pile);
+	afficher_pile(pile);*/
 
 	return 0;
 }
@@ -116,7 +120,7 @@ void afficher_pile(TPile pile)
 		printf("[%d]", (*aux).num);
 		printf("[%s]", (*aux).nom);
 		aux = (*aux).suivant;
-	} 
+	}
 }
 
 int taille_pile(TPile pile)
@@ -179,7 +183,7 @@ void cadeau(TPile * totem1, TPile * totem2)
 
 }
 
-//suivant la carte que le joueur joue 
+//suivant la carte que le joueur joue
 void immunite_totem(TJoueur * j)
 {
 
