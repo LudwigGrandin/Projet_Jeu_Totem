@@ -4,7 +4,8 @@
 #include "libraryProjet.h"
 
 
-int main(){
+	/* Définition d'une carte */
+
 
 /**MainLudwig**/
 /*
@@ -76,11 +77,20 @@ int main(){
 
 	//int taille = 0;
 /*	struct TPile pile;
+
+
+
+/*int main(){
+
+//test de toutes les procédures.
+/*
+	int taille = 0;
+	struct TPile pile;
+
 	init_pile(&pile);
 	struct TCarte carte;
-	struct TCarte cartest;
 	carte.num = 0;
-	for(int i = 0; i <= 2; i ++){				// saisie des données à la main pour tester empiler
+	for(int i = 0; i <= 3; i ++){
 		printf("Entrer un nom de carte \n");
 		fflush(stdout);
 		scanf("%s", carte.nom);
@@ -94,6 +104,7 @@ int main(){
 
 		empiler(&pile, &carte);
 	}
+
 	afficher_pile(pile);		//affiche la pile avant depiler
 	depiler(&pile, &cartest);
 	printf("le num de la carte est %d \n", cartest.num);	//verification des données prises par la carte en param
@@ -106,6 +117,15 @@ int main(){
 
 	return 0;
 }
+
+/*	afficher_pile(pile);
+	taille = taille_pile(pile);
+	printf("%d", taille);
+	liberer_pile(&pile);
+	afficher_pile(pile);*/
+
+//	return 0;
+//}
 
 int est_pile_vide(TPile pile)
 {
@@ -121,33 +141,27 @@ int est_pile_vide(TPile pile)
 
 void empiler(TPile * pile, TCarte * c)
 {
-	struct TCarte *aux;
-	struct TCarte *newC;
+	struct TPilelem *aux;
+	struct TPilelem *newC;
 
-	newC = (TCarte*) malloc(sizeof(TCarte));
-	strcpy((*newC).nom , (*c).nom);
-	strcpy((*newC).effet , (*c).effet);
-	(*newC).num = (*c).num;
-	(*newC).type = (*c).type;
+	newC = (TPilelem*) malloc(sizeof(TPilelem));
+	strcpy((*newC).carte.nom , (*c).nom);
+	strcpy((*newC).carte.effet , (*c).effet);
+	(*newC).carte.num = (*c).num;
+	(*newC).carte.type = (*c).type;
 
 	aux = (*pile).sommet;
 	(*newC).suivant = (*pile).sommet;
 	(*pile).sommet = newC;
 }
 
-void depiler(TPile * pile, TCarte * c)
+void depiler(TPile * pile)
 {
 	int verif;
-	struct TCarte *aux;
+	struct TPilelem *aux;
 	verif = est_pile_vide(*pile);
 
 	aux = (*pile).sommet;
-
-	strcpy((*c).nom , (*aux).nom);
-	strcpy((*c).effet , (*aux).effet);
-	(*c).num = (*aux).num;
-	(*c).type = (*aux).type;
-
 	if(verif == 1) // la pile est vide
 	{
 		printf("Rien à dépiler, la pile est vide \n");
@@ -168,7 +182,7 @@ void init_pile(TPile * pile)
 
 void afficher_pile(TPile pile)
 {
-	struct TCarte *aux;
+	struct TPilelem *aux;
 	int verif;
 
 	verif = est_pile_vide(pile);
@@ -179,15 +193,14 @@ void afficher_pile(TPile pile)
 	}
 		while(aux != NULL)
 	{
-		printf("[%d]", (*aux).num);
-		printf("[%s]", (*aux).nom);
+		printf("[%d]\n", (*aux).carte.num);
 		aux = (*aux).suivant;
 	}
 }
 
 int taille_pile(TPile pile)
 {
-	struct TCarte *aux;
+	struct TPilelem *aux;
 	int verif;
 	int taille = 0;
 
@@ -205,24 +218,24 @@ int taille_pile(TPile pile)
 	return taille;
 }
 
-void liberer_pile(TPile * pile, TCarte * c)
+void liberer_pile(TPile * pile)
 {
 
 	int verif;
 	verif = est_pile_vide(*pile);
 
 	while(verif == 0){
-		depiler(pile, c);
+		depiler(pile);
 		verif = est_pile_vide(*pile);
 	}
 }
 
-/*
-void supprimer_carte_totem(TPile * pile, TMain * main, int num)
+void ajout_totem(TPile * pile, TMain * main)
 {
 
 
 }
+
 
 
 //effet cartes
@@ -278,4 +291,6 @@ void DeposerCarteTotem(TPile *totem,TMain *mainJoueur ,int IDCarte)
     }
 
 }
-*/
+
+
+

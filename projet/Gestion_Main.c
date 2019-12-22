@@ -3,13 +3,13 @@
 #include <string.h>
 #include "libraryProjet.h"
 
-void piocher(TMain *mainJoueur, TPile *pile, TCarte *carte)
+void piocher(TMain mainJoueur, TPile pile)
 {
-    TCarte *aux = (*mainJoueur).debut;
-    TCarte *prec = (*mainJoueur).debut;
-    TCarte *newCell;
+    TPilelem *aux = mainJoueur.debut;
+    TPilelem *prec = mainJoueur.debut;
+    TPilelem *newCell;
 
-    aux = (*mainJoueur).debut;
+    aux = mainJoueur.debut;
 
     while(aux != NULL)
     {
@@ -18,17 +18,17 @@ void piocher(TMain *mainJoueur, TPile *pile, TCarte *carte)
     }
     //On tire une nouvelle carte
 
-    newCell = (*pile).sommet;  //On met la carte en haut de la pioche dans newCell
+    (*newCell).carte = (*pile.sommet).carte;  //On met la carte en haut de la pioche dans newCell
     (*prec).suivant = newCell;
     (*newCell).suivant = aux;
-    depiler(pile, carte);//La pile ne devrait elle pas renvoyer un TPileElem?????
+    depiler(&pile);//La pile ne devrait elle pas renvoyer un TPileElem?????
 }
 
 
 void DeposerCarteTotem(TPile totem, int numCarteMain, TMain *main)
 {
-    TCarte *emplacementCartePrecedente;
-    TCarte *emplacementCarteActuelle;
+    TPilelem *emplacementCartePrecedente;
+    TPilelem *emplacementCarteActuelle;
     TCarte carte;
 
     //On récupère l'adresse dans la liste chainée de la carte que le joueur veut jouer
@@ -36,20 +36,20 @@ void DeposerCarteTotem(TPile totem, int numCarteMain, TMain *main)
     //Supprime la carte de la main du joueur
     (*emplacementCartePrecedente).suivant = (*emplacementCarteActuelle).suivant;
     //Sauvegarde de la carte de la main
-    carte = (*emplacementCarteActuelle);
+    carte = (*emplacementCarteActuelle).carte;
     //Il faut désallouer l'emplacement qui a été supprimé de la main
     //Si c'est une carte totem alors on l'ajoute à la pile totem
-    if((*emplacementCarteActuelle).type == 1)
+    if((*emplacementCarteActuelle).carte.type == 1)
     {
         empiler(&totem,&carte);
     }
 }
 
 //Fonction Permetta,t de récupérer l'adresse d'une carte contenue dans la liste chaînée de la main
-void  choix_Emplacement_Carte_Main(TMain *main, int numCarteMain, TCarte *emplacementCartePrecedente,TCarte *emplacementCarteActuelle)
+void  choix_Emplacement_Carte_Main(TMain *main, int numCarteMain, TPilelem *emplacementCartePrecedente,TPilelem *emplacementCarteActuelle)
 {
     int trouve = 0, compteur = 1;
-    TCarte *aux;
+    TPilelem *aux;
     aux = (*main).debut;
     emplacementCartePrecedente = (*main).debut;
 
