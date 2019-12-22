@@ -7,10 +7,72 @@
 int main(){
 
 /**MainLudwig**/
+/*
+
+//test de toutes les procédures.
+    TPile pile;
+	init_pile(&pile);
+	TCarte carte;
+	carte.num = 0;
+	int nombreCarte = 2;
+
+	//fflush(stdout);
+    /** carte0 **/
+/*    (*carte.nom) = "Carte0";
+    printf("nom test = %s\n", (&carte.nom));
+    (*carte.effet) = "25";
+    carte.num = 1;
+    empiler(&pile, &carte);
+    /** carte1 **/
+ /*   (*carte.nom) = "carte1";
+    (*carte.effet) = "26";
+    carte.num++;
+    empiler(&pile, &carte);
+    /** carte2 **/
+/*    (*carte.nom) = "carte2";
+    (*carte.effet) = "27";
+    carte.num ++;
+    empiler(&pile, &carte);*/
+
+
+	/*for(int i = 0; i <= nombreCarte; i ++){				// saisie des données à la main pour tester empiler
+
+		printf("Carte numéro : %d \n",i);
+
+		printf("Entrer un nom de carte \n");
+		fflush(stdout);
+		scanf("%s", carte.nom);
+
+		printf("Entrer un effet de carte \n");
+		fflush(stdout);
+		scanf("%s", carte.effet);
+
+		carte.num++;
+		carte.type = 1;
+
+		empiler(&pile, &carte);
+	}*/
+	//afficher_pile(pile);
+    //system("cls");
+    //affiche la pile avant depiler
+
+    //char nom[1000] = "";
+/*    for(int i = 0; i <= nombreCarte; i ++)
+    {
+        //depiler(&pile, &carte);
+       // nom = (*carte).(*nom);
+        printf("le num de la carte est %d \n", carte.num);	//verification des données prises par la carte en param
+        printf("le nom de la carte est %s \n", carte.nom);
+        printf("l effet de la carte est %d \n", carte.effet);
+        printf("\n\n");
+    }
+
+//	taille = taille_pile(pile);
+//	printf("%d", taille);
+	liberer_pile(&pile, &carte); // libère toute la pile
+	//afficher_pile(pile);*/
 
 /**Main Lucas**/
-//test de toutes les procédures.
-
 
 	//int taille = 0;
 /*	struct TPile pile;
