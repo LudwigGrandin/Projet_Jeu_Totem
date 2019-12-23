@@ -229,6 +229,22 @@ void liberer_pile(TPile * pile)
 	}
 }
 
+void liberer_main(TMain * main)
+{
+	TCarte *aux;
+	aux = (*main).debut;
+	
+	if((*main).debut == NULL){		
+		printf("La liste est vide, rien à supprimer");
+	}
+
+	while(aux != NULL){
+	
+		(*main).debut = (*aux).suivant;
+		free(aux);
+		aux = (*main).debut;
+	}
+}
 
 //effet cartes
 void tete_coyote(TJoueur * j1, TJoueur * j2, TJoueur * jint) // créer un joueur jint dans le main ?
