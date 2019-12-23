@@ -6,9 +6,11 @@
 
 	/* Définition d'une carte */
 
+int main()
+{
 
 /**MainLudwig**/
-/*
+
 
 //test de toutes les procédures.
     TPile pile;
@@ -17,69 +19,42 @@
 	carte.num = 0;
 	int nombreCarte = 2;
 
+
 	//fflush(stdout);
-    /** carte0 **/
-/*    (*carte.nom) = "Carte0";
-    printf("nom test = %s\n", (&carte.nom));
-    (*carte.effet) = "25";
+    //carte0
+    //sprintf(carte.nom, "Carte0");
+    strcpy(carte.nom, "carte0");
+    //gets(carte.nom);
+     printf("nom test = %s\n", carte.nom);
+    strcpy(carte.effet, "25");
     carte.num = 1;
     empiler(&pile, &carte);
-    /** carte1 **/
- /*   (*carte.nom) = "carte1";
-    (*carte.effet) = "26";
+    //carte1
+    strcpy(carte.nom,"carte1");
+    strcpy(carte.effet, "26");
     carte.num++;
     empiler(&pile, &carte);
-    /** carte2 **/
-/*    (*carte.nom) = "carte2";
-    (*carte.effet) = "27";
+    // carte2
+    strcpy(carte.nom, "carte2");
+    strcpy(carte.effet, "27");
     carte.num ++;
-    empiler(&pile, &carte);*/
+    empiler(&pile, &carte);
 
-
-	/*for(int i = 0; i <= nombreCarte; i ++){				// saisie des données à la main pour tester empiler
-
-		printf("Carte numéro : %d \n",i);
-
-		printf("Entrer un nom de carte \n");
-		fflush(stdout);
-		scanf("%s", carte.nom);
-
-		printf("Entrer un effet de carte \n");
-		fflush(stdout);
-		scanf("%s", carte.effet);
-
-		carte.num++;
-		carte.type = 1;
-
-		empiler(&pile, &carte);
-	}*/
-	//afficher_pile(pile);
-    //system("cls");
-    //affiche la pile avant depiler
-
-    //char nom[1000] = "";
-/*    for(int i = 0; i <= nombreCarte; i ++)
+    for(int i = 0; i <= nombreCarte; i ++)
     {
-        //depiler(&pile, &carte);
-       // nom = (*carte).(*nom);
+        carte = depiler(&pile);
         printf("le num de la carte est %d \n", carte.num);	//verification des données prises par la carte en param
         printf("le nom de la carte est %s \n", carte.nom);
-        printf("l effet de la carte est %d \n", carte.effet);
+        printf("l effet de la carte est %s \n", carte.effet);
         printf("\n\n");
     }
 
 //	taille = taille_pile(pile);
 //	printf("%d", taille);
-	liberer_pile(&pile, &carte); // libère toute la pile
+	liberer_pile(&pile); // libère toute la pile
 	//afficher_pile(pile);*/
 
 /**Main Lucas**/
-
-
-
-
-
-int main(){
 
     //int taille = 0;
 	//struct TPile pile;
@@ -158,10 +133,10 @@ void empiler(TPile * pile, TCarte * c)
 
 }
 
-TCarte * depiler(TPile * pile)
+TCarte depiler(TPile * pile)
 {
 	int verif;
-	TCarte * c;
+	TCarte c;
 	struct TPilelem *aux;
 	verif = est_pile_vide(*pile);
 
@@ -173,7 +148,7 @@ TCarte * depiler(TPile * pile)
 	else
 	{
 		(*pile).sommet = (*aux).suivant;
-		c = aux;
+		c = (*aux).carte;
 		free(aux);
 	}
 return c;
@@ -196,7 +171,7 @@ void afficher_pile(TPile pile)
 	{
 		printf("La pile est vide, rien à afficher \n");
 	}
-		while(aux != NULL)
+	while(aux != NULL)
 	{
 		printf("[%d]\n", (*aux).carte.num);
 		aux = (*aux).suivant;

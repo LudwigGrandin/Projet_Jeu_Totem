@@ -14,21 +14,13 @@ typedef struct TCarte
 typedef struct TPilelem
 {
 	TCarte carte;
-	struct TPilelem *suivant;
+    struct TPilelem *suivant;
 }TPilelem;
 
 typedef struct TPile
 {
-	TPilelem *sommet;
+	TPilelem *sommet;//Stocke toujours le dernier élément de la liste chainée
 }TPile;
-
-/*typedef struct Tcellule Tcellule;
-typedef struct Tcellule
-{
-	TCarte cartes;
-    Tcellule *suivant;
-} Tcellule;*/
-
 
 typedef struct TMain
 {
