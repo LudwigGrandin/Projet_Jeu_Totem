@@ -13,7 +13,7 @@ int main()
 
 
 //test de toutes les procédures.
-    TPile pile;
+/*    TPile pile;
 	init_pile(&pile);
 	TCarte carte;
 	carte.num = 0;
@@ -56,18 +56,25 @@ int main()
 
 /**Main Lucas**/
 
+
     //int taille = 0;
 	//struct TPile pile;
 
-//test de toutes les procédures.
+
+
+
+
 /*
+int main(){
+//test de toutes les procédures.
+
 	int taille = 0;
 	struct TPile pile;
-
+	struct TCarte *cartest;
 	init_pile(&pile);
 	struct TCarte carte;
 	carte.num = 0;
-	for(int i = 0; i <= 3; i ++){
+	for(int i = 0; i <= 2; i ++){
 		printf("Entrer un nom de carte \n");
 		fflush(stdout);
 		scanf("%s", carte.nom);
@@ -83,26 +90,20 @@ int main()
 	}
 
 	afficher_pile(pile);		//affiche la pile avant depiler
-	depiler(&pile, &cartest);
-	printf("le num de la carte est %d \n", cartest.num);	//verification des données prises par la carte en param
-	printf("le num de la carte est %s \n", cartest.nom);
-	printf("le num de la carte est %s \n", cartest.effet);
+	cartest = depiler(&pile);
+	printf("le num de la carte est %d \n", (*cartest).num);	//verification des données prises par la carte en param
+	printf("le nom de la carte est %s \n", (*cartest).nom);
+	printf("l'effet de la carte est %s \n", (*cartest).effet);
+	afficher_pile(pile);
 //	taille = taille_pile(pile);
 //	printf("%d", taille);
-	liberer_pile(&pile, &cartest); // libère toute la pile
-	afficher_pile(pile);*/
+	liberer_pile(&pile); // libère toute la pile
+	afficher_pile(pile);
+
+	*/
 
 	return 0;
 }
-
-/*	afficher_pile(pile);
-	taille = taille_pile(pile);
-	printf("%d", taille);
-	liberer_pile(&pile);
-	afficher_pile(pile);*/
-
-//	return 0;
-//}
 
 int est_pile_vide(TPile pile)
 {
@@ -118,14 +119,14 @@ int est_pile_vide(TPile pile)
 
 void empiler(TPile * pile, TCarte * c)
 {
-	struct TPilelem *aux;
-	struct TPilelem *newC;
+	struct TCarte *aux;
+	struct TCarte *newC;
 
-	newC = (TPilelem*) malloc(sizeof(TPilelem));
-	strcpy((*newC).carte.nom , (*c).nom);
-	strcpy((*newC).carte.effet , (*c).effet);
-	(*newC).carte.num = (*c).num;
-	(*newC).carte.type = (*c).type;
+	newC = (TCarte*) malloc(sizeof(TCarte));
+	strcpy((*newC).nom , (*c).nom);
+	strcpy((*newC).effet , (*c).effet);
+	(*newC).num = (*c).num;
+	(*newC).type = (*c).type;
 
 	aux = (*pile).sommet;
 	(*newC).suivant = (*pile).sommet;
@@ -138,6 +139,9 @@ TCarte depiler(TPile * pile)
 	int verif;
 	TCarte c;
 	struct TPilelem *aux;
+	TCarte * c;
+	c = (TCarte*) malloc(sizeof(TCarte));
+	struct TCarte *aux;
 	verif = est_pile_vide(*pile);
 
 	aux = (*pile).sommet;
@@ -148,7 +152,13 @@ TCarte depiler(TPile * pile)
 	else
 	{
 		(*pile).sommet = (*aux).suivant;
+
 		c = (*aux).carte;
+		
+		strcpy((*c).nom , (*aux).nom);
+		strcpy((*c).effet , (*aux).effet);
+		(*c).num = (*aux).num;
+		//(*c).type = (*aux).type;
 		free(aux);
 	}
 return c;
@@ -162,7 +172,7 @@ void init_pile(TPile * pile)
 
 void afficher_pile(TPile pile)
 {
-	struct TPilelem *aux;
+	struct TCarte *aux;
 	int verif;
 
 	verif = est_pile_vide(pile);
@@ -173,14 +183,14 @@ void afficher_pile(TPile pile)
 	}
 	while(aux != NULL)
 	{
-		printf("[%d]\n", (*aux).carte.num);
+		printf("[%d]\n", (*aux).num);
 		aux = (*aux).suivant;
 	}
 }
 
 int taille_pile(TPile pile)
 {
-	struct TPilelem *aux;
+	struct TCarte *aux;
 	int verif;
 	int taille = 0;
 
@@ -210,13 +220,22 @@ void liberer_pile(TPile * pile)
 	}
 }
 
-void ajout_totem(TPile * pile, TMain * main)
+void liberer_main(TMain * main)
 {
+	TCarte *aux;
+	aux = (*main).debut;
+	
+	if((*main).debut == NULL){		
+		printf("La liste est vide, rien à supprimer");
+	}
 
-
+	while(aux != NULL){
+	
+		(*main).debut = (*aux).suivant;
+		free(aux);
+		aux = (*main).debut;
+	}
 }
-
-
 
 //effet cartes
 void tete_coyote(TJoueur * j1, TJoueur * j2, TJoueur * jint) // créer un joueur jint dans le main ?
@@ -250,8 +269,8 @@ void immunite_totem(TJoueur * j)
 /*void DeposerCarteTotem(TPile totem, int numCarteMain, TMain *mainJoueur)
 {
     int trouve = 0;
-    TPilelem *aux;
-    TPilelem *prec;
+    TCarte *aux;
+    TCarte *prec;
 
     aux =  (*mainJoueur).debut;
     prec = (*mainJoueur).debut;

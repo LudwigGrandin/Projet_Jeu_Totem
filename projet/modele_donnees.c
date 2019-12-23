@@ -9,7 +9,9 @@ typedef struct TCarte
 	char effet[100];
 	int num;
 	int type;
+	struct TCarte *suivant;
 } TCarte;
+
 
 typedef struct TPilelem
 {
@@ -20,6 +22,11 @@ typedef struct TPilelem
 typedef struct TPile
 {
 	TPilelem *sommet;//Stocke toujours le dernier élément de la liste chainée
+
+
+typedef struct TPile
+{
+	TPilelem *sommet;
 }TPile;
 
 typedef struct TMain
