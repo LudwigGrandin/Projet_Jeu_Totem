@@ -134,10 +134,10 @@ TCarte depiler(TPile * pile)
 {
 	int verif;
 	TCarte c;
-	struct TPilelem *aux;
-	TCarte * c;
-	c = (TCarte*) malloc(sizeof(TCarte));
-	struct TPilelem *aux;
+	TPilelem *aux;
+	//TCarte * c;
+	//c = (TCarte*) malloc(sizeof(TCarte));
+	//TPilelem *aux;
 	verif = est_pile_vide(*pile);
 
 	aux = (*pile).sommet;
@@ -150,9 +150,9 @@ TCarte depiler(TPile * pile)
 	{
 		(*pile).sommet = (*aux).suivant;
 
-		strcpy((*c).nom , (*aux).carte.nom);
-		strcpy((*c).effet , (*aux).carte.effet);
-		(*c).num = (*aux).carte.num;
+		strcpy((*c.nom) , (*aux).carte.nom);
+		strcpy((*c.effet) , (*aux).carte.effet);
+		c.num = (*aux).carte.num;
 
 		//(*c).type = (*aux).type;
 		free(aux);
@@ -220,13 +220,13 @@ void liberer_main(TMain * main)
 {
 	TPilelem *aux;
 	aux = (*main).debut;
-	
-	if((*main).debut == NULL){		
+
+	if((*main).debut == NULL){
 		printf("La liste est vide, rien à supprimer");
 	}
 
 	while(aux != NULL){
-	
+
 		(*main).debut = (*aux).suivant;
 		free(aux);
 		aux = (*main).debut;
