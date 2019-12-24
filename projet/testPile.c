@@ -11,7 +11,7 @@ int main()
 
 /**MainLudwig**/
 
-
+/*
 //test de toutes les procédures.
     TPile pile;
 	init_pile(&pile);
@@ -26,23 +26,23 @@ int main()
     strcpy(carte.effet, "25");
     carte.num = 1;
     empiler(&pile, &carte);
-    printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
+    //printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
     //carte1
     strcpy(carte.nom,"carte1");
     strcpy(carte.effet, "26");
     carte.num++;
     empiler(&pile, &carte);
-    printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
+   // printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
     // carte2
     strcpy(carte.nom, "carte2");
     strcpy(carte.effet, "27");
     carte.num ++;
     empiler(&pile, &carte);
-    printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
+    //printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
 
     for(int i = 0; i <= nombreCarte; i ++)
     {
-        printf("test\n");
+       // printf("test\n");
         carte = depiler(&pile);
         printf("test1");
         printf("le num de la carte est %d \n", carte.num);	//verification des données prises par la carte en param
@@ -55,7 +55,7 @@ int main()
 //	printf("%d", taille);
 	liberer_pile(&pile); // libère toute la pile
 	//afficher_pile(pile);
-
+*/
 /**Main Lucas**/
 
 /*
