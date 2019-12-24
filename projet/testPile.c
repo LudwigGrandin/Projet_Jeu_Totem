@@ -13,7 +13,7 @@ int main()
 
 
 //test de toutes les procédures.
-/*    TPile pile;
+    TPile pile;
 	init_pile(&pile);
 	TCarte carte;
 	carte.num = 0;
@@ -22,27 +22,29 @@ int main()
 
 	//fflush(stdout);
     //carte0
-    //sprintf(carte.nom, "Carte0");
-    strcpy(carte.nom, "carte0");
-    //gets(carte.nom);
-     printf("nom test = %s\n", carte.nom);
+    strcpy(carte.nom,"carte0");
     strcpy(carte.effet, "25");
     carte.num = 1;
     empiler(&pile, &carte);
+    printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
     //carte1
     strcpy(carte.nom,"carte1");
     strcpy(carte.effet, "26");
     carte.num++;
     empiler(&pile, &carte);
+    printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
     // carte2
     strcpy(carte.nom, "carte2");
     strcpy(carte.effet, "27");
     carte.num ++;
     empiler(&pile, &carte);
+    printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
 
     for(int i = 0; i <= nombreCarte; i ++)
     {
+        printf("test\n");
         carte = depiler(&pile);
+        printf("test1");
         printf("le num de la carte est %d \n", carte.num);	//verification des données prises par la carte en param
         printf("le nom de la carte est %s \n", carte.nom);
         printf("l effet de la carte est %s \n", carte.effet);
@@ -52,7 +54,7 @@ int main()
 //	taille = taille_pile(pile);
 //	printf("%d", taille);
 	liberer_pile(&pile); // libère toute la pile
-	//afficher_pile(pile);*/
+	//afficher_pile(pile);
 
 /**Main Lucas**/
 
@@ -135,9 +137,7 @@ TCarte depiler(TPile * pile)
 	int verif;
 	TCarte c;
 	TPilelem *aux;
-	//TCarte * c;
-	//c = (TCarte*) malloc(sizeof(TCarte));
-	//TPilelem *aux;
+    //On vérifie si la pile est vide
 	verif = est_pile_vide(*pile);
 
 	aux = (*pile).sommet;
@@ -148,10 +148,9 @@ TCarte depiler(TPile * pile)
 	}
 	else
 	{
-		(*pile).sommet = (*aux).suivant;
-
-		strcpy((*c.nom) , (*aux).carte.nom);
-		strcpy((*c.effet) , (*aux).carte.effet);
+	   (*pile).sommet = (*aux).suivant;
+		strcpy(c.nom , (*aux).carte.nom);
+		strcpy(c.effet , (*aux).carte.effet);
 		c.num = (*aux).carte.num;
 
 		//(*c).type = (*aux).type;
@@ -258,7 +257,7 @@ void immunite_totem(TJoueur * j)
 
 
 }
-
+*/
 
 
 /*void DeposerCarteTotem(TPile totem, int numCarteMain, TMain *mainJoueur)
