@@ -19,10 +19,6 @@ typedef struct TPilelem
     struct TPilelem *suivant;
 }TPilelem;
 
-typedef struct TPile
-{
-	TPilelem *sommet;//Stocke toujours le dernier élément de la liste chainée
-
 
 typedef struct TPile
 {
