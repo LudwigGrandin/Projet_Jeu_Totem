@@ -9,14 +9,12 @@ typedef struct TCarte
 	char effet[100];
 	int num;
 	int type;
-	struct TCarte *suivant;
 } TCarte;
-
 
 typedef struct TPilelem
 {
 	TCarte carte;
-    struct TPilelem *suivant;
+	struct TPilelem *suivant;
 }TPilelem;
 
 
@@ -25,10 +23,10 @@ typedef struct TPile
 	TPilelem *sommet;
 }TPile;
 
+
 typedef struct TMain
 {
 	TPilelem *debut;
-
 } TMain;
 
 typedef struct TJoueur
