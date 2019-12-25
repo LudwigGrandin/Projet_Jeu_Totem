@@ -3,34 +3,49 @@
 #include <string.h>
 #include "libraryProjet.h"
 
-void piocher(TMain *mainJoueur, TPile *pile, TCarte *carte)
+void piocher(TMain *mainJoueur, TPile *pile)
 {
 
     TPilelem *aux;
     TPilelem *prec;
     TPilelem *newCell;
 
+    //ALLOUER NewCell
     newCell = (TPilelem*) malloc(sizeof(TPilelem));
 
-    (*newCell).suivant = NULL;
     aux = (*mainJoueur).debut;
     prec = (*mainJoueur).debut;
 
-    while(aux != NULL)
+    //Si main vide
+   if(est_pile_vide(*pile) != 1)
     {
-        prec = aux;
-        aux = (*aux).suivant;
+
+        while(aux != NULL)
+        {
+            prec = aux;
+            aux = (*aux).suivant;
+        }
+
+        //Piocher la carte en haut de la pile
+        (*newCell).carte = depiler(pile);
+        printf("nom Carte : %s \n", (*newCell).carte.nom);
+        //Si mainVide
+        if(aux == prec)
+        {
+            (*newCell).suivant = (*mainJoueur).debut;
+            (*mainJoueur).debut = newCell;
+        }
+        else
+        {
+            (*prec).suivant = newCell;
+            (*newCell).suivant = aux;
+        }
+    }
+    else
+    {
+        printf("il n y a plus de cartes dans la pioche\n");
     }
 
-    //On tire une nouvelle carte
-
-    //(*newCell).carte = (*(*pile).sommet).carte;  //On met la carte en haut de la pioche dans newCell
-     (*newCell).carte = depiler(pile);
-     printf("test1");
-    (*prec).suivant = newCell;
-    (*newCell).suivant = aux;
-
-    *carte = depiler(&pile);//La pile ne devrait elle pas renvoyer un TPileElem?????
 }
 
 
@@ -84,12 +99,20 @@ void Afficher_Main(TMain *mainJoueur)
     TPilelem *aux;
     aux = (*mainJoueur).debut;
 
+    if(mainJoueur == NULL)
+    {
+        printf("vous n'avez pas de cartes en main");
+    }
+
     while(aux != NULL)
     {
-        printf("crate num = %d\n", (*aux).carte.num);
+        printf("\n\n");
+        printf("carte num = %d\n", (*aux).carte.num);
         printf("carte nom = %s\n", (*aux).carte.nom);
         printf("carte effet = %s\n", (*aux).carte.effet);
+        //Problème pour l'affichage du type
         printf("carte type = %d\n", (*aux).carte.type);
+        printf("\n\n");
 
         aux = (*aux).suivant;
     }

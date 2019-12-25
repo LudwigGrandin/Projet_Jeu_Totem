@@ -6,43 +6,64 @@
 
 	/* Définition d'une carte */
 
-//int main()
-//{
+int main()
+{
 
 /**MainLudwig**/
-/*
+
 
 //test de toutes les procédures.
     TPile pile;
 	init_pile(&pile);
+	pile.sommet = NULL;
 	TCarte carte;
 	carte.num = 0;
 	int nombreCarte = 2;
 
 	TMain mainJoueur;
-	mainJoueur.debut = (TPilelem*) malloc(sizeof(TPilelem));
+	//mainJoueur.debut = (TPilelem*) malloc(sizeof(TPilelem));
+	mainJoueur.debut = NULL;
 
 
 	//fflush(stdout);
     //carte0
-    strcpy(carte.nom,"carte0");
-    strcpy(carte.effet, "25");
+    strcpy(carte.nom,"carte1");
+    strcpy(carte.effet, "21");
     carte.num = 1;
+    carte.type = 0;
     empiler(&pile, &carte);
     //printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
     //carte1
-    strcpy(carte.nom,"carte1");
-    strcpy(carte.effet, "26");
-    carte.num++;
+    strcpy(carte.nom,"carte2");
+    strcpy(carte.effet, "22");
+    carte.num = 2;
+    carte.type = 0;
     empiler(&pile, &carte);
    // printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
     // carte2
-    strcpy(carte.nom, "carte2");
-    strcpy(carte.effet, "27");
-    carte.num ++;
+    strcpy(carte.nom, "carte3");
+    strcpy(carte.effet, "23");
+    carte.num = 3;
+    carte.type = 0;
     empiler(&pile, &carte);
     //printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
 
+ /*   TPilelem *aux;
+    aux = mainJoueur.debut;
+
+    while(aux != NULL)
+    {
+        (*aux).carte = depiler(&pile);
+        printf("\n\n");
+        printf("carte num = %d\n", (*aux).carte.num);
+        printf("carte nom = %s\n", (*aux).carte.nom);
+        printf("carte effet = %s\n", (*aux).carte.effet);
+        printf("carte type = %d\n", (*aux).carte.type);
+        printf("\n\n");
+
+        aux = (*aux).suivant;
+    }*/
+/*
     for(int i = 0; i <= nombreCarte; i ++)
     {
        // printf("test\n");
@@ -52,17 +73,27 @@
         printf("l effet de la carte est %s \n", carte.effet);
         printf("\n\n");
     }
+    */
+    printf("\n");
+    printf("appel de la fonction piocher\n");
+    piocher(&mainJoueur,&pile);
+    printf("appel de la fonction Afficher Main \n");
+    Afficher_Main(&mainJoueur);
+    printf("\n");
 
-    piocher(&mainJoueur,&pile,&carte);
+    printf("appel de la fonction piocher\n");
+    piocher(&mainJoueur,&pile);
+    printf("appel de la fonction Afficher Main \n");
+    Afficher_Main(&mainJoueur);
 
-    Afficher_Main(mainJoueur);
-
+    liberer_main(&mainJoueur);
 	liberer_pile(&pile); // libère toute la pile
-*/
+
 
 /**Main Lucas**/
 
 /*
+//Pas besoin d'avoir de main ici, décommente juste ta partie. Le début du main est tout ne haut
 int main(){
 
     //int taille = 0;
@@ -102,11 +133,12 @@ int main(){
 	liberer_pile(&pile); // libère toute la pile
 	afficher_pile(pile);
 
-	
 
+*/
+//Ne commente pas le return ici, c'est la fin du main(peu importe si c'est celui de ludwig, lucas ou killian
 	return 0;
 }
-*/
+
 
 int est_pile_vide(TPile pile)
 {
