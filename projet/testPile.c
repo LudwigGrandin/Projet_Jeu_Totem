@@ -13,7 +13,7 @@ int main()
 
 
 //test de toutes les procédures.
-    TPile pile;
+/*    TPile pile;
 	init_pile(&pile);
 	pile.sommet = NULL;
 	TCarte carte;
@@ -45,7 +45,7 @@ int main()
     strcpy(carte.effet, "23");
     carte.num = 3;
     carte.type = 0;
-    empiler(&pile, &carte);
+    empiler(&pile, &carte);*/
     //printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
 
  /*   TPilelem *aux;
@@ -74,7 +74,7 @@ int main()
         printf("\n\n");
     }
     */
-    printf("\n");
+/*    printf("\n");
     printf("appel de la fonction piocher\n");
     piocher(&mainJoueur,&pile);
     printf("appel de la fonction Afficher Main \n");
@@ -89,7 +89,7 @@ int main()
     liberer_main(&mainJoueur);
 	liberer_pile(&pile); // libère toute la pile
 
-
+*/
 /**Main Lucas**/
 
 /*
