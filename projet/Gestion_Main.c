@@ -5,12 +5,14 @@
 
 void piocher(TMain *mainJoueur, TPile *pile, TCarte *carte)
 {
+
     TPilelem *aux;
     TPilelem *prec;
     TPilelem *newCell;
 
     newCell = (TPilelem*) malloc(sizeof(TPilelem));
 
+    (*newCell).suivant = NULL;
     aux = (*mainJoueur).debut;
     prec = (*mainJoueur).debut;
 
@@ -19,12 +21,16 @@ void piocher(TMain *mainJoueur, TPile *pile, TCarte *carte)
         prec = aux;
         aux = (*aux).suivant;
     }
+
     //On tire une nouvelle carte
 
-    (*newCell).carte = (*(*pile).sommet).carte;  //On met la carte en haut de la pioche dans newCell
+    //(*newCell).carte = (*(*pile).sommet).carte;  //On met la carte en haut de la pioche dans newCell
+     (*newCell).carte = depiler(pile);
+     printf("test1");
     (*prec).suivant = newCell;
     (*newCell).suivant = aux;
-    depiler(&pile);//La pile ne devrait elle pas renvoyer un TPileElem?????
+
+    *carte = depiler(&pile);//La pile ne devrait elle pas renvoyer un TPileElem?????
 }
 
 
@@ -68,6 +74,24 @@ void choix_Emplacement_Carte_Main(TMain *main, int numCarteMain, TCarte *emplace
             aux = (*aux).suivant;
             compteur ++;
         }
+    }
+
+}
+
+void Afficher_Main(TMain *mainJoueur)
+{
+
+    TPilelem *aux;
+    aux = (*mainJoueur).debut;
+
+    while(aux != NULL)
+    {
+        printf("crate num = %d\n", (*aux).carte.num);
+        printf("carte nom = %s\n", (*aux).carte.nom);
+        printf("carte effet = %s\n", (*aux).carte.effet);
+        printf("carte type = %d\n", (*aux).carte.type);
+
+        aux = (*aux).suivant;
     }
 
 }

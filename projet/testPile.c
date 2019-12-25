@@ -10,14 +10,17 @@ int main()
 {
 
 /**MainLudwig**/
-
 /*
+
 //test de toutes les procédures.
     TPile pile;
 	init_pile(&pile);
 	TCarte carte;
 	carte.num = 0;
 	int nombreCarte = 2;
+
+	TMain mainJoueur;
+	mainJoueur.debut = (TPilelem*) malloc(sizeof(TPilelem));
 
 
 	//fflush(stdout);
@@ -44,18 +47,19 @@ int main()
     {
        // printf("test\n");
         carte = depiler(&pile);
-        printf("test1");
         printf("le num de la carte est %d \n", carte.num);	//verification des données prises par la carte en param
         printf("le nom de la carte est %s \n", carte.nom);
         printf("l effet de la carte est %s \n", carte.effet);
         printf("\n\n");
     }
 
-//	taille = taille_pile(pile);
-//	printf("%d", taille);
+    piocher(&mainJoueur,&pile,&carte);
+
+    Afficher_Main(mainJoueur);
+
 	liberer_pile(&pile); // libère toute la pile
-	//afficher_pile(pile);
 */
+
 /**Main Lucas**/
 
 /*
