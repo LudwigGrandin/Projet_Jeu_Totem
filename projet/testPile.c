@@ -6,8 +6,8 @@
 
 	/* Définition d'une carte */
 
-int main()
-{
+//int main()
+//{
 
 /**MainLudwig**/
 /*
@@ -72,7 +72,7 @@ int main(){
 
 	int taille = 0;
 	struct TPile pile;
-	struct TCarte *cartest;
+	struct TCarte cartest;
 	init_pile(&pile);
 	struct TCarte carte;
 	carte.num = 0;
@@ -93,19 +93,20 @@ int main(){
 
 	afficher_pile(pile);		//affiche la pile avant depiler
 	cartest = depiler(&pile);
-	printf("le num de la carte est %d \n", (*cartest).num);	//verification des données prises par la carte en param
-	printf("le num de la carte est %s \n", (*cartest).nom);
-	printf("le num de la carte est %s \n", (*cartest).effet);
+	printf("le num de la carte est %d \n", cartest.num);	//verification des données prises par la carte en param
+	printf("le num de la carte est %s \n", cartest.nom);
+	printf("le num de la carte est %s \n", cartest.effet);
 	afficher_pile(pile);
 //	taille = taille_pile(pile);
 //	printf("%d", taille);
 	liberer_pile(&pile); // libère toute la pile
 	afficher_pile(pile);
 
-	*/
+	
 
 	return 0;
 }
+*/
 
 int est_pile_vide(TPile pile)
 {
@@ -236,6 +237,7 @@ void liberer_main(TMain * main)
 	}
 }
 
+/*
 void tete_coyote(TJoueur * j1, TJoueur * j2, TJoueur * jint) // créer un joueur jint dans le main ?
 {
 
