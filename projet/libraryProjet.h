@@ -15,8 +15,8 @@ void supprimer_carte_totem(TPile * pile, TMain * main, int num);
 //Gestion Main
 
 void piocher(TMain *mainJoueur, TPile *pile);
-void DeposerCarteTotem(TPile totem, int numCarteMain, TMain *main);
-void choix_Emplacement_Carte_Main(TMain *main, int numCarteMain, TCarte *emplacementCartePrecedente,TCarte *emplacementCarteActuelle);
+void DeposerCarteTotem(TPile *totem, int numCarteMain, TMain *main);
+TCarte Retrait_Carte_Main(TMain *main, int numCarteMain);
 void JouerCarteCoupBas(TCarte carte, TPile pile);
 
 

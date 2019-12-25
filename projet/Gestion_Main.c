@@ -10,6 +10,8 @@ void piocher(TMain *mainJoueur, TPile *pile)
     TPilelem *prec;
     TPilelem *newCell;
 
+
+
     //ALLOUER NewCell
     newCell = (TPilelem*) malloc(sizeof(TPilelem));
 
@@ -27,13 +29,15 @@ void piocher(TMain *mainJoueur, TPile *pile)
         }
 
         //Piocher la carte en haut de la pile
+
         (*newCell).carte = depiler(pile);
-        printf("nom Carte : %s \n", (*newCell).carte.nom);
+
         //Si mainVide
         if(aux == prec)
         {
             (*newCell).suivant = (*mainJoueur).debut;
             (*mainJoueur).debut = newCell;
+
         }
         else
         {
@@ -49,47 +53,69 @@ void piocher(TMain *mainJoueur, TPile *pile)
 }
 
 
-void DeposerCarteTotem(TPile totem, int numCarteMain, TMain *main)
+void DeposerCarteTotem(TPile *totem, int numCarteMain, TMain *mainJoueur)
 {
-    TPilelem *emplacementCartePrecedente;
-    TPilelem *emplacementCarteActuelle;
     TCarte carte;
 
     //On récupère l'adresse dans la liste chainée de la carte que le joueur veut jouer
-     choix_Emplacement_Carte_Main(main,numCarteMain,emplacementCartePrecedente,emplacementCarteActuelle);
-    //Supprime la carte de la main du joueur
-    (*emplacementCartePrecedente).suivant = (*emplacementCarteActuelle).suivant;
-    //Sauvegarde de la carte de la main
-    carte = (*emplacementCarteActuelle).carte;
+    carte = Retrait_Carte_Main(mainJoueur,numCarteMain);
+
     //Il faut désallouer l'emplacement qui a été supprimé de la main
     //Si c'est une carte totem alors on l'ajoute à la pile totem
-    if((*emplacementCarteActuelle).carte.type == 1)
+    if(carte.type == 1)
     {
-        empiler(&totem,&carte);
+        empiler(totem,&carte);
+    }
+    else
+    {
+
     }
 }
 
-//Fonction Permetta,t de récupérer l'adresse d'une carte contenue dans la liste chaînée de la main
-void choix_Emplacement_Carte_Main(TMain *main, int numCarteMain, TCarte *emplacementCartePrecedente,TCarte *emplacementCarteActuelle)
+//Fonction Permettant de récupérer l'adresse d'une carte contenue dans la liste chaînée de la main
+TCarte Retrait_Carte_Main(TMain *main, int numCarteMain)
 {
     int trouve = 0, compteur = 1;
+
+    TCarte carte;
     TPilelem *aux;
+    TPilelem *prec;
+
     aux = (*main).debut;
-    emplacementCartePrecedente = (*main).debut;
+    prec = (*main).debut;
+
+    carte.type=0;
+
+
 
     while(aux != NULL && trouve == 0)
     {
+
         if(compteur == numCarteMain)
         {
             trouve = 1;
         }
         else
         {
-            emplacementCartePrecedente = aux;
+            prec = aux;
             aux = (*aux).suivant;
+
             compteur ++;
         }
     }
+
+    if(trouve == 1)
+    {
+        carte.num = (*aux).carte.num;
+        strcpy(carte.nom,(*aux).carte.nom);
+        strcpy(carte.effet,(*aux).carte.effet);
+        carte.type = (*aux).carte.type;
+
+        (*prec).suivant=(*aux).suivant;
+        free(aux);
+    }
+
+    return carte;
 
 }
 
@@ -103,18 +129,20 @@ void Afficher_Main(TMain *mainJoueur)
     {
         printf("vous n'avez pas de cartes en main");
     }
-
-    while(aux != NULL)
+    else
     {
-        printf("\n\n");
-        printf("carte num = %d\n", (*aux).carte.num);
-        printf("carte nom = %s\n", (*aux).carte.nom);
-        printf("carte effet = %s\n", (*aux).carte.effet);
-        //Problème pour l'affichage du type
-        printf("carte type = %d\n", (*aux).carte.type);
-        printf("\n\n");
+        while(aux != NULL)
+        {
+            printf("\n\n");
+            printf("carte num = %d\n", (*aux).carte.num);
+            printf("carte nom = %s\n", (*aux).carte.nom);
+            printf("carte effet = %s\n", (*aux).carte.effet);
+            //Problème pour l'affichage du type
+            printf("carte type = %d\n", (*aux).carte.type);
+            printf("\n\n");
 
-        aux = (*aux).suivant;
+            aux = (*aux).suivant;
+        }
     }
 
 }

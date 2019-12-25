@@ -10,14 +10,18 @@ int main()
 {
 
 /**MainLudwig**/
-
+/*
 
 //test de toutes les procédures.
-/*    TPile pile;
+    TPile pile;
+    TPile totem;
 	init_pile(&pile);
+	init_pile(&totem);
 	pile.sommet = NULL;
+	totem.sommet = NULL;
 	TCarte carte;
 	carte.num = 0;
+	carte.type = 0;
 	int nombreCarte = 2;
 
 	TMain mainJoueur;
@@ -30,54 +34,30 @@ int main()
     strcpy(carte.nom,"carte1");
     strcpy(carte.effet, "21");
     carte.num = 1;
-    carte.type = 0;
+    carte.type = 1;
     empiler(&pile, &carte);
     //printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
     //carte1
     strcpy(carte.nom,"carte2");
     strcpy(carte.effet, "22");
     carte.num = 2;
-    carte.type = 0;
+    carte.type = 1;
     empiler(&pile, &carte);
    // printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
     // carte2
     strcpy(carte.nom, "carte3");
     strcpy(carte.effet, "23");
     carte.num = 3;
-    carte.type = 0;
-    empiler(&pile, &carte);*/
-    //printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
+    carte.type = 1;
+    empiler(&pile, &carte);
 
- /*   TPilelem *aux;
-    aux = mainJoueur.debut;
 
-    while(aux != NULL)
-    {
-        (*aux).carte = depiler(&pile);
-        printf("\n\n");
-        printf("carte num = %d\n", (*aux).carte.num);
-        printf("carte nom = %s\n", (*aux).carte.nom);
-        printf("carte effet = %s\n", (*aux).carte.effet);
-        printf("carte type = %d\n", (*aux).carte.type);
-        printf("\n\n");
-
-        aux = (*aux).suivant;
-    }*/
-/*
-    for(int i = 0; i <= nombreCarte; i ++)
-    {
-       // printf("test\n");
-        carte = depiler(&pile);
-        printf("le num de la carte est %d \n", carte.num);	//verification des données prises par la carte en param
-        printf("le nom de la carte est %s \n", carte.nom);
-        printf("l effet de la carte est %s \n", carte.effet);
-        printf("\n\n");
-    }
-    */
-/*    printf("\n");
+    printf("\n");
+    printf("pioche Carte 3 : carte.type = %d\n", (*pile.sommet).carte.type);
     printf("appel de la fonction piocher\n");
     piocher(&mainJoueur,&pile);
     printf("appel de la fonction Afficher Main \n");
+    printf("mainJoueur Carte 1 : carte.type = %d", (*mainJoueur.debut).carte.type);
     Afficher_Main(&mainJoueur);
     printf("\n");
 
@@ -85,6 +65,14 @@ int main()
     piocher(&mainJoueur,&pile);
     printf("appel de la fonction Afficher Main \n");
     Afficher_Main(&mainJoueur);
+    printf("\n");
+
+    printf("appel de la fonction Totem\n");
+    DeposerCarteTotem(&totem,1,&mainJoueur);
+    DeposerCarteTotem(&totem,2,&mainJoueur);
+    printf("appel de la fonction afficher pile\n");
+    afficher_pile(totem);
+    printf("\n");
 
     liberer_main(&mainJoueur);
 	liberer_pile(&pile); // libère toute la pile
@@ -174,10 +162,12 @@ TCarte depiler(TPile * pile)
 	int verif;
 	TCarte c;
 	TPilelem *aux;
+
     //On vérifie si la pile est vide
 	verif = est_pile_vide(*pile);
 
 	aux = (*pile).sommet;
+
 
 	if(verif == 1) // la pile est vide
 	{
@@ -186,11 +176,12 @@ TCarte depiler(TPile * pile)
 	else
 	{
 	   (*pile).sommet = (*aux).suivant;
+
 		strcpy(c.nom , (*aux).carte.nom);
 		strcpy(c.effet , (*aux).carte.effet);
 		c.num = (*aux).carte.num;
+		c.type = (*aux).carte.type;
 
-		//(*c).type = (*aux).type;
 		free(aux);
 	}
 	return c;
@@ -209,15 +200,20 @@ void afficher_pile(TPile pile)
 
 	verif = est_pile_vide(pile);
 	aux = pile.sommet;
+
 	if(verif == 1)
 	{
 		printf("La pile est vide, rien à afficher \n");
 	}
-	while(aux != NULL)
-	{
-		printf("[%d]\n", (*aux).carte.num);
-		aux = (*aux).suivant;
-	}
+	else
+    {
+        while(aux != NULL)
+        {
+            printf("[%d] -- %s\n", (*aux).carte.num, (*aux).carte.nom);
+            aux = (*aux).suivant;
+        }
+    }
+
 }
 
 int taille_pile(TPile pile)
@@ -257,7 +253,7 @@ void liberer_main(TMain * main)
 	TPilelem *aux;
 	aux = (*main).debut;
 
-	if((*main).debut == NULL){
+	if(aux == NULL){
 		printf("La liste est vide, rien à supprimer");
 	}
 
