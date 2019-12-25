@@ -6,7 +6,7 @@
 typedef struct TCarte
 {
 	char nom[100];
-	char effet[100];
+	char effet[200];//Mis à 200 pour prendre des phrases plus grandes
 	int num;
 	int type;
 } TCarte;
