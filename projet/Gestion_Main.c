@@ -53,7 +53,7 @@ void piocher(TMain *mainJoueur, TPile *pile)
 }
 
 
-void DeposerCarteTotem(TPile *totem, int numCarteMain, TMain *mainJoueur)
+void DeposerCarte(TPile *totem, int numCarteMain, TMain *mainJoueur)
 {
     TCarte carte;
 

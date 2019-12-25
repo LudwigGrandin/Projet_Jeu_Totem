@@ -10,7 +10,7 @@ int main()
 {
 
 /**MainLudwig**/
-/*
+
 
 //test de toutes les procédures.
     TPile pile;
@@ -68,8 +68,8 @@ int main()
     printf("\n");
 
     printf("appel de la fonction Totem\n");
-    DeposerCarteTotem(&totem,1,&mainJoueur);
-    DeposerCarteTotem(&totem,2,&mainJoueur);
+    DeposerCarte(&totem,1,&mainJoueur);
+    DeposerCarte(&totem,2,&mainJoueur);
     printf("appel de la fonction afficher pile\n");
     afficher_pile(totem);
     printf("\n");
@@ -77,7 +77,7 @@ int main()
     liberer_main(&mainJoueur);
 	liberer_pile(&pile); // libère toute la pile
 
-*/
+
 /**Main Lucas**/
 
 /*
@@ -121,8 +121,8 @@ int main(){
 	liberer_pile(&pile); // libère toute la pile
 	afficher_pile(pile);
 
-
 */
+
 //Ne commente pas le return ici, c'est la fin du main(peu importe si c'est celui de ludwig, lucas ou killian
 	return 0;
 }
@@ -293,35 +293,6 @@ void immunite_totem(TJoueur * j)
 }
 */
 
-
-/*void DeposerCarteTotem(TPile totem, int numCarteMain, TMain *mainJoueur)
-{
-    int trouve = 0;
-    TPilelem *aux;
-    TPilelem *prec;
-
-    aux =  (*mainJoueur).debut;
-    prec = (*mainJoueur).debut;
-
-    while(aux != NULL && trouve == 0 )
-    {
-        if( (*aux).carte.num  == )
-        {
-            //si la carte est une tête
-            if((*aux).carte.type = 1)
-            {
-                trouve = 1;
-                empiler(*totem, aux);
-            }
-
-
-       }
-       prec = aux;
-       aux = (*aux).suivant;
-    }
-
-}
-*/
 
 
 
