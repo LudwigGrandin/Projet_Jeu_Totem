@@ -19,5 +19,9 @@ void DeposerCarte(TPile *totem, int numCarteMain, TMain *main);
 TCarte Retrait_Carte_Main(TMain *main, int numCarteMain);
 void JouerCarteCoupBas(TCarte carte, TPile pile);
 
+//Killian
+void afficherCartes(TCarte* listeCartes,int taille);
+void init_ListeCarte(TCarte* liste,int nbCarte,int nbJoueur);
+
 
 #endif

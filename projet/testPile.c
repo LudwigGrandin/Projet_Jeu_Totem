@@ -24,6 +24,10 @@ int main()
 	carte.type = 0;
 	int nombreCarte = 2;
 
+	TCarte listeCarte[64];
+	int nbCarte = 64;
+	int nbJoueur = 2;
+
 	TMain mainJoueur;
 	//mainJoueur.debut = (TPilelem*) malloc(sizeof(TPilelem));
 	mainJoueur.debut = NULL;
@@ -31,7 +35,7 @@ int main()
 
 	//fflush(stdout);
     //carte0
-    strcpy(carte.nom,"carte1");
+ /*   strcpy(carte.nom,"carte1");
     strcpy(carte.effet, "21");
     carte.num = 1;
     carte.type = 1;
@@ -49,9 +53,12 @@ int main()
     strcpy(carte.effet, "23");
     carte.num = 3;
     carte.type = 1;
-    empiler(&pile, &carte);
+    empiler(&pile, &carte);*/
 
+    init_ListeCarte(&listeCarte, nbCarte, nbJoueur);
+    afficherCartes(&listeCarte,nbCarte);
 
+/*
     printf("\n");
     printf("pioche Carte 3 : carte.type = %d\n", (*pile.sommet).carte.type);
     printf("appel de la fonction piocher\n");
@@ -73,9 +80,11 @@ int main()
     printf("appel de la fonction afficher pile\n");
     afficher_pile(totem);
     printf("\n");
-
+*/
     liberer_main(&mainJoueur);
 	liberer_pile(&pile); // libère toute la pile
+
+
 
 
 /**Main Lucas**/
@@ -292,7 +301,5 @@ void immunite_totem(TJoueur * j)
 
 }
 */
-
-
 
 

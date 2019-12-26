@@ -6,7 +6,7 @@
 typedef struct TCarte
 {
 	char nom[100];
-	char effet[100];
+	char effet[200];
 	int num;
 	int type;
 } TCarte;
@@ -31,6 +31,7 @@ typedef struct TMain
 
 typedef struct TJoueur
 {
+    int id_Joueur;
 	TPile totem;
 	TMain main;
 	int pion;
