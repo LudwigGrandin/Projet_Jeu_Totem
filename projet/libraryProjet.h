@@ -5,7 +5,7 @@
 //Piles
 int est_pile_vide(TPile pile);
 void empiler(TPile * pile, TCarte * c);
-TCarte depiler(TPile * pile);
+TPile depiler(TPile * pile);
 void init_pile(TPile * pile);
 void afficher_pile(TPile pile);
 int taille_pile(TPile pile);
@@ -20,8 +20,12 @@ TCarte Retrait_Carte_Main(TMain *main, int numCarteMain);
 void JouerCarteCoupBas(TCarte carte, TPile pile);
 
 //Killian
-void afficherCartes(TCarte* listeCartes,int taille);
+void init_sans_doublons(int* tableau,int taille);
+void melanger(int* tableau, int taille);
+void init_pioche(int* tableau,int nbCarte,TCarte* listeCarte, TPile* pioche);
 void init_ListeCarte(TCarte* liste,int nbCarte,int nbJoueur);
+void afficherCartes(TCarte* listeCartes,int taille);
+int saisir_entre(int min, int max);
 
 //Gestion init partie
 void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, int nbJoueur);

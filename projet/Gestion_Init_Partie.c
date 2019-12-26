@@ -8,7 +8,6 @@ void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, i
     int nbCartesLocales,nbJoueurLocal = 0;
     TPilelem *aux;
 
-
     for (nbJoueurLocal = 0; nbJoueurLocal < nbJoueur; nbJoueurLocal ++)
     {
 
