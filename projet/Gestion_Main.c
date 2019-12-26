@@ -31,7 +31,8 @@ void piocher(TMain *mainJoueur, TPile *pile)
 
         //Piocher la carte en haut de la pile
 
-        (*newCell).carte = depiler(pile);
+        (*newCell).carte = (*(*pile).sommet).carte;
+        depiler(pile);
 
         //Si mainVide
         if(aux == prec)

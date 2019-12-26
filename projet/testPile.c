@@ -134,7 +134,7 @@ int main()
 	//struct TPile pile;
 
 //test de toutes les procédures.
-
+/*
 	int taille = 0;
 	struct TPile pile;
 	struct TPile piletest;
@@ -165,7 +165,7 @@ int main()
 	liberer_pile(&pile); // libère toute la pile
 	afficher_pile(pile);
 
-
+*/
 //Ne commente pas le return ici, c'est la fin du main(peu importe si c'est celui de ludwig, lucas ou killian
 	return 0;
 }
@@ -543,13 +543,13 @@ void menu(TJoueur j, int e, int nbJoueurs)
 	{
 		scanf("%d", &choixCarte);
 		//verif s'il a bien la carte dans sa main / Création d'une fonction verif_carte()?
-		verif = verif_carte(j.main, choixCarte); //prend la main et la carte souhaitée en paramètre
+		/**verif = verif_carte(j.main, choixCarte);**/ //prend la main et la carte souhaitée en paramètre
 		//Si la vérif = 0 alors il n'a pas la carte dans sa main et doit en jouer une.
 		if(verif == 0)
 		{
 			printf("Vous ne possédez pas cette carte dans votre main veuillez en choisir une nouvelle.\n");
 		}
-		//Sinon on continue 
+		//Sinon on continue
 	}while(verif != 1);
 
 	//proposer aux autres de contrer
@@ -583,7 +583,7 @@ void menu(TJoueur j, int e, int nbJoueurs)
 	else{
 		//on joue la carte souhaitée par le joueur e
 	}
-	
+
 }
 
 /*
