@@ -10,7 +10,7 @@ int main()
 {
 
 /**MainLudwig**/
-
+/*
 
 //test de toutes les procédures.
     TPile pile;
@@ -55,8 +55,8 @@ int main()
     carte.type = 1;
     empiler(&pile, &carte);*/
 
-    init_ListeCarte(&listeCarte, nbCarte, nbJoueur);
-    afficherCartes(&listeCarte,nbCarte);
+ //   init_ListeCarte(&listeCarte, nbCarte, nbJoueur);
+ //   afficherCartes(&listeCarte,nbCarte);
 
 /*
     printf("\n");
@@ -81,11 +81,11 @@ int main()
     afficher_pile(totem);
     printf("\n");
 */
-    liberer_main(&mainJoueur);
+/*    liberer_main(&mainJoueur);
 	liberer_pile(&pile); // libère toute la pile
 
 
-
+*/
 
 /**Main Lucas**/
 
