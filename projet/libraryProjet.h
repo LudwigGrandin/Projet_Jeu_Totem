@@ -20,8 +20,12 @@ TCarte Retrait_Carte_Main(TMain *main, int numCarteMain);
 void JouerCarteCoupBas(TCarte carte, TPile pile);
 
 //Killian
-void afficherCartes(TCarte* listeCartes,int taille);
+void init_sans_doublons(int* tableau,int taille);
+void melanger(int* tableau, int taille);
+void init_pioche(int* tableau,int nbCarte,TCarte* listeCarte, TPile* pioche);
 void init_ListeCarte(TCarte* liste,int nbCarte,int nbJoueur);
+void afficherCartes(TCarte* listeCartes,int taille);
+int saisir_entre(int min, int max);
 
 
 #endif
