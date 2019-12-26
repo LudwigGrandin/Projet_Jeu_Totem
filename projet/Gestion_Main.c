@@ -3,6 +3,7 @@
 #include <string.h>
 #include "libraryProjet.h"
 
+
 void piocher(TMain *mainJoueur, TPile *pile)
 {
 

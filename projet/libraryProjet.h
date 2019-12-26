@@ -23,5 +23,8 @@ void JouerCarteCoupBas(TCarte carte, TPile pile);
 void afficherCartes(TCarte* listeCartes,int taille);
 void init_ListeCarte(TCarte* liste,int nbCarte,int nbJoueur);
 
+//Gestion init partie
+void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, int nbJoueur);
+
 
 #endif

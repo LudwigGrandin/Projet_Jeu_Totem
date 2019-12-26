@@ -3,15 +3,14 @@
 #include <string.h>
 #include "libraryProjet.h"
 
-
 	/* Définition d'une carte */
 
 int main()
 {
 
 /**MainLudwig**/
-/*
 
+/*
 //test de toutes les procédures.
     TPile pile;
     TPile totem;
@@ -24,22 +23,32 @@ int main()
 	carte.type = 0;
 	int nombreCarte = 2;
 
-	TCarte listeCarte[64];
+	TJoueur listeJoueur[10];
 	int nbCarte = 64;
 	int nbJoueur = 2;
 
 	TMain mainJoueur;
-	//mainJoueur.debut = (TPilelem*) malloc(sizeof(TPilelem));
+	mainJoueur.debut = (TPilelem*) malloc(sizeof(TPilelem));
 	mainJoueur.debut = NULL;
+
+	listeJoueur[0].id = 1;
+	strcpy(listeJoueur[0].nom, "jackie");
+
+	listeJoueur[1].id = 2;
+	strcpy(listeJoueur[1].nom,"Michel");
+
+	listeJoueur[2].id = 3;
+	strcpy(listeJoueur[2].nom, "Louisa");
 
 
 	//fflush(stdout);
     //carte0
- /*   strcpy(carte.nom,"carte1");
+    strcpy(carte.nom,"carte1");
     strcpy(carte.effet, "21");
     carte.num = 1;
     carte.type = 1;
     empiler(&pile, &carte);
+
     //printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
     //carte1
     strcpy(carte.nom,"carte2");
@@ -47,19 +56,22 @@ int main()
     carte.num = 2;
     carte.type = 1;
     empiler(&pile, &carte);
+
    // printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
     // carte2
     strcpy(carte.nom, "carte3");
     strcpy(carte.effet, "23");
     carte.num = 3;
     carte.type = 1;
-    empiler(&pile, &carte);*/
+    empiler(&pile, &carte);
 
- //   init_ListeCarte(&listeCarte, nbCarte, nbJoueur);
- //   afficherCartes(&listeCarte,nbCarte);
+    Distribuer_Cartes(listeJoueur,&pile,nbCarte,nbJoueur);
 
-/*
-    printf("\n");
+//   init_ListeCarte(listeCarte, nbCarte, nbJoueur);
+//   afficherCartes(&listeCarte,nbCarte);
+
+
+/*    printf("\n");
     printf("pioche Carte 3 : carte.type = %d\n", (*pile.sommet).carte.type);
     printf("appel de la fonction piocher\n");
     piocher(&mainJoueur,&pile);
@@ -79,12 +91,10 @@ int main()
     DeposerCarte(&totem,2,&mainJoueur);
     printf("appel de la fonction afficher pile\n");
     afficher_pile(totem);
-    printf("\n");
-*/
-/*    liberer_main(&mainJoueur);
+    printf("\n");*/
+/*
+    liberer_main(&mainJoueur);
 	liberer_pile(&pile); // libère toute la pile
-
-
 */
 
 /**Main Lucas**/

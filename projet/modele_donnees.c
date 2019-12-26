@@ -32,6 +32,7 @@ typedef struct TMain
 typedef struct TJoueur
 {
 	int id;
+	char nom[20];
 	TPile totem;
 	TMain main;
 	int pion;
