@@ -121,13 +121,13 @@ TCarte Retrait_Carte_Main(TMain *main, int numCarteMain)
 
 }
 
-void Afficher_Main(TMain *mainJoueur)
+void Afficher_Main(TMain mainJoueur)
 {
 
     TPilelem *aux;
-    aux = (*mainJoueur).debut;
+    aux = mainJoueur.debut;
 
-    if(mainJoueur == NULL)
+    if(mainJoueur.debut == NULL)
     {
         printf("vous n'avez pas de cartes en main");
     }

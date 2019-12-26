@@ -14,26 +14,23 @@ void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, i
         listeJoueur[nbJoueurLocal].main.debut = (TPilelem*) malloc(sizeof(TPilelem));
         aux = listeJoueur[nbJoueurLocal].main.debut;
 
+
         for(nbCartesLocales = 0; nbCartesLocales < 5; nbCartesLocales ++)
         {
 
             (*aux).carte = (*(*listeCartes).sommet).carte;
+            printf("test");
             depiler(listeCartes);
             aux = (*aux).suivant;
         }
     }
-
+/*
     for (nbJoueurLocal = 0; nbJoueurLocal < nbJoueur; nbJoueurLocal ++)
     {
         aux = listeJoueur[nbJoueurLocal].main.debut;
         printf("Joueur : %s\n", listeJoueur[nbJoueurLocal].nom);
 
-        while(aux != NULL)
-        {
-            printf("Carte.num = %d\n", (*aux).carte.num);
-            aux = (*aux).suivant;
-        }
-
+        //Afficher_Main(listeJoueur[nbJoueurLocal].main);
     }
-
+*/
 }

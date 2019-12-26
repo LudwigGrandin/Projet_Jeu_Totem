@@ -38,7 +38,8 @@ int main()
 
 /**MainLudwig**/
 
-/*
+
+
 //test de toutes les procédures.
     TPile pile;
     TPile totem;
@@ -68,8 +69,10 @@ int main()
 	listeJoueur[2].id = 3;
 	strcpy(listeJoueur[2].nom, "Louisa");
 
+	init_pioche(nbCarte,nbJoueur,&pile);
+	afficher_pile(pile);
 
-	//fflush(stdout);
+/*	//fflush(stdout);
     //carte0
     strcpy(carte.nom,"carte1");
     strcpy(carte.effet, "21");
@@ -91,9 +94,10 @@ int main()
     strcpy(carte.effet, "23");
     carte.num = 3;
     carte.type = 1;
-    empiler(&pile, &carte);
+    empiler(&pile, &carte);*/
 
-    Distribuer_Cartes(listeJoueur,&pile,nbCarte,nbJoueur);
+
+    //Distribuer_Cartes(listeJoueur,&pile,nbCarte,nbJoueur);
 
 //   init_ListeCarte(listeCarte, nbCarte, nbJoueur);
 //   afficherCartes(&listeCarte,nbCarte);
@@ -120,10 +124,10 @@ int main()
     printf("appel de la fonction afficher pile\n");
     afficher_pile(totem);
     printf("\n");*/
-/*
+
     liberer_main(&mainJoueur);
 	liberer_pile(&pile); // libère toute la pile
-*/
+
 
 /**Main Lucas**/
 
@@ -198,11 +202,17 @@ void melanger(int* tableau, int taille){
 	}
 }
 
-void init_pioche(int* tableau,int nbCarte,TCarte* listeCarte, TPile* pioche){
+void init_pioche(int nbCarte,int nbJoueur, TPile* pioche){
 
+    int tableau[nbCarte];
+    init_sans_doublons(tableau,nbCarte);
     //mélange le tableau d'entier
     melanger(tableau,nbCarte);
     //debug
+
+    TCarte listeCarte[nbCarte];
+    init_ListeCarte(listeCarte,nbCarte,nbJoueur);
+
     for(int i =0 ; i< nbCarte ; i++){
             printf(" %d ;", tableau[i]);
         }
@@ -585,33 +595,4 @@ void menu(TJoueur j, int e, int nbJoueurs)
 	}
 
 }
-
-/*
-void tete_coyote(TJoueur * j1, TJoueur * j2, TJoueur * jint) // créer un joueur jint dans le main ?
-{
-
-	(*jint).totem = (*j1).totem;
-	(*j1).totem = (*j2).totem;
-	(*j2).totem = (*jint).totem;
-
-}
-
-/*void cadeau(TPile * totem1, TPile * totem2)
-{
-	struct TCarte *aux;
-
-	depiler(totem2);
-
-	empiler(totem1, (*(*totem2).sommet).carte);
-
-}
-
-//suivant la carte que le joueur joue
-void immunite_totem(TJoueur * j)
-{
-
-
-}
-*/
-
 
