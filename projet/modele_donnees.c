@@ -31,7 +31,7 @@ typedef struct TMain
 
 typedef struct TJoueur
 {
-    int id_Joueur;
+	int id;
 	TPile totem;
 	TMain main;
 	int pion;
