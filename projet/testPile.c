@@ -530,6 +530,62 @@ void liberer_main(TMain * main)
 	}
 }
 
+void menu(TJoueur j, int e, int nbJoueurs)
+{
+	int verif = 0;
+	int rep = 0;
+	int choixCarte = 0;
+	printf("C'est au tour du joueur n° %d \n", e);
+
+	// proposer action soit jouer carte totem / coup bas
+	printf("Indiquez le nom de la carte que vous voulez jouer \n");
+	do
+	{
+		scanf("%d", &choixCarte);
+		//verif s'il a bien la carte dans sa main / Création d'une fonction verif_carte()?
+		verif = verif_carte(j.main, choixCarte); //prend la main et la carte souhaitée en paramètre
+		//Si la vérif = 0 alors il n'a pas la carte dans sa main et doit en jouer une.
+		if(verif == 0)
+		{
+			printf("Vous ne possédez pas cette carte dans votre main veuillez en choisir une nouvelle.\n");
+		}
+		//Sinon on continue 
+	}while(verif != 1);
+
+	//proposer aux autres de contrer
+	printf("Un joueur ayant la carte 'Faux pas !' peut contrer la carte");
+	printf("Entrer le numéro du joueur souhaitant contrer l'action \n");
+	scanf("%d", rep);
+	if(rep == 1)
+	{
+		//on verif si le joueur 1 à la carte "Faux Pas"
+		//si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 1
+		//sinon on demande à un autre joueur s'il veut contrer
+	}
+	else if(rep == 2)
+	{
+		//on verif si le joueur 2 à la carte "Faux Pas"
+		//si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 2
+		//sinon on demande à un autre joueur s'il veut contrer
+	}
+	else if(rep == 3)
+	{
+		//on verif si le joueur 3 à la carte "Faux Pas"
+		//si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 3
+		//sinon on demande à un autre joueur s'il veut contrer
+	}
+	else if(rep == 4)
+	{
+		//on verif si le joueur 4 à la carte "Faux Pas"
+		//si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 4
+		//sinon on demande à un autre joueur s'il veut contrer
+	}
+	else{
+		//on joue la carte souhaitée par le joueur e
+	}
+	
+}
+
 /*
 void tete_coyote(TJoueur * j1, TJoueur * j2, TJoueur * jint) // créer un joueur jint dans le main ?
 {
