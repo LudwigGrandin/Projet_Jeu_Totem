@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "libraryProjet.h"
 
 
@@ -8,7 +9,7 @@
 
 int main()
 {
-/** PartieKillian**/
+/** PartieKillian
 
         //TODO : selon le nbr de joueurs des cartes seront à retirer
 
