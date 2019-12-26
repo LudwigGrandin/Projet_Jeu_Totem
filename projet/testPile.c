@@ -89,9 +89,8 @@ int main()
 
 /**Main Lucas**/
 
-/*
+
 //Pas besoin d'avoir de main ici, décommente juste ta partie. Le début du main est tout ne haut
-int main(){
 
     //int taille = 0;
 	//struct TPile pile;
@@ -100,7 +99,7 @@ int main(){
 
 	int taille = 0;
 	struct TPile pile;
-	struct TCarte cartest;
+	struct TPile piletest;
 	init_pile(&pile);
 	struct TCarte carte;
 	carte.num = 0;
@@ -120,17 +119,14 @@ int main(){
 	}
 
 	afficher_pile(pile);		//affiche la pile avant depiler
-	cartest = depiler(&pile);
-	printf("le num de la carte est %d \n", cartest.num);	//verification des données prises par la carte en param
-	printf("le num de la carte est %s \n", cartest.nom);
-	printf("le num de la carte est %s \n", cartest.effet);
+	pile = depiler(&pile);
+	printf("Voici la pile dépilée \n");
 	afficher_pile(pile);
 //	taille = taille_pile(pile);
 //	printf("%d", taille);
 	liberer_pile(&pile); // libère toute la pile
 	afficher_pile(pile);
 
-*/
 
 //Ne commente pas le return ici, c'est la fin du main(peu importe si c'est celui de ludwig, lucas ou killian
 	return 0;
@@ -166,10 +162,10 @@ void empiler(TPile * pile, TCarte * c)
 
 }
 
-TCarte depiler(TPile * pile)
+TPile depiler(TPile * pile)
 {
 	int verif;
-	TCarte c;
+
 	TPilelem *aux;
 
     //On vérifie si la pile est vide
@@ -184,16 +180,10 @@ TCarte depiler(TPile * pile)
 	}
 	else
 	{
-	   (*pile).sommet = (*aux).suivant;
-
-		strcpy(c.nom , (*aux).carte.nom);
-		strcpy(c.effet , (*aux).carte.effet);
-		c.num = (*aux).carte.num;
-		c.type = (*aux).carte.type;
-
+	    (*pile).sommet = (*aux).suivant;
 		free(aux);
 	}
-	return c;
+	return *pile;
 }
 
 void init_pile(TPile * pile)
