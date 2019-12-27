@@ -296,7 +296,11 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
     }
     else if(strcmp(carte.nom,"TeteLoup") == 0)
     {
-        //à faire
+        /*à faire
+        Faire une fonction taille_main qui retourne la taille de la main du joueur ciblé
+        génère
+
+        */
     }
     else if(strcmp(carte.nom,"TeteCorbeau") == 0)
     {
@@ -304,7 +308,7 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
     }
     else if(strcmp(carte.nom,"TeteLynx") == 0)
     {
-        //à faire
+        //Créer une variable dans TJoueur si = 1 alors le joueur piochera 3 fois et défaussera deux cartes à chaque fin tour ?
     }
     else if(strcmp(carte.nom,"TeteTortue") == 0)
     {
