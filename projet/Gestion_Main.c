@@ -298,8 +298,10 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
     {
         /*à faire
         Faire une fonction taille_main qui retourne la taille de la main du joueur ciblé
-        génère
-
+        génère 1 nombre n  entre 1 et taille_main
+        on avance aux de n - 1 fois dans la main du joueur ciblé, on alloue un newC qui prendra les valeurs de cette carte ?
+        on ajoute ce newC à la main du Joueur qui joue
+        on supprime la carte chez les Joueur ciblé
         */
     }
     else if(strcmp(carte.nom,"TeteCorbeau") == 0)

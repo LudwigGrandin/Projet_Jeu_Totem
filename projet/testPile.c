@@ -489,7 +489,7 @@ void liberer_main(TMain * main)
 }
 
 /*
-void menu(TJoueur j, int e, int nbJoueurs)
+void menu(TJoueur j, int e, int nbJoueurs, TPile *pioche)
 {
 	int verif = 0;
 	int choix = 0;
@@ -569,8 +569,8 @@ void menu(TJoueur j, int e, int nbJoueurs)
 	}
 	else
 	{
-		piocher(&j.main, &pioche)
-		piocher(&j.main, &pioche)
+		piocher(&j.main, &pioche);
+		piocher(&j.main, &pioche);
 	}
 
 }
