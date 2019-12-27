@@ -8,10 +8,7 @@ void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, i
 {
     int nbCartesLocales,nbJoueurLocal = 0;
     TPilelem *aux;
-    TPilelem *prec;
     TPilelem *newCell;
-
-    prec = aux;
 
     for (nbJoueurLocal = 0; nbJoueurLocal < nbJoueur; nbJoueurLocal ++)
     {
@@ -40,5 +37,24 @@ int Choix_Premier_Joueur(int nbJoueur)
 {
     srand(time(NULL));
 	return rand()%nbJoueur+1;
+}
+
+void Plateau()
+{//Regarder sur internet. A faire en dernier temps
+    printf("||\n");
+    printf("||\n");
+    printf("||\n");
+    printf("||\n");
+    printf("||\n");
+    printf("||\n");
+    printf("||\n");
+    printf("||\n");
+    printf("||\n");
+    printf("||\n");
+    printf("||\n");
+    printf("||\n");
+    printf("||\n");
+    printf("||\n");
+
 }
 

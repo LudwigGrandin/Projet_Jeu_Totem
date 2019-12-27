@@ -88,35 +88,39 @@ TCarte Retrait_Carte_Main(TMain *main, int numCarteMain)
 
     carte.type=0;
 
-
-
-    while(aux != NULL && trouve == 0)
+    if((*main).debut == NULL)
+    {
+        printf("Votre main est vide !\n");
+    }
+    else
     {
 
-        if(compteur == numCarteMain)
+        while(aux != NULL && trouve == 0)
         {
-            trouve = 1;
-        }
-        else
-        {
-            prec = aux;
-            aux = (*aux).suivant;
 
-            compteur ++;
+            if(compteur == numCarteMain)
+            {
+                trouve = 1;
+            }
+            else
+            {
+                prec = aux;
+                aux = (*aux).suivant;
+
+                compteur ++;
+            }
+        }
+
+        if(trouve == 1)
+        {
+            carte.num = (*aux).carte.num;
+            strcpy(carte.nom,(*aux).carte.nom);
+            strcpy(carte.effet,(*aux).carte.effet);
+            carte.type = (*aux).carte.type;
+            (*prec).suivant=(*aux).suivant;
+            free(aux);
         }
     }
-
-    if(trouve == 1)
-    {
-        carte.num = (*aux).carte.num;
-        strcpy(carte.nom,(*aux).carte.nom);
-        strcpy(carte.effet,(*aux).carte.effet);
-        carte.type = (*aux).carte.type;
-
-        (*prec).suivant=(*aux).suivant;
-        free(aux);
-    }
-
     return carte;
 
 }
@@ -148,8 +152,9 @@ void Afficher_Main(TMain mainJoueur)
 
 }
 
-void JouerCarteCoupBas(TCarte carte, TPile pile)
+void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur)
 {
+    int i =0;
     //Montrer la carte à jouer
     printf("La carte jouee est : %s ",carte.nom);
     //Plusieurs actions possibles:
@@ -162,33 +167,89 @@ void JouerCarteCoupBas(TCarte carte, TPile pile)
     //Faux PAs
     //Pillage
     //Eau de Feu
-    if(strcmp(carte.nom,"OnArrive"))
+    if(strcmp(carte.nom,"OnArrive") == 0)
     {
 
     }
-    else if(strcmp(carte.nom,"EspritFarceur"))
+    else if(strcmp(carte.nom,"EtPaf") == 0)
+    {
+        if((*joueurCible).immunite == 1)
+        {
+            printf("Ce joueur est invicible pour l'instant");
+        }
+        else
+        {
+            //Destruction du totem adverse
+            depiler((*joueurCible).totem.sommet);
+        }
+    }
+    else if(strcmp(carte.nom,"EspritFarceur") == 0)
+    {
+        Donner_Totem_Vers_Voisin_Gauche(listeJoueur);
+    }
+    else if(strcmp(carte.nom,"BisonDingo") == 0)
+    {
+
+
+        for(i=0; i<2;i++)
+        {
+            depiler((*joueurCible).totem.sommet);
+        }
+    }
+    else if(strcmp(carte.nom,"FauxPas") == 0)
     {
 
     }
-    else if(strcmp(carte.nom,"BisonDingo"))
+    else if(strcmp(carte.nom,"Pillage") == 0)
     {
 
     }
-    else if(strcmp(carte.nom,"FauxPas"))
+    else if(strcmp(carte.nom,"EaudeFeu") == 0)
     {
-
-    }
-    else if(strcmp(carte.nom,"Pillage"))
-    {
-
-    }
-    else if(strcmp(carte.nom,"EaudeFeu"))
-    {
+        for(i=0; i<2;i++)
+        {//Voir pour le pointeur
+            // piocher((*joueurQuiJoue.main),pioche);
+        }
 
     }
 
 
 }
 
+void Defausser_Carte(TMain *mainJoueur, int numCarte)
+{
+    Retrait_Carte_Main(mainJoueur,numCarte);
+}
+
+void Donner_Main_Vers_Voisin_Gauche(TJoueur *listeJoueur, int nbJoueur)
+{
+    int nbJoueurLocal;
+    TPile totemJoueur0;
+
+    totemJoueur0 = listeJoueur[0].totem;
+
+    for(nbJoueurLocal = 0; nbJoueurLocal < nbJoueur; nbJoueurLocal ++)
+    {
+            listeJoueur[nbJoueurLocal].totem = listeJoueur[nbJoueurLocal+1].totem;
+    }
+
+    listeJoueur[nbJoueur].totem = totemJoueur0;
+}
+
+void Donner_Totem_Vers_Voisin_Gauche(TJoueur *listeJoueur, int nbJoueur)
+{
+    int nbJoueurLocal;
+    TMain mainJoueur0;
+
+    mainJoueur0 = listeJoueur[0].main;
+
+    for(nbJoueurLocal = 0; nbJoueurLocal < nbJoueur; nbJoueurLocal ++)
+    {
+            listeJoueur[nbJoueurLocal].main = listeJoueur[nbJoueurLocal+1].main;
+    }
+
+    listeJoueur[nbJoueur].main = mainJoueur0;
+
+}
 
 
