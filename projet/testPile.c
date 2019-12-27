@@ -488,6 +488,7 @@ void liberer_main(TMain * main)
 	}
 }
 
+/*
 void menu(TJoueur j, int e, int nbJoueurs)
 {
 	int verif = 0;
@@ -501,7 +502,7 @@ void menu(TJoueur j, int e, int nbJoueurs)
 	{
 		scanf("%d", &choixCarte);
 		//verif s'il a bien la carte dans sa main / Création d'une fonction verif_carte()?
-		/**verif = verif_carte(j.main, choixCarte);**/ //prend la main et la carte souhaitée en paramètre
+		//verif = verif_carte(j.main, choixCarte);/ //prend la main et la carte souhaitée en paramètre
 		//Si la vérif = 0 alors il n'a pas la carte dans sa main et doit en jouer une.
 		if(verif == 0)
 		{
@@ -541,6 +542,33 @@ void menu(TJoueur j, int e, int nbJoueurs)
 	else{
 		//on joue la carte souhaitée par le joueur e
 	}
+
+}
+*/
+
+int verif_carte(TMain mainJoueur, int numCarte)
+{
+	TPilelem *aux;
+	int trouve = 0;
+
+	aux = mainJoueur.debut;
+
+
+	if(aux == NULL)
+    {
+        printf("Vous n'avez aucune carte en main");
+    }
+    else
+    {
+    	while(aux != NULL || trouve != 1)
+    	{
+    		if(numCarte == (*aux).carte.num)
+    		{
+    			trouve = 1;
+    		}
+    	}
+    }
+    return trouve;
 
 }
 

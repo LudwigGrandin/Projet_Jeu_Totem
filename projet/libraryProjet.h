@@ -19,6 +19,7 @@ void DeposerCarte(TPile *totem, int numCarteMain, TMain *main);
 TCarte Retrait_Carte_Main(TMain *main, int numCarteMain);
 void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur);
 void Afficher_Main(TMain mainJoueur);//Permet d'afficher une liste chaînée
+int verif_carte(TMain mainJoueur, int numCarte); //Vérifie si le joueur a bien la carte qu'il veut jouer en sa possession renvoie 1 si oui sinon renvoie 0
 
 //Killian
 void init_sans_doublons(int* tableau,int taille);
