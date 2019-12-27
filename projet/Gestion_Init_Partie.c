@@ -7,30 +7,29 @@ void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, i
 {
     int nbCartesLocales,nbJoueurLocal = 0;
     TPilelem *aux;
+    TPilelem *prec;
+    TPilelem *newCell;
+
+    prec = aux;
 
     for (nbJoueurLocal = 0; nbJoueurLocal < nbJoueur; nbJoueurLocal ++)
     {
-
         listeJoueur[nbJoueurLocal].main.debut = (TPilelem*) malloc(sizeof(TPilelem));
+        //On met l'adresse de la 1ere carte dans aux
         aux = listeJoueur[nbJoueurLocal].main.debut;
+        //On tire la 1ere carte pour le 1er emplacement
+        (*aux).carte = (*(*listeCartes).sommet).carte;
+        depiler(listeCartes);
 
-
-        for(nbCartesLocales = 0; nbCartesLocales < 5; nbCartesLocales ++)
+        for(nbCartesLocales = 1; nbCartesLocales < 5; nbCartesLocales ++)
         {
-
-            (*aux).carte = (*(*listeCartes).sommet).carte;
-            printf("test");
+            newCell = (TPilelem*) malloc(sizeof(TPilelem));
+            (*newCell).carte = (*(*listeCartes).sommet).carte;
             depiler(listeCartes);
-            aux = (*aux).suivant;
+
+            (*aux).suivant = newCell;
+             aux = (*aux).suivant;
+             (*aux).suivant = NULL;
         }
     }
-/*
-    for (nbJoueurLocal = 0; nbJoueurLocal < nbJoueur; nbJoueurLocal ++)
-    {
-        aux = listeJoueur[nbJoueurLocal].main.debut;
-        printf("Joueur : %s\n", listeJoueur[nbJoueurLocal].nom);
-
-        //Afficher_Main(listeJoueur[nbJoueurLocal].main);
-    }
-*/
 }

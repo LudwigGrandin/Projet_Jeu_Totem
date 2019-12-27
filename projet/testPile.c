@@ -54,7 +54,7 @@ int main()
 
 	TJoueur listeJoueur[10];
 	int nbCarte = 64;
-	int nbJoueur = 2;
+	int nbJoueur = 4;
 
 	TMain mainJoueur;
 	mainJoueur.debut = (TPilelem*) malloc(sizeof(TPilelem));
@@ -69,8 +69,11 @@ int main()
 	listeJoueur[2].id = 3;
 	strcpy(listeJoueur[2].nom, "Louisa");
 
+	listeJoueur[3].id = 4;
+	strcpy(listeJoueur[3].nom, "Perl");
+
 	init_pioche(nbCarte,nbJoueur,&pile);
-	afficher_pile(pile);
+    Distribuer_Cartes(listeJoueur,&pile,nbCarte,nbJoueur);
 
 /*	//fflush(stdout);
     //carte0
@@ -97,7 +100,7 @@ int main()
     empiler(&pile, &carte);*/
 
 
-    //Distribuer_Cartes(listeJoueur,&pile,nbCarte,nbJoueur);
+
 
 //   init_ListeCarte(listeCarte, nbCarte, nbJoueur);
 //   afficherCartes(&listeCarte,nbCarte);
@@ -213,9 +216,9 @@ void init_pioche(int nbCarte,int nbJoueur, TPile* pioche){
     TCarte listeCarte[nbCarte];
     init_ListeCarte(listeCarte,nbCarte,nbJoueur);
 
-    for(int i =0 ; i< nbCarte ; i++){
+   /* for(int i =0 ; i< nbCarte ; i++){
             printf(" %d ;", tableau[i]);
-        }
+        }*/
 
 
     for(int i=0 ; i < nbCarte ; i++)

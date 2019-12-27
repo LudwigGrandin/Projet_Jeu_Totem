@@ -127,7 +127,7 @@ void Afficher_Main(TMain mainJoueur)
     TPilelem *aux;
     aux = mainJoueur.debut;
 
-    if(mainJoueur.debut == NULL)
+    if(aux == NULL)
     {
         printf("vous n'avez pas de cartes en main");
     }
@@ -135,13 +135,12 @@ void Afficher_Main(TMain mainJoueur)
     {
         while(aux != NULL)
         {
-            printf("\n\n");
+            printf("\n");
             printf("carte num = %d\n", (*aux).carte.num);
             printf("carte nom = %s\n", (*aux).carte.nom);
             printf("carte effet = %s\n", (*aux).carte.effet);
-            //Problème pour l'affichage du type
             printf("carte type = %d\n", (*aux).carte.type);
-            printf("\n\n");
+            printf("\n");
 
             aux = (*aux).suivant;
         }
