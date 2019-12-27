@@ -37,5 +37,5 @@ typedef struct TJoueur
 	TMain main;
 	int pion;
 	int points;
-	int immunite;//Permet d'empecher de se faire voler son totem. Booléen
+	int immunite;//Permet d'empecher de se faire voler son totem. Bool?n
 } TJoueur;
