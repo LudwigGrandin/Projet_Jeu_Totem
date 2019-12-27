@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "libraryProjet.h"
 
 void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, int nbJoueur)
@@ -33,3 +34,11 @@ void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, i
         }
     }
 }
+
+
+int Choix_Premier_Joueur(int nbJoueur)
+{
+    srand(time(NULL));
+	return rand()%nbJoueur+1;
+}
+

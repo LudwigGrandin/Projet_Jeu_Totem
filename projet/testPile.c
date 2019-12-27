@@ -37,7 +37,7 @@ int main()
        liberer_pile(&laPioche);
 
 /**MainLudwig**/
-
+/**
 
 
 //test de toutes les procédures.
@@ -72,61 +72,6 @@ int main()
 	listeJoueur[3].id = 4;
 	strcpy(listeJoueur[3].nom, "Perl");
 
-	init_pioche(nbCarte,nbJoueur,&pile);
-    Distribuer_Cartes(listeJoueur,&pile,nbCarte,nbJoueur);
-
-/*	//fflush(stdout);
-    //carte0
-    strcpy(carte.nom,"carte1");
-    strcpy(carte.effet, "21");
-    carte.num = 1;
-    carte.type = 1;
-    empiler(&pile, &carte);
-
-    //printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
-    //carte1
-    strcpy(carte.nom,"carte2");
-    strcpy(carte.effet, "22");
-    carte.num = 2;
-    carte.type = 1;
-    empiler(&pile, &carte);
-
-   // printf("carte.nom=%s\n",(*pile.sommet).carte.nom);
-    // carte2
-    strcpy(carte.nom, "carte3");
-    strcpy(carte.effet, "23");
-    carte.num = 3;
-    carte.type = 1;
-    empiler(&pile, &carte);*/
-
-
-
-
-//   init_ListeCarte(listeCarte, nbCarte, nbJoueur);
-//   afficherCartes(&listeCarte,nbCarte);
-
-
-/*    printf("\n");
-    printf("pioche Carte 3 : carte.type = %d\n", (*pile.sommet).carte.type);
-    printf("appel de la fonction piocher\n");
-    piocher(&mainJoueur,&pile);
-    printf("appel de la fonction Afficher Main \n");
-    printf("mainJoueur Carte 1 : carte.type = %d", (*mainJoueur.debut).carte.type);
-    Afficher_Main(&mainJoueur);
-    printf("\n");
-
-    printf("appel de la fonction piocher\n");
-    piocher(&mainJoueur,&pile);
-    printf("appel de la fonction Afficher Main \n");
-    Afficher_Main(&mainJoueur);
-    printf("\n");
-
-    printf("appel de la fonction Totem\n");
-    DeposerCarte(&totem,1,&mainJoueur);
-    DeposerCarte(&totem,2,&mainJoueur);
-    printf("appel de la fonction afficher pile\n");
-    afficher_pile(totem);
-    printf("\n");*/
 
     liberer_main(&mainJoueur);
 	liberer_pile(&pile); // libère toute la pile

@@ -31,6 +31,7 @@ int saisir_entre(int min, int max);
 
 //Gestion init partie
 void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, int nbJoueur);
+int Choix_Premier_Joueur(int nbJoueur);
 
 
 #endif
