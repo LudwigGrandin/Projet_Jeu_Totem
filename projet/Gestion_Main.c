@@ -153,23 +153,24 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
 {
     int i =0;
     (*joueurQuiJoue).rejouer = 0;
+    (*joueurCible).rejouer = 0;
     //Montrer la carte à jouer
     printf("La carte jouee est : %s ",carte.nom);
     //Plusieurs actions possibles:
 
     //Carte
     //On arrive v
-    //Et paf
-    //Esprit Farceur
-    //Bison Dingo
-    //Faux PAs
-    //Pillage
+    //Et paf v
+    //Esprit Farceur v
+    //Bison Dingo v
+    //Faux PAs v
+    //Pillage v
     //Eau de Feu
     if(strcmp(carte.nom,"OnArrive") == 0)
     {
         //A jouer en même temps qu'un joueur qui gagne
         //EFFET : Vous gagnez la partie aussi.
-        //gestion_point(&joueur)
+         ajout_Points(joueurQuiJoue);
     }
     else if(strcmp(carte.nom,"EtPaf") == 0)
     {
@@ -202,9 +203,28 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
     }
     else if(strcmp(carte.nom,"FauxPas") == 0)
     {
+        int choix = 0;
         /*Pré-requis : Jouer cette carte durant le tour d’un autre joueur.
 EFFET : Annuler l’action d’un joueur si vous annulez un autre “Faux pas !”. Piochez 2 cartes, sinon rejouez immédiatement.
 */
+        if(carte.nom == "FauxPas")
+        {
+            printf("Piocher 2 carte en Tapant 1 ou rejouez immédiatement en tapant 2 : ");
+            scanf("%d", &choix);
+            if(choix == 1)
+            {
+                for(i=0; i<2; i++)
+                {
+                    piocher(&(*joueurQuiJoue).main,pioche);
+                }
+            }
+            else
+            {
+                (*joueurQuiJoue).rejouer = 1;
+            }
+        }
+
+
     }
     else if(strcmp(carte.nom,"Pillage") == 0)
     {
@@ -238,7 +258,7 @@ EFFET : Annuler l’action d’un joueur si vous annulez un autre “Faux pas !”. Pioc
              piocher(&(*joueurQuiJoue).main,pioche);
         }
 
-
+        (*joueurQuiJoue).rejouer = 1;
         //Comment indiquer de rejouer?
 
     }
