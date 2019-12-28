@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "libraryProjet.h"
 
 
@@ -169,7 +170,7 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
     //Eau de Feu
     if(strcmp(carte.nom,"OnArrive") == 0)
     {
-
+        //A jouer si un autre joueur va gagner la partie
     }
     else if(strcmp(carte.nom,"EtPaf") == 0)
     {
@@ -189,8 +190,6 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
     }
     else if(strcmp(carte.nom,"BisonDingo") == 0)
     {
-
-
         for(i=0; i<2;i++)
         {
             depiler((*joueurCible).totem.sommet);
@@ -198,7 +197,9 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
     }
     else if(strcmp(carte.nom,"FauxPas") == 0)
     {
-
+        /*Pré-requis : Jouer cette carte durant le tour d’un autre joueur.
+EFFET : Annuler l’action d’un joueur si vous annulez un autre “Faux pas !”. Piochez 2 cartes, sinon rejouez immédiatement.
+*/
     }
     else if(strcmp(carte.nom,"Pillage") == 0)
     {
@@ -271,6 +272,102 @@ void tete_corbeau(TJoueur * j1, TJoueur * j2) // échange les totems de 2 joueurs
 
 }
 
+//Permet d'échanger 2 mains
+void tete_loup(TMain *mainJoueurQuiJoue,TMain *mainJoueurCible)
+{
+    TMain mainTemp;
+
+    mainTemp = *mainJoueurQuiJoue;
+    mainJoueurQuiJoue = mainJoueurCible;
+    *mainJoueurCible = mainTemp;
+
+
+}
+
+void tete_lynx(TJoueur *joueurQuiJoue,TPile *pioche)
+{
+     int numCarte = 0;
+        TMain main3Cartes;
+        TPilelem *aux;
+        int choix;
+
+        main3Cartes.debut = (TPilelem*) malloc(sizeof(TPilelem*));
+        aux = main3Cartes.debut;
+        //Prenser à retirer ces propriétés quand un autre totem est placé
+        (*joueurQuiJoue).lynx = 1;
+
+        //Permet de tirer 3 cartes
+        for(numCarte=0; numCarte = 3; numCarte ++)
+        {
+            printf("Carte %d : %s", numCarte+1, (*(*pioche).sommet).carte.nom);
+            piocher(&main3Cartes,pioche);
+        }
+
+        printf("Quelle carte choisissez vous ? :");
+        scanf("%d", &choix);
+
+        aux = main3Cartes.debut;
+
+        for(numCarte=0; numCarte<choix-1;numCarte++)
+        {
+            aux = (*aux).suivant;
+        }
+
+        Depot_Carte_Main(&(*joueurQuiJoue).main,(*aux).carte,taille_main((*joueurQuiJoue).main));
+
+        liberer_main(main3Cartes);
+}
+
+void Depot_Carte_Main(TMain *mainJoueur, TCarte carte, int emplacementMain)
+{
+    TPilelem *aux, *prec, *newCell;
+    int emplacementMainLocal = 1, trouve = 0;
+
+
+    aux = (*mainJoueur).debut;
+
+    while(aux != NULL && trouve != 1)
+    {
+        if(emplacementMainLocal == emplacementMain)
+        {
+            trouve = 1;
+        }
+        else
+        {
+            prec = aux;
+            aux = (*aux).suivant;
+            emplacementMainLocal ++;
+        }
+    }
+
+    if(trouve == 1)
+    {
+        newCell = (TPilelem*) malloc(sizeof(TPilelem));
+        (*newCell).carte = carte;
+
+        (*prec).suivant = newCell;
+        (*newCell).suivant = aux;
+    }
+    else
+    {
+        printf("veuillez saisir un numéro de carte valide");
+    }
+}
+
+int taille_main(TMain mainJoueur)
+{
+    TPilelem *aux;
+    int tailleMain = 0;
+    aux = mainJoueur.debut;
+
+    while(aux != NULL)
+    {
+        aux = (*aux).suivant;
+        tailleMain ++;
+    }
+    return tailleMain;
+}
+
 void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur)
 {
     int i = 0;
@@ -288,7 +385,7 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
 
     if(strcmp(carte.nom,"TeteCoyote") == 0)
     {
-        tete_coyote(&joueurQuiJoue.totem, &joueurCible.totem);  
+        tete_coyote(joueurQuiJoue, joueurCible);
     }
     else if(strcmp(carte.nom,"TeteAigle") == 0)
     {
@@ -296,20 +393,16 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
     }
     else if(strcmp(carte.nom,"TeteLoup") == 0)
     {
-        /*à faire
-        Faire une fonction taille_main qui retourne la taille de la main du joueur ciblé
-        génère 1 nombre n  entre 1 et taille_main
-        on avance aux de n - 1 fois dans la main du joueur ciblé, on alloue un newC qui prendra les valeurs de cette carte ?
-        on ajoute ce newC à la main du Joueur qui joue
-        on supprime la carte chez les Joueur ciblé
-        */
+        tete_loup(&(*joueurQuiJoue).main,&(*joueurCible).main);
     }
     else if(strcmp(carte.nom,"TeteCorbeau") == 0)
     {
-        tete_coyote(&joueurQuiJoue.main, &joueurCible.main);      
+        tete_corbeau(joueurQuiJoue,joueurCible);
     }
     else if(strcmp(carte.nom,"TeteLynx") == 0)
     {
+        tete_lynx(joueurQuiJoue,pioche);
+
         //Créer une variable dans TJoueur si = 1 alors le joueur piochera 3 fois et défaussera deux cartes à chaque fin tour ?
     }
     else if(strcmp(carte.nom,"TeteTortue") == 0)
