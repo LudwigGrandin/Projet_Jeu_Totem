@@ -508,20 +508,22 @@ void nettoyage_partie(TJoueur * listeJoueur,int nbJoueur ,TPile * laPioche){
 
 /**********************************************  POINTS  **********************************************/
 
-
-//Ajoute les points de chaque joueur, on gagne autant de points qu'on a eu d'étage et au minimum 1 point
-void ajout_Points(TJoueur* listeJoueur,int nbJoueur){
+//On gagne autant de point qu'on l'on à d'étage avec un minima de 1 points
+void ajout_Points(TJoueur *joueur){
     //lexique
-    int nbPoints;
-    printf("\n debug avant ajout points \n");
-    for(int parcouru = 0 ; parcouru < nbJoueur ; parcouru++){
-        nbPoints = taille_pile(listeJoueur[parcouru].totem);
-         if(nbPoints == 0 ){
-            nbPoints = 1;
-         }
-         listeJoueur[parcouru].points = listeJoueur[parcouru].points + nbPoints;
+    int gainPoints = taille_pile((*joueur).totem);
+
+    if(gainPoints == 0)
+    {
+        gainPoints = 1;
     }
-    printf("\n debug apres ajout points \n");
+    (*joueur).points = (*joueur).points + gainPoints;
+
+    //si le joueur cumule 24 points ou plus il gagne la partie
+    if((*joueur).points >= 24)
+    {
+        printf("Félicitation vous avez gagné la partie %s",(*joueur).nom);
+    }
 
 }
 
