@@ -24,7 +24,9 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
 void tete_coyote(TJoueur * j1, TJoueur * j2);//échange le totem avec celui d'un autre joueur
 void tete_corbeau(TJoueur * j1, TJoueur * j2);//échange la main avec celle d'un autre joueur
 
+
 //Pioche
+
 void init_sans_doublons(int* tableau,int taille);
 void melanger(int* tableau, int taille);
 //void init_pioche(int* tableau,int nbCarte,TCarte* listeCarte, TPile* pioche);
