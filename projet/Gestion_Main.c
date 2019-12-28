@@ -12,8 +12,6 @@ void piocher(TMain *mainJoueur, TPile *pile)
     TPilelem *prec;
     TPilelem *newCell;
 
-
-
     //ALLOUER NewCell
     newCell = (TPilelem*) malloc(sizeof(TPilelem));
 
@@ -95,10 +93,8 @@ TCarte Retrait_Carte_Main(TMain *main, int numCarteMain)
     }
     else
     {
-
         while(aux != NULL && trouve == 0)
         {
-
             if(compteur == numCarteMain)
             {
                 trouve = 1;
@@ -156,6 +152,7 @@ void Afficher_Main(TMain mainJoueur)
 void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur)
 {
     int i =0;
+    (*joueurQuiJoue).rejouer = 0;
     //Montrer la carte à jouer
     printf("La carte jouee est : %s ",carte.nom);
     //Plusieurs actions possibles:
@@ -203,14 +200,38 @@ EFFET : Annuler l’action d’un joueur si vous annulez un autre “Faux pas !”. Pioc
     }
     else if(strcmp(carte.nom,"Pillage") == 0)
     {
+        TCarte carteTotemAdverse;
+        carteTotemAdverse = (*(*joueurCible).totem.sommet).carte;
+        Depot_Carte_Main(&(*joueurQuiJoue).main,carteTotemAdverse,taille_totem((*joueurQuiJoue).totem));
+        depiler(&(*joueurCible).totem);
 
+
+        if(taille_totem((*joueurQuiJoue).totem) <4)
+        {
+            (*joueurQuiJoue).rejouer = 1;
+            //Comment gérer le fait de rejouer ? Variable dans joueur ?
+        }
+
+        /*
+         Voler et mettez dans votre main le dernière
+          étage du totem d’un joueur. Si votre totem possède
+          moins de 4 étages . Rejouez immédiatement.
+
+        */
     }
     else if(strcmp(carte.nom,"EaudeFeu") == 0)
     {
+        /*
+        EFFET : Piochez 2 cartes puis rejouez immédiatement.
+
+        */
         for(i=0; i<2;i++)
         {//Voir pour le pointeur
-            // piocher((*joueurQuiJoue.main),pioche);
+             piocher(&(*joueurQuiJoue).main,pioche);
         }
+
+
+        //Comment indiquer de rejouer?
 
     }
 
@@ -368,6 +389,20 @@ int taille_main(TMain mainJoueur)
     return tailleMain;
 }
 
+int taille_totem(TPile totem)
+{
+    TPilelem *aux;
+    int tailletotem = 0;
+    aux = totem.sommet;
+
+    while(aux != NULL)
+    {
+        aux = (*aux).suivant;
+        tailletotem ++;
+    }
+    return tailletotem;
+}
+
 void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur)
 {
     int i = 0;
@@ -385,7 +420,7 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
 
     if(strcmp(carte.nom,"TeteCoyote") == 0)
     {
-        tete_coyote(joueurQuiJoue, joueurCible);
+        tete_coyote(&joueurQuiJoue, &joueurCible);
     }
     else if(strcmp(carte.nom,"TeteAigle") == 0)
     {
@@ -397,11 +432,11 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
     }
     else if(strcmp(carte.nom,"TeteCorbeau") == 0)
     {
-        tete_corbeau(joueurQuiJoue,joueurCible);
+        tete_corbeau(&joueurQuiJoue,&joueurCible);
     }
     else if(strcmp(carte.nom,"TeteLynx") == 0)
     {
-        tete_lynx(joueurQuiJoue,pioche);
+        tete_lynx(&joueurQuiJoue,&pioche);
 
         //Créer une variable dans TJoueur si = 1 alors le joueur piochera 3 fois et défaussera deux cartes à chaque fin tour ?
     }
