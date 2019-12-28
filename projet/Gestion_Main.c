@@ -158,7 +158,7 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
     //Plusieurs actions possibles:
 
     //Carte
-    //On arrive
+    //On arrive v
     //Et paf
     //Esprit Farceur
     //Bison Dingo
@@ -167,13 +167,19 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
     //Eau de Feu
     if(strcmp(carte.nom,"OnArrive") == 0)
     {
-        //A jouer si un autre joueur va gagner la partie
+        //A jouer en même temps qu'un joueur qui gagne
+        //EFFET : Vous gagnez la partie aussi.
+        //gestion_point(&joueur)
     }
     else if(strcmp(carte.nom,"EtPaf") == 0)
     {
         if((*joueurCible).immunite == 1)    // Attention à bien distinguer vol et destruction de totem, je pensais à protection contre le vol quand immunite = 2 / protection contre la destruction immunite = 1
         {
-            printf("Ce joueur est invicible pour l'instant");
+            printf("Ce joueur est immunisé contre le vol de totem");
+        }
+        else if((*joueurCible).immunite == 1)
+        {
+            printf("Ce joueur est immunisé contre la destruction de totem");
         }
         else
         {
@@ -183,10 +189,12 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
     }
     else if(strcmp(carte.nom,"EspritFarceur") == 0)
     {
+        //EFFET : chacun donne son totem à son voisin de gauche
         Donner_Totem_Vers_Voisin_Gauche(listeJoueur);
     }
     else if(strcmp(carte.nom,"BisonDingo") == 0)
     {
+        //
         for(i=0; i<2;i++)
         {
             depiler((*joueurCible).totem.sommet);
