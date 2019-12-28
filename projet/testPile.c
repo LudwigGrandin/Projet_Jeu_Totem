@@ -8,33 +8,146 @@
 
 int main()
 {
-/** PartieKillian
-
+// PartieKillian
+/*
         //TODO : selon le nbr de joueurs des cartes seront à retirer
+        printf("\nCombien y aura t-il de joueurs ?");
+        int nbJoueur = saisir_entre(2,6);
 
         int taillePioche = 64;
         TPile laPioche;
-        struct TCarte listeCartes[64];
-        // Va contenir le tableau de nombres qui servira à remplir la pioche
-        //int *tabNum = malloc((taillePioche)*sizeof(int));
 
-        int tabNum[64];
-
-        //créér un tableau d'entier de 0 à 63 et une liste de TCartes
-        init_sans_doublons(tabNum,taillePioche);
-        init_ListeCarte(listeCartes,taillePioche,2);
         init_pile(&laPioche);
 
         // créer la pioche de TCartes mélangé en utilisant le tableau d'entier et la liste de TCartes
-        init_pioche(tabNum,taillePioche,listeCartes,&laPioche);
-         printf("\n ");
+        init_pioche(taillePioche,nbJoueur,&laPioche);
+        printf("\n ");
         afficher_pile(laPioche);
-        printf("\n debug 4 \n");
+        printf("\n debug apres pioche \n");
+
+*/
+        //TJoueur* listeJoueur,int nbJoueur
+/*****************Test points***********************************/
+    /*
+        struct TCarte carte1;
+        carte1.num = 1;
+        strcpy(carte1.effet,"Lorsque Tete de coyote arrive en jeu, vous pouvez voler le totem d'un joueur et lui donner le votre.");
+        carte1.type = 1;
+        strcpy(carte1.nom,"Tete de Coyote");
+
+        struct TCarte carte2;
+        carte2.num = 2;
+        strcpy(carte2.effet,"Lorsque Tete de coyote arrive en jeu, vous pouvez voler le totem d'un joueur et lui donner le votre.");
+        carte2.type = 1;
+        strcpy(carte2.nom,"Tete de Coyote 2");
 
 
+        struct TCarte carte3;
+        carte3.num = 3;
+        strcpy(carte3.effet,"Lorsque Tete de coyote arrive en jeu, vous pouvez voler le totem d'un joueur et lui donner le votre.");
+        carte3.type = 1;
+        strcpy(carte3.nom,"Tete de Coyote 3");
+
+
+        TJoueur joueur;
+        joueur.id = 1;
+        joueur.immunite =0;
+        joueur.lynx=0;
+        strcpy(joueur.nom, "J1");
+        joueur.pion = 1;
+        init_pile(&joueur.totem);
+        empiler( &joueur.totem,&carte1);
+        empiler( &joueur.totem,&carte3);
+
+        TJoueur joueur2;
+        joueur2.id = 2;
+        joueur2.immunite =0;
+        joueur2.lynx=0;
+        strcpy(joueur2.nom, "J2");
+        joueur2.pion = 2;
+        init_pile(&joueur2.totem);
+        empiler( &joueur2.totem,&carte2);
+        //empiler( &joueur2.totem,&carte3);
+
+        TJoueur listeJoueur[2];
+        listeJoueur[0] =joueur;
+        listeJoueur[1] =joueur2;
+
+
+        printf("\n debug avant affiche pile \n");
+        afficher_pile(listeJoueur[0].totem);
+        printf("\n");
+        afficher_pile(listeJoueur[1].totem);
+        printf("\n debug apres affiche pile \n");
+
+
+        initialiser_Points(listeJoueur,2);
+        ajout_Points(listeJoueur,2);
+        affichage_Points(listeJoueur,2);
+        printf("\n debug apres affichage points \n");
+
+        liberer_pile(&listeJoueur[0].totem);
+        liberer_pile(&listeJoueur[1].totem);
+        printf("\n debug apres liberer totem \n");
+    */
+/********************Fin test points********************************/
+/*****************Test init joueurs***********************************/
+/*
+        struct TCarte carte1;
+        carte1.num = 1;
+        strcpy(carte1.effet,"Lorsque Tete de coyote arrive en jeu, vous pouvez voler le totem d'un joueur et lui donner le votre.");
+        carte1.type = 1;
+        strcpy(carte1.nom,"Tete de Coyote");
+
+        struct TCarte carte2;
+        carte2.num = 2;
+        strcpy(carte2.effet,"Lorsque Tete de coyote arrive en jeu, vous pouvez voler le totem d'un joueur et lui donner le votre.");
+        carte2.type = 1;
+        strcpy(carte2.nom,"Tete de Coyote 2");
+
+
+        struct TCarte carte3;
+        carte3.num = 3;
+        strcpy(carte3.effet,"Lorsque Tete de coyote arrive en jeu, vous pouvez voler le totem d'un joueur et lui donner le votre.");
+        carte3.type = 1;
+        strcpy(carte3.nom,"Tete de Coyote 3");
+
+        TPile pioche;
+
+        int nbJoueurs = 0;
+
+        empiler(&pioche,&carte1);
+        empiler(&pioche,&carte2);
+        empiler(&pioche,&carte3);
+
+        afficher_pile(pioche);
+
+        TJoueur listeJoueur[nbJoueurs];
+        init_Joueurs(listeJoueur, nbJoueur);
+
+       // empiler( &listeJoueur[0].totem,&carte3);
+        empiler( &listeJoueur[0].totem,&carte1);
+
+
+        empiler( &listeJoueur[1].totem,&carte2);
+        empiler( &listeJoueur[1].totem,&carte3);
+
+        printf("\n debug avant affiche totem \n");
+        afficher_pile(listeJoueur[0].totem);
+        printf("\n");
+        afficher_pile(listeJoueur[1].totem);
+        printf("\n debug apres affiche totem \n");
+
+
+
+        nettoyage_partie(&listeJoueur,nbJoueur,&pioche);
+        printf("\n debug apres nettoyage pioche \n");
+*/
+/********************Fin init joueurs********************************/
        // Ne pas oublier de libérer la mémoire
-       //free(tabNum);
-       liberer_pile(&laPioche);
+
+      // liberer_pile(&laPioche);
+
 
 /**MainLudwig**/
 /**
@@ -123,7 +236,7 @@ int main()
 }
 
 
-/********************************************PIOCHE************************************************/
+/******************************************** PIOCHE ************************************************/
 
 void init_sans_doublons(int* tableau,int taille){
 
@@ -152,19 +265,18 @@ void melanger(int* tableau, int taille){
 
 void init_pioche(int nbCarte,int nbJoueur, TPile* pioche){
 
+   //lexique
     int tableau[nbCarte];
+    struct TCarte listeCarte[nbCarte];
+
     init_sans_doublons(tableau,nbCarte);
     //mélange le tableau d'entier
     melanger(tableau,nbCarte);
-    //debug
-
-    TCarte listeCarte[nbCarte];
     init_ListeCarte(listeCarte,nbCarte,nbJoueur);
 
    /* for(int i =0 ; i< nbCarte ; i++){
             printf(" %d ;", tableau[i]);
         }*/
-
 
     for(int i=0 ; i < nbCarte ; i++)
     {
@@ -353,9 +465,83 @@ int saisir_entre(int min, int max)
     printf("saisir un nombre entre %d et %d \n",min,max);
     scanf("%d", &vretour);
   }while ((vretour < min) || (vretour > max));
+  printf("%d",vretour);
   return vretour;
 }
-/**  FIN PIOCHE  **/
+/**********************************************  FIN PIOCHE  **********************************************/
+
+/**********************************************  JOUEURS  **********************************************/
+void init_Joueurs(TJoueur* listeJoueur,int nbJoueur){
+    for(int parcouru = 0; parcouru < nbJoueur ; parcouru++){
+        TJoueur joueur;
+        printf("\nSaisir un pseudonyme pour le joueur %d :",parcouru+1);
+        scanf("%s", joueur.nom);
+        joueur.id = parcouru;
+        joueur.points = 0;
+        joueur.pion = 0;
+        joueur.immunite = 0;
+        joueur.lynx = 0;
+        init_pile(&joueur.totem);
+        joueur.main.debut = NULL;
+        joueur.rejouer = 0;
+        listeJoueur[parcouru] = joueur;
+    }
+}
+
+/********************************************** FIN JOUEURS  **********************************************/
+
+
+
+/**********************************************  NETTOYAGE MEMOIRE **********************************************/
+//faire appel à cette procédure en fin de partie pour liberer la mémoire
+void nettoyage_partie(TJoueur * listeJoueur,int nbJoueur ,TPile * laPioche){
+
+    for(int parcouru = 0 ; parcouru < nbJoueur ; parcouru++){
+        liberer_main(&listeJoueur[parcouru].main);
+        liberer_pile(&listeJoueur[parcouru].totem);
+    }
+    liberer_pile(laPioche);
+}
+/**********************************************  FIN NETTOYAGE MEMOIRE  **********************************************/
+
+
+
+/**********************************************  POINTS  **********************************************/
+
+
+//Ajoute les points de chaque joueur, on gagne autant de points qu'on a eu d'étage et au minimum 1 point
+void ajout_Points(TJoueur* listeJoueur,int nbJoueur){
+    //lexique
+    int nbPoints;
+    printf("\n debug avant ajout points \n");
+    for(int parcouru = 0 ; parcouru < nbJoueur ; parcouru++){
+        nbPoints = taille_pile(listeJoueur[parcouru].totem);
+         if(nbPoints == 0 ){
+            nbPoints = 1;
+         }
+         listeJoueur[parcouru].points = listeJoueur[parcouru].points + nbPoints;
+    }
+    printf("\n debug apres ajout points \n");
+
+}
+
+//Initialise les points de tout les joueurs à 0
+void initialiser_Points(TJoueur* listeJoueur,int nbJoueur){
+     for(int parcouru = 0 ; parcouru < nbJoueur ; parcouru++){
+         listeJoueur[parcouru].points = 0;
+    }
+    printf("\n debug apres init points \n");
+}
+
+//affiche pour chaque joueur son nombre de points
+void affichage_Points(TJoueur* listeJoueur,int nbJoueur){
+    printf("\n debug avant affichage points \n");
+    for(int parcouru = 0 ; parcouru < nbJoueur ; parcouru++){
+        printf("\n Le joueur numero %d, %s  a %d points.",listeJoueur[parcouru].id,listeJoueur[parcouru].nom ,listeJoueur[parcouru].points);
+    }
+}
+
+/**********************************************  FIN POINTS **********************************************/
 
 int est_pile_vide(TPile pile)
 {

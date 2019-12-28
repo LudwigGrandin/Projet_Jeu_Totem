@@ -25,7 +25,8 @@ void tete_coyote(TJoueur * j1, TJoueur * j2);//échange le totem avec celui d'un 
 void tete_corbeau(TJoueur * j1, TJoueur * j2);//échange la main avec celle d'un autre joueur
 
 
-//Killian
+//Pioche
+
 void init_sans_doublons(int* tableau,int taille);
 void melanger(int* tableau, int taille);
 //void init_pioche(int* tableau,int nbCarte,TCarte* listeCarte, TPile* pioche);
@@ -34,10 +35,18 @@ void init_ListeCarte(TCarte* liste,int nbCarte,int nbJoueur);
 void afficherCartes(TCarte* listeCartes,int taille);
 int saisir_entre(int min, int max);
 
+//Points
+void ajout_Points(TJoueur* listeJoueur,int nbJoueur);
+void initialiser_Points(TJoueur* listeJoueur,int nbJoueur);
+void affichage_Points(TJoueur* listeJoueur,int nbJoueur);
+
 //Gestion init partie
 void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, int nbJoueur);
 int Choix_Premier_Joueur(int nbJoueur);
 void Defausser_Carte(TMain *mainJoueur, int numCarte);
+void init_Joueurs(TJoueur* listeJoueur,int nbJoueur);
 
+// Libere la mémoire de toutes les piles,listes chainées des joueurs et de la pioche
+void nettoyage_partie(TJoueur* listeJoueur,int nbJoueur ,TPile* laPioche);
 
 #endif
