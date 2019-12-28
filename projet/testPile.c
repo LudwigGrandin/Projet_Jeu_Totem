@@ -424,11 +424,12 @@ int saisir_entre(int min, int max)
 
 /**********************************************  NETTOYAGE MEMOIRE **********************************************/
 //faire appel à cette procédure en fin de partie pour liberer la mémoire
-void nettoyage_partie(TJoueur* listeJoueur,int nbJoueur){
+void nettoyage_partie(TJoueur* listeJoueur,int nbJoueur ,TPile* laPioche){
     for(int parcouru = 0 ; parcouru < nbJoueur ; parcouru++){
-        liberer_main(listeJoueur[parcouru].main);
-        liberer_pile(listeJoueur[parcouru].totem);
+        liberer_main(&listeJoueur[parcouru].main);
+        liberer_pile(&listeJoueur[parcouru].totem);
     }
+    liberer_pile(&laPioche);
 }
 /**********************************************  FIN NETTOYAGE MEMOIRE  **********************************************/
 

@@ -43,7 +43,7 @@ void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, i
 int Choix_Premier_Joueur(int nbJoueur);
 void Defausser_Carte(TMain *mainJoueur, int numCarte);
 
-// Libere la mémoire de toutes les piles et listes chainées des joueurs
-void nettoyage_partie(TJoueur* listeJoueur,int nbJoueur);
+// Libere la mémoire de toutes les piles et listes chainées des joueurs et de la pioche
+void nettoyage_partie(TJoueur* listeJoueur,int nbJoueur ,TPile* laPioche);
 
 #endif
