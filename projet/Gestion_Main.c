@@ -12,8 +12,6 @@ void piocher(TMain *mainJoueur, TPile *pile)
     TPilelem *prec;
     TPilelem *newCell;
 
-
-
     //ALLOUER NewCell
     newCell = (TPilelem*) malloc(sizeof(TPilelem));
 
@@ -95,10 +93,8 @@ TCarte Retrait_Carte_Main(TMain *main, int numCarteMain)
     }
     else
     {
-
         while(aux != NULL && trouve == 0)
         {
-
             if(compteur == numCarteMain)
             {
                 trouve = 1;
@@ -156,6 +152,7 @@ void Afficher_Main(TMain mainJoueur)
 void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur)
 {
     int i =0;
+    (*joueurQuiJoue).rejouer = 0;
     //Montrer la carte à jouer
     printf("La carte jouee est : %s ",carte.nom);
     //Plusieurs actions possibles:
@@ -211,6 +208,7 @@ EFFET : Annuler l’action d’un joueur si vous annulez un autre “Faux pas !”. Pioc
 
         if(taille_totem((*joueurQuiJoue).totem) <4)
         {
+            (*joueurQuiJoue).rejouer = 1;
             //Comment gérer le fait de rejouer ? Variable dans joueur ?
         }
 
@@ -231,6 +229,7 @@ EFFET : Annuler l’action d’un joueur si vous annulez un autre “Faux pas !”. Pioc
         {//Voir pour le pointeur
              piocher(&(*joueurQuiJoue).main,pioche);
         }
+
 
         //Comment indiquer de rejouer?
 

@@ -39,4 +39,5 @@ typedef struct TJoueur
 	int points;
 	int immunite;//Permet d'empecher de se faire voler son totem. Bool?n
 	int lynx;//Permet de piocher 3 carte et d'en chosir une à la fin de chaque tour. C'est un booleen
+	int rejouer;//Variable qui définit qui peut jouer
 } TJoueur;
