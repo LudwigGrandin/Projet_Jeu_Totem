@@ -780,10 +780,14 @@ int verif_carte(TMain mainJoueur, int numCarte)
     {
     	while(aux != NULL || trouve != 1)
     	{
-    		if(numCarte == (*aux).carte.num)
+    		if(strcmp((*aux).carte.nom,"FauxPas") == 0)
     		{
     			trouve = 1;
     		}
+            else
+            {
+                aux = (*aux).suivant;
+            }
     	}
     }
     return trouve;
