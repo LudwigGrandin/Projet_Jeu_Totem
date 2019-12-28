@@ -420,7 +420,7 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
 
     if(strcmp(carte.nom,"TeteCoyote") == 0)
     {
-        tete_coyote(joueurQuiJoue, joueurCible);
+        tete_coyote(&joueurQuiJoue, &joueurCible);
     }
     else if(strcmp(carte.nom,"TeteAigle") == 0)
     {
@@ -432,11 +432,11 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
     }
     else if(strcmp(carte.nom,"TeteCorbeau") == 0)
     {
-        tete_corbeau(joueurQuiJoue,joueurCible);
+        tete_corbeau(&joueurQuiJoue,&joueurCible);
     }
     else if(strcmp(carte.nom,"TeteLynx") == 0)
     {
-        tete_lynx(joueurQuiJoue,pioche);
+        tete_lynx(&joueurQuiJoue,&pioche);
 
         //Créer une variable dans TJoueur si = 1 alors le joueur piochera 3 fois et défaussera deux cartes à chaque fin tour ?
     }
