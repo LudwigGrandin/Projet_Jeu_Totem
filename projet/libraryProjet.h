@@ -36,7 +36,7 @@ void afficherCartes(TCarte* listeCartes,int taille);
 int saisir_entre(int min, int max);
 
 //Points
-void ajout_Points(TJoueur* listeJoueur,int nbJoueur);
+void ajout_Points(TJoueur *joueur);
 void initialiser_Points(TJoueur* listeJoueur,int nbJoueur);
 void affichage_Points(TJoueur* listeJoueur,int nbJoueur);
 
