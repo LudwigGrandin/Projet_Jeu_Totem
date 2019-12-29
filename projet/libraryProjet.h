@@ -19,10 +19,12 @@ void DeposerCarte(TPile *totem, int numCarteMain, TMain *main);
 TCarte Retrait_Carte_Main(TMain *main, int numCarteMain);
 void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur);
 void Afficher_Main(TMain mainJoueur);//Permet d'afficher une liste chaînée
-int verif_carte(TMain mainJoueur, int numCarte); //Vérifie si le joueur a bien la carte qu'il veut jouer en sa possession renvoie 1 si oui sinon renvoie 0
+int verif_carte(TMain mainJoueur, char Carte[]); //Vérifie si le joueur a bien la carte qu'il veut jouer en sa possession renvoie 1 si oui sinon renvoie 0
+int verif_carteNUM(TMain mainJoueur, int numCarte);
 void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur);
 void tete_coyote(TJoueur * j1, TJoueur * j2);//échange le totem avec celui d'un autre joueur
 void tete_corbeau(TJoueur * j1, TJoueur * j2);//échange la main avec celle d'un autre joueur
+void liberer_main(TMain * main);
 
 
 //Pioche
@@ -45,6 +47,7 @@ void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, i
 int Choix_Premier_Joueur(int nbJoueur);
 void Defausser_Carte(TMain *mainJoueur, int numCarte);
 void init_Joueurs(TJoueur* listeJoueur,int nbJoueur);
+void tour_joueur(TJoueur *listeJoueur, TPile *pioche);
 
 // Libere la mémoire de toutes les piles,listes chainées des joueurs et de la pioche
 void nettoyage_partie(TJoueur* listeJoueur,int nbJoueur ,TPile* laPioche);

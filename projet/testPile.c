@@ -193,42 +193,115 @@ int main()
 /**Main Lucas**/
 
 
-//Pas besoin d'avoir de main ici, décommente juste ta partie. Le début du main est tout ne haut
+//------------------------------TEST MENU------------------------------
+/*  VARIABLES */
 
-    //int taille = 0;
-	//struct TPile pile;
+    TPile pioche;
+    int nbJoueurs = 0;
+    int nbCartes = 64;
+    int premier = 0;
 
-//test de toutes les procédures.
+    nbJoueurs = saisir_entre(2,6);
+
+    TJoueur listeJoueur[nbJoueurs];
+
+
+/*  INITIALISATIONS */
+
+    init_Joueurs(listeJoueur, nbJoueurs);
+    init_pioche(64, nbJoueurs, &pioche);
+
+/*  JEU  */
+
+    premier = Choix_Premier_Joueur(nbJoueurs);
+    printf("%d \n", listeJoueur[premier].id);
+
+    tour_joueur(&listeJoueur[premier-1], &pioche);
 /*
-	int taille = 0;
-	struct TPile pile;
-	struct TPile piletest;
-	init_pile(&pile);
-	struct TCarte carte;
-	carte.num = 0;
-	for(int i = 0; i <= 2; i ++){
-		printf("Entrer un nom de carte \n");
-		fflush(stdout);
-		scanf("%s", carte.nom);
+    int verif = 0;
+    int choix = 0;
+    int rep = 0;
+    int choixCarte = 0;
+    printf("C'est au tour du joueur n° %d \n", e);
 
-		printf("Entrer un effet de carte \n");
-		fflush(stdout);
-		scanf("%s", carte.effet);
+    // proposer action soit jouer carte / défausser une carte / piocher deux cartes
 
-		carte.num++;
-		carte.type = 1;
+    printf("Que voulez-vous faire ? 1 pour jouer une carte de votre main / 2 pour piocher deux cartes / 3 pour défausser une carte de votre main")
+    do
+    {
+        scanf("%d", &choix);
+    }while(choix < 1 || choix > 3);
 
-		empiler(&pile, &carte);
-	}
+    if(choix == 1)
+    {
+        printf("Indiquez le nom de la carte que vous voulez jouer \n");
+        do
+        {
+            scanf("%d", &choixCarte);
+            //verif s'il a bien la carte dans sa main / Création d'une fonction verif_carte()?
+            //verif = verif_carte(j.main, choixCarte);/ //prend la main et la carte souhaitée en paramètre
+            //Si la vérif = 0 alors il n'a pas la carte dans sa main et doit en jouer une.
+            if(verif == 0)
+            {
+                printf("Vous ne possédez pas cette carte dans votre main veuillez en choisir une nouvelle.\n");
+            }
+            //Sinon on continue
+        }while(verif != 1);
 
-	afficher_pile(pile);		//affiche la pile avant depiler
-	pile = depiler(&pile);
-	printf("Voici la pile dépilée \n");
-	afficher_pile(pile);
-//	taille = taille_pile(pile);
-//	printf("%d", taille);
-	liberer_pile(&pile); // libère toute la pile
-	afficher_pile(pile);
+        //proposer aux autres de contrer
+        printf("Un joueur ayant la carte 'Faux pas !' peut contrer la carte");
+        printf("Entrer le numéro du joueur souhaitant contrer l'action \n");
+        scanf("%d", rep);
+        if(rep == 1)
+        {
+            //on verif si le joueur 1 à la carte "Faux Pas"
+            //si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 1
+            //sinon on demande à un autre joueur s'il veut contrer
+        }
+        else if(rep == 2)
+        {
+            //on verif si le joueur 2 à la carte "Faux Pas"
+            //si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 2
+            //sinon on demande à un autre joueur s'il veut contrer
+        }
+        else if(rep == 3)
+        {
+            //on verif si le joueur 3 à la carte "Faux Pas"
+            //si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 3
+            //sinon on demande à un autre joueur s'il veut contrer
+        }
+        else if(rep == 4)
+        {
+            //on verif si le joueur 4 à la carte "Faux Pas"
+            //si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 4
+            //sinon on demande à un autre joueur s'il veut contrer
+        }
+        else{
+            //on joue la carte souhaitée par le joueur e
+        }
+    }
+    else if(choix == 2)
+    {
+        printf("Choisir le numéro de la carte à défausser.");
+        scanf("%d", &choixCarte);
+        verif = verif_carte(j.main, choixCarte);
+        if(verif == 0)
+        {
+            printf("Vous ne possédez pas cette carte dans votre main veuillez en choisir une nouvelle.\n");
+        }
+        else
+        {
+            Defausser_Carte(&j.main, choixCarte);
+        }
+    }
+    else
+    {
+        piocher(&j.main, &pioche);
+        piocher(&j.main, &pioche);
+    }
+
+
+
 
 */
 //Ne commente pas le return ici, c'est la fin du main(peu importe si c'est celui de ludwig, lucas ou killian
@@ -463,6 +536,7 @@ int saisir_entre(int min, int max)
   int vretour = -1;
   do{
     printf("saisir un nombre entre %d et %d \n",min,max);
+    fflush(stdout);
     scanf("%d", &vretour);
   }while ((vretour < min) || (vretour > max));
   printf("%d",vretour);
@@ -475,6 +549,7 @@ void init_Joueurs(TJoueur* listeJoueur,int nbJoueur){
     for(int parcouru = 0; parcouru < nbJoueur ; parcouru++){
         TJoueur joueur;
         printf("\nSaisir un pseudonyme pour le joueur %d :",parcouru+1);
+                fflush(stdout);
         scanf("%s", joueur.nom);
         joueur.id = parcouru;
         joueur.points = 0;
@@ -676,95 +751,9 @@ void liberer_main(TMain * main)
 	}
 }
 
-/*
-void menu(TJoueur j, int e, int nbJoueurs, TPile *pioche)
-{
-	int verif = 0;
-	int choix = 0;
-	int rep = 0;
-	int choixCarte = 0;
-	printf("C'est au tour du joueur n° %d \n", e);
 
-	// proposer action soit jouer carte / défausser une carte / piocher deux cartes
 
-	printf("Que voulez-vous faire ? 1 pour jouer une carte de votre main / 2 pour piocher deux cartes / 3 pour défausser une carte de votre main")
-	do
-	{
-		scanf("%d", &choix);
-	}while(choix < 1 || choix > 3);
-
-	if(choix == 1)
-	{
-		printf("Indiquez le nom de la carte que vous voulez jouer \n");
-		do
-		{
-			scanf("%d", &choixCarte);
-			//verif s'il a bien la carte dans sa main / Création d'une fonction verif_carte()?
-			//verif = verif_carte(j.main, choixCarte);/ //prend la main et la carte souhaitée en paramètre
-			//Si la vérif = 0 alors il n'a pas la carte dans sa main et doit en jouer une.
-			if(verif == 0)
-			{
-				printf("Vous ne possédez pas cette carte dans votre main veuillez en choisir une nouvelle.\n");
-			}
-			//Sinon on continue
-		}while(verif != 1);
-
-		//proposer aux autres de contrer
-		printf("Un joueur ayant la carte 'Faux pas !' peut contrer la carte");
-		printf("Entrer le numéro du joueur souhaitant contrer l'action \n");
-		scanf("%d", rep);
-		if(rep == 1)
-		{
-			//on verif si le joueur 1 à la carte "Faux Pas"
-			//si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 1
-			//sinon on demande à un autre joueur s'il veut contrer
-		}
-		else if(rep == 2)
-		{
-			//on verif si le joueur 2 à la carte "Faux Pas"
-			//si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 2
-			//sinon on demande à un autre joueur s'il veut contrer
-		}
-		else if(rep == 3)
-		{
-			//on verif si le joueur 3 à la carte "Faux Pas"
-			//si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 3
-			//sinon on demande à un autre joueur s'il veut contrer
-		}
-		else if(rep == 4)
-		{
-			//on verif si le joueur 4 à la carte "Faux Pas"
-			//si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 4
-			//sinon on demande à un autre joueur s'il veut contrer
-		}
-		else{
-			//on joue la carte souhaitée par le joueur e
-		}
-	}
-	else if(choix == 2)
-	{
-		printf("Choisir le numéro de la carte à défausser.");
-		scanf("%d", &choixCarte);
-		verif = verif_carte(j.main, choixCarte);
-		if(verif == 0)
-		{
-			printf("Vous ne possédez pas cette carte dans votre main veuillez en choisir une nouvelle.\n");
-		}
-		else
-		{
-			Defausser_Carte(&j.main, choixCarte);
-		}
-	}
-	else
-	{
-		piocher(&j.main, &pioche);
-		piocher(&j.main, &pioche);
-	}
-
-}
-*/
-
-int verif_carte(TMain mainJoueur, int numCarte)
+int verif_carte(TMain mainJoueur, char Carte[])
 {
 	TPilelem *aux;
 	int trouve = 0;
@@ -794,3 +783,203 @@ int verif_carte(TMain mainJoueur, int numCarte)
 
 }
 
+int verif_carteNUM(TMain mainJoueur, int numCarte)
+{
+    TPilelem *aux;
+    int trouve = 0;
+
+    aux = mainJoueur.debut;
+
+
+    if(aux == NULL)
+    {
+        printf("Vous n'avez aucune carte en main");
+    }
+    else
+    {
+        while(aux != NULL || trouve != 1)
+        {
+            if((*aux).carte.num == numCarte)
+            {
+                trouve = 1;
+            }
+            else
+            {
+                aux = (*aux).suivant;
+            }
+        }
+    }
+    return trouve;
+
+}
+
+/* DOUBLON CAR CES PROCEDURES NE SONT PAS RECONNUES DANS TOUR JOUEUR*/
+
+int Choix_Premier_Joueur(int nbJoueur)
+{
+    srand(time(NULL));
+    return rand()%nbJoueur+1;
+}
+
+void piocher(TMain *mainJoueur, TPile *pile)
+{
+
+    TPilelem *aux;
+    TPilelem *prec;
+    TPilelem *newCell;
+
+    //ALLOUER NewCell
+    newCell = (TPilelem*) malloc(sizeof(TPilelem));
+
+    aux = (*mainJoueur).debut;
+    prec = (*mainJoueur).debut;
+
+    //Si main vide
+   if(est_pile_vide(*pile) != 1)
+    {
+
+        while(aux != NULL)
+        {
+            prec = aux;
+            aux = (*aux).suivant;
+        }
+
+        //Piocher la carte en haut de la pile
+
+        (*newCell).carte = (*(*pile).sommet).carte;
+        depiler(pile);
+
+        //Si mainVide
+        if(aux == prec)
+        {
+            (*newCell).suivant = (*mainJoueur).debut;
+            (*mainJoueur).debut = newCell;
+
+        }
+        else
+        {
+            (*prec).suivant = newCell;
+            (*newCell).suivant = aux;
+        }
+    }
+    else
+    {
+        printf("il n y a plus de cartes dans la pioche\n");
+    }
+
+}
+
+TCarte Retrait_Carte_Main(TMain *main, int numCarteMain)
+{
+    int trouve = 0, compteur = 1;
+
+    TCarte carte;
+    TPilelem *aux;
+    TPilelem *prec;
+
+    aux = (*main).debut;
+    prec = (*main).debut;
+
+    carte.type=0;
+
+    if((*main).debut == NULL)
+    {
+        printf("Votre main est vide !\n");
+    }
+    else
+    {
+        while(aux != NULL && trouve == 0)
+        {
+            if(compteur == numCarteMain)
+            {
+                trouve = 1;
+            }
+            else
+            {
+                prec = aux;
+                aux = (*aux).suivant;
+
+                compteur ++;
+            }
+        }
+
+        if(trouve == 1)
+        {
+            carte.num = (*aux).carte.num;
+            strcpy(carte.nom,(*aux).carte.nom);
+            strcpy(carte.effet,(*aux).carte.effet);
+            carte.type = (*aux).carte.type;
+            (*prec).suivant=(*aux).suivant;
+            free(aux);
+        }
+    }
+    return carte;
+
+}
+
+void Defausser_Carte(TMain *mainJoueur, int numCarte)
+{
+    Retrait_Carte_Main(mainJoueur,numCarte);
+}
+
+/****************************************************************/
+
+void tour_joueur(TJoueur *listeJoueur, TPile *pioche)
+{
+    int verif = 0;
+    int choix = 0;
+    int numCarte = 0;
+    int rep = 0;
+    char choixCarte[20];
+    printf("C'est au joueur n° %d de jouer. \n", (*listeJoueur).id + 1);
+
+    printf("Que voulez-vous faire ? 1 pour jouer une carte de votre main / 2 pour piocher deux cartes / 3 pour défausser une carte de votre main");
+    do
+    {
+        scanf("%d", &choix);
+    }while(choix < 1 || choix > 3);
+
+    if(choix == 1)
+    {
+        printf("Indiquez le nom de la carte que vous voulez jouer \n");
+        do
+        {
+            scanf("%s", &choixCarte);
+            //verif s'il a bien la carte dans sa main / Création d'une fonction verif_carte()?
+            //verif = verif_carte(j.main, choixCarte);/ //prend la main et la carte souhaitée en paramètre
+            //Si la vérif = 0 alors il n'a pas la carte dans sa main et doit en jouer une.
+            verif = verif_carte((*listeJoueur).main, choixCarte);
+            if(verif == 0)
+            {
+                printf("Vous ne possédez pas cette carte dans votre main veuillez en choisir une nouvelle.\n");
+            }
+            else
+            {
+                verif = 1;
+            }
+            //Sinon on continue
+        }while(verif != 1);
+
+    }
+    else if(choix == 2)
+    {
+        printf("Choisir le num de la carte à défausser.");
+        scanf("%s", &numCarte);
+        verif = verif_carteNUM((*listeJoueur).main, numCarte);
+        if(verif == 0)
+        {
+            printf("Vous ne possédez pas cette carte dans votre main veuillez en choisir une nouvelle.\n");
+        }
+        else
+        {
+            Defausser_Carte(&(*listeJoueur).main, numCarte);
+        }
+    }
+    else
+    {
+        piocher(&(*listeJoueur).main, pioche);
+        piocher(&(*listeJoueur).main, pioche);
+    }
+
+
+}
