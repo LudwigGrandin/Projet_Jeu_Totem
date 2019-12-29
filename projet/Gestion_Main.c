@@ -149,7 +149,7 @@ void Afficher_Main(TMain mainJoueur)
 
 }
 
-void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur)
+void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur, int *gagnePartie)
 {
     int i =0;
     (*joueurQuiJoue).rejouer = 0;
@@ -170,7 +170,7 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
     {
         //A jouer en même temps qu'un joueur qui gagne
         //EFFET : Vous gagnez la partie aussi.
-         ajout_Points(joueurQuiJoue);
+         ajout_Points(joueurQuiJoue, gagnePartie);
     }
     else if(strcmp(carte.nom,"EtPaf") == 0)
     {
@@ -185,20 +185,20 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
         else
         {
             //Destruction du totem adverse
-            depiler((*joueurCible).totem.sommet);
+            depiler(&(*joueurCible).totem);
         }
     }
     else if(strcmp(carte.nom,"EspritFarceur") == 0)
     {
         //EFFET : chacun donne son totem à son voisin de gauche
-        Donner_Totem_Vers_Voisin_Gauche(listeJoueur);
+   //     Donner_Totem_Vers_Voisin_Gauche(listeJoueur);         manque un parametre
     }
     else if(strcmp(carte.nom,"BisonDingo") == 0)
     {
         //
         for(i=0; i<2;i++)
         {
-            depiler((*joueurCible).totem.sommet);
+            depiler(&(*joueurCible).totem);
         }
     }
     else if(strcmp(carte.nom,"FauxPas") == 0)
@@ -364,7 +364,7 @@ void tete_lynx(TJoueur *joueurQuiJoue,TPile *pioche)
 
         Depot_Carte_Main(&(*joueurQuiJoue).main,(*aux).carte,taille_main((*joueurQuiJoue).main));
 
-        liberer_main(main3Cartes);
+        liberer_main(&main3Cartes);
 }
 
 void Depot_Carte_Main(TMain *mainJoueur, TCarte carte, int emplacementMain)
@@ -448,7 +448,7 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
 
     if(strcmp(carte.nom,"TeteCoyote") == 0)
     {
-        tete_coyote(&joueurQuiJoue, &joueurCible);
+        tete_coyote(joueurQuiJoue, joueurCible);
     }
     else if(strcmp(carte.nom,"TeteAigle") == 0)
     {
@@ -460,11 +460,11 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
     }
     else if(strcmp(carte.nom,"TeteCorbeau") == 0)
     {
-        tete_corbeau(&joueurQuiJoue,&joueurCible);
+        tete_corbeau(joueurQuiJoue,joueurCible);
     }
     else if(strcmp(carte.nom,"TeteLynx") == 0)
     {
-        tete_lynx(&joueurQuiJoue,&pioche);
+        tete_lynx(joueurQuiJoue,pioche);
 
         //Créer une variable dans TJoueur si = 1 alors le joueur piochera 3 fois et défaussera deux cartes à chaque fin tour ?
     }
@@ -481,7 +481,7 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
         else
         {
             //on détruit un étage du totem adverse
-            depiler((*joueurCible).totem.sommet);
+            depiler(&(*joueurCible).totem);
         }
     }
 

@@ -3,6 +3,8 @@
 #include <string.h>
 #include <time.h>
 #include "libraryProjet.h"
+#include "Gestion_Init_Partie.c"
+#include "Gestion_Main.c"
 
 	/* Définition d'une carte */
 
@@ -206,13 +208,13 @@ int main()
     nbJoueurs = saisir_entre(2,6);
 
     TJoueur listeJoueur[nbJoueurs];
+    printf("\n1er test Seg fault\n")
 
 
 /*  INITIALISATIONS */
 
     init_Joueurs(listeJoueur, nbJoueurs);
-    
-    //Distribuer_Cartes(listeJoueur, )
+    Distribuer_Cartes(listeJoueur, &pioche, nbCartes ,nbJoueurs);
 
 /*  JEU  */
 
@@ -223,6 +225,7 @@ int main()
 
         gagneManche = 0;
         init_pioche(64, nbJoueurs, &pioche);
+        Distribuer_Cartes(listeJoueur, &pioche, nbCartes ,nbJoueurs);
         premier = Choix_Premier_Joueur(nbJoueurs);
 
         printf("%d \n", listeJoueur[premier].id);
@@ -474,7 +477,7 @@ int saisir_entre(int min, int max)
   int vretour = -1;
   do{
     printf("saisir un nombre entre %d et %d \n",min,max);
-    
+    fflush(stdout);
     scanf("%d", &vretour);
   }while ((vretour < min) || (vretour > max));
   printf("%d",vretour);
@@ -487,8 +490,8 @@ void init_Joueurs(TJoueur* listeJoueur,int nbJoueur){
     for(int parcouru = 0; parcouru < nbJoueur ; parcouru++){
         TJoueur joueur;
         printf("\nSaisir un pseudonyme pour le joueur %d :",parcouru+1);
-                
-        scanf("%s", joueur.nom);
+        fflush(stdout);
+        scanf("%s", &joueur.nom);
         joueur.id = parcouru;
         joueur.points = 0;
         joueur.pion = 0;
@@ -723,163 +726,6 @@ int verif_carte(TMain mainJoueur, int numCarte)
 }
 
 
-/* DOUBLON CAR CES PROCEDURES NE SONT PAS RECONNUES DANS TOUR JOUEUR*/
-
-int Choix_Premier_Joueur(int nbJoueur)
-{
-    srand(time(NULL));
-    return rand()%nbJoueur+1;
-}
-
-void piocher(TMain *mainJoueur, TPile *pile)
-{
-
-    TPilelem *aux;
-    TPilelem *prec;
-    TPilelem *newCell;
-
-    //ALLOUER NewCell
-    newCell = (TPilelem*) malloc(sizeof(TPilelem));
-
-    aux = (*mainJoueur).debut;
-    prec = (*mainJoueur).debut;
-
-    //Si main vide
-   if(est_pile_vide(*pile) != 1)
-    {
-
-        while(aux != NULL)
-        {
-            prec = aux;
-            aux = (*aux).suivant;
-        }
-
-        //Piocher la carte en haut de la pile
-
-        (*newCell).carte = (*(*pile).sommet).carte;
-        depiler(pile);
-
-        //Si mainVide
-        if(aux == prec)
-        {
-            (*newCell).suivant = (*mainJoueur).debut;
-            (*mainJoueur).debut = newCell;
-
-        }
-        else
-        {
-            (*prec).suivant = newCell;
-            (*newCell).suivant = aux;
-        }
-    }
-    else
-    {
-        printf("il n y a plus de cartes dans la pioche\n");
-    }
-
-}
-
-TCarte Retrait_Carte_Main(TMain *main, int numCarteMain)
-{
-    int trouve = 0, compteur = 1;
-
-    TCarte carte;
-    TPilelem *aux;
-    TPilelem *prec;
-
-    aux = (*main).debut;
-    prec = (*main).debut;
-
-    carte.type=0;
-
-    if((*main).debut == NULL)
-    {
-        printf("Votre main est vide !\n");
-    }
-    else
-    {
-        while(aux != NULL && trouve == 0)
-        {
-            if(compteur == numCarteMain)
-            {
-                trouve = 1;
-            }
-            else
-            {
-                prec = aux;
-                aux = (*aux).suivant;
-
-                compteur ++;
-            }
-        }
-
-        if(trouve == 1)
-        {
-            carte.num = (*aux).carte.num;
-            strcpy(carte.nom,(*aux).carte.nom);
-            strcpy(carte.effet,(*aux).carte.effet);
-            carte.type = (*aux).carte.type;
-            (*prec).suivant=(*aux).suivant;
-            free(aux);
-        }
-    }
-    return carte;
-
-}
-
-void Defausser_Carte(TMain *mainJoueur, int numCarte)
-{
-    Retrait_Carte_Main(mainJoueur,numCarte);
-}
-
-void DeposerCarte(TPile *totem, int numCarteMain, TMain *mainJoueur)
-{
-    TCarte carte;
-
-    //On récupère l'adresse dans la liste chainée de la carte que le joueur veut jouer
-    carte = Retrait_Carte_Main(mainJoueur,numCarteMain);
-
-    //Il faut désallouer l'emplacement qui a été supprimé de la main
-    //Si c'est une carte totem alors on l'ajoute à la pile totem
-    if(carte.type == 1)
-    {
-        empiler(totem,&carte);
-    }
-    else
-    {
-
-    }
-}
-
-void Afficher_Main(TMain mainJoueur)
-{
-
-    TPilelem *aux;
-    aux = mainJoueur.debut;
-
-    if(aux == NULL)
-    {
-        printf("vous n'avez pas de cartes en main");
-    }
-    else
-    {
-        while(aux != NULL)
-        {
-            printf("\n");
-            printf("carte num = %d\n", (*aux).carte.num);
-            printf("carte nom = %s\n", (*aux).carte.nom);
-            printf("carte effet = %s\n", (*aux).carte.effet);
-            printf("carte type = %d\n", (*aux).carte.type);
-            printf("\n");
-
-            aux = (*aux).suivant;
-        }
-    }
-
-}
-
-/****************************************************************/
-
 void tour_joueur(TJoueur *listeJoueur, TPile *pioche, int *gagneManche, int *gagnePartie)
 {
     int verif = 0;
@@ -894,6 +740,7 @@ void tour_joueur(TJoueur *listeJoueur, TPile *pioche, int *gagneManche, int *gag
     printf("Que voulez-vous faire ? 1 pour jouer une carte de votre main / 2 pour piocher deux cartes / 3 pour défausser une carte de votre main");
     do
     {
+        fflush(stdout);
         scanf("%d", &choix);
     }while(choix < 1 || choix > 3);
 
@@ -902,6 +749,7 @@ void tour_joueur(TJoueur *listeJoueur, TPile *pioche, int *gagneManche, int *gag
         printf("Indiquez le num de la carte que vous voulez jouer \n");
         do
         {
+            fflush(stdout);
             scanf("%s", numCarte);
             //verif s'il a bien la carte dans sa main / Création d'une fonction verif_carte()?
             //verif = verif_carte(j.main, choixCarte);/ //prend la main et la carte souhaitée en paramètre
@@ -940,6 +788,7 @@ void tour_joueur(TJoueur *listeJoueur, TPile *pioche, int *gagneManche, int *gag
     else if(choix == 3)
     {
         printf("Choisir le num de la carte à défausser.");
+        fflush(stdout);
         scanf("%s", &numCarte);
         verif = verif_carte((*listeJoueur).main, numCarte);
         if(verif == 0)
