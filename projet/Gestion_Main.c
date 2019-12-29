@@ -54,7 +54,7 @@ void piocher(TMain *mainJoueur, TPile *pile)
 }
 
 
-void JouerCarte(TPile *totem, TPile *pioche, int numCarteMain, TJoueur *joueurQuiJoue, TJoueur listeJoueur)
+void JouerCarte(TPile *totem, TPile *pioche, int numCarteMain, TJoueur *joueurQuiJoue, TJoueur *listeJoueur)
 {
 
     TCarte carte;

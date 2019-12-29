@@ -3,8 +3,8 @@
 #include <string.h>
 #include <time.h>
 #include "libraryProjet.h"
-#include "Gestion_Init_Partie.c"
-#include "Gestion_Main.c"
+//#include "Gestion_Init_Partie.c"
+//#include "Gestion_Main.c"
 
 	/* Définition d'une carte */
 
@@ -153,7 +153,7 @@ int main()
 
 /**MainLudwig**/
 
-/**
+
 
 //test de toutes les procédures.
     TPile pile;
@@ -173,6 +173,7 @@ int main()
 	int nbCarte = 64;
 	int nbJoueur = 4;
 	int numCarteJoueur;
+	int gagnePartie = 0;
     TJoueur newJoueur;
 	TMain mainJoueur;
 	mainJoueur.debut = (TPilelem*) malloc(sizeof(TPilelem));
@@ -198,15 +199,16 @@ int main()
             {
                 printf("%s, Choisissez un numero de carte dans votre main");
                 scanf("%d", &numCarteJoueur);
-                JouerCarte(&totem, &pile,numCarteJoueur, &listeJoueur[i],&listeJoueur);//A corriger
-                //Fonction gestion point pour calcul score joueur
+                JouerCarte(&totem, &pile,numCarteJoueur, listeJoueur[i],listeJoueur);//A corriger
+                ajout_Points(&listeJoueur[i],&gagnePartie);
 
-                if(listeJoueur[i].rejouer == 0)
+                if((*listeJoueur[i]).rejouer == 0)
                 {
-                    i++
+                    i++;
                 }
+
             }
-       }while(pas gagné));
+       }while(gagnePartie != 1);
 
 
     }while(rejouer != 1);
@@ -220,7 +222,7 @@ int main()
 
 //------------------------------TEST MENU------------------------------
 /*  VARIABLES */
-
+/**
     TPile pioche;
     int nbJoueurs;
     int nbCartes = 64;
@@ -234,7 +236,7 @@ int main()
 
 
 /*  INITIALISATIONS */
-
+/*
     init_Joueurs(listeJoueur, nbJoueurs);
 
     printf("\n3er test Seg fault\n");
@@ -243,7 +245,7 @@ int main()
 
 /*  JEU  */
 
-
+/*
     do
     {
         //INITIALISATION A CHAQUE DEBUT DE MANCHE
@@ -269,8 +271,8 @@ int main()
     }while(gagnePartie < 1);
 
     nettoyage_partie(listeJoueur, nbJoueurs, &pioche);
-   
 
+*/
 //Ne commente pas le return ici, c'est la fin du main(peu importe si c'est celui de ludwig, lucas ou killian
 	return 0;
 }
@@ -793,7 +795,8 @@ void tour_joueur(TJoueur *listeJoueur, TPile *pioche, int *gagneManche, int *gag
         }while(verif != 1);
 
         //Le joueur pose sa carte
-        DeposerCarte(&(*listeJoueur).totem, numCarte, &(*listeJoueur).main);
+        //DeposerCarte(&(*listeJoueur).totem, numCarte, &(*listeJoueur).main);
+        JouerCarte(&(*listeJoueur).totem,pioche,numCarte,&(*listeJoueur).main,listeJoueur);
 
         //On affiche son totem et sa taille
 

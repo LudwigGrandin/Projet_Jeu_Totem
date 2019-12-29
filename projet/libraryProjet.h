@@ -15,8 +15,8 @@ void supprimer_carte_totem(TPile * pile, TMain * main, int num);
 //Gestion Main
 
 void piocher(TMain *mainJoueur, TPile *pile);
-//void DeposerCarte(TPile *totem, int numCarteMain, TMain *main);
-void JouerCarte(TPile *totem, TPile *pioche, int numCarteMain, TJoueur *joueurQuiJoue, TJoueur listeJoueur);
+void DeposerCarte(TPile *totem, int numCarteMain, TMain *main);
+void JouerCarte(TPile *totem, TPile *pioche, int numCarteMain, TJoueur *joueurQuiJoue, TJoueur *listeJoueur);
 TCarte Retrait_Carte_Main(TMain *main, int numCarteMain);
 void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur, int *gagnePartie);
 void Afficher_Main(TMain mainJoueur);//Permet d'afficher une liste chaînée
@@ -45,7 +45,7 @@ void initialiser_Points(TJoueur* listeJoueur,int nbJoueur);
 void affichage_Points(TJoueur* listeJoueur,int nbJoueur);
 
 //Gestion init partie
-void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, int nbJoueur);
+//void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, int nbJoueur);
 int Choix_Premier_Joueur(int nbJoueur);
 void Defausser_Carte(TMain *mainJoueur, int numCarte);
 void init_Joueurs(TJoueur* listeJoueur,int nbJoueur);
