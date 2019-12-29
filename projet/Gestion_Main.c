@@ -153,27 +153,34 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
 {
     int i =0;
     (*joueurQuiJoue).rejouer = 0;
+    (*joueurCible).rejouer = 0;
     //Montrer la carte à jouer
     printf("La carte jouee est : %s ",carte.nom);
     //Plusieurs actions possibles:
 
     //Carte
-    //On arrive
-    //Et paf
-    //Esprit Farceur
-    //Bison Dingo
-    //Faux PAs
-    //Pillage
+    //On arrive v
+    //Et paf v
+    //Esprit Farceur v
+    //Bison Dingo v
+    //Faux PAs v
+    //Pillage v
     //Eau de Feu
     if(strcmp(carte.nom,"OnArrive") == 0)
     {
-        //A jouer si un autre joueur va gagner la partie
+        //A jouer en même temps qu'un joueur qui gagne
+        //EFFET : Vous gagnez la partie aussi.
+         ajout_Points(joueurQuiJoue);
     }
     else if(strcmp(carte.nom,"EtPaf") == 0)
     {
         if((*joueurCible).immunite == 1)    // Attention à bien distinguer vol et destruction de totem, je pensais à protection contre le vol quand immunite = 2 / protection contre la destruction immunite = 1
         {
-            printf("Ce joueur est invicible pour l'instant");
+            printf("Ce joueur est immunisé contre le vol de totem");
+        }
+        else if((*joueurCible).immunite == 1)
+        {
+            printf("Ce joueur est immunisé contre la destruction de totem");
         }
         else
         {
@@ -183,10 +190,12 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
     }
     else if(strcmp(carte.nom,"EspritFarceur") == 0)
     {
+        //EFFET : chacun donne son totem à son voisin de gauche
         Donner_Totem_Vers_Voisin_Gauche(listeJoueur);
     }
     else if(strcmp(carte.nom,"BisonDingo") == 0)
     {
+        //
         for(i=0; i<2;i++)
         {
             depiler((*joueurCible).totem.sommet);
@@ -194,9 +203,28 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
     }
     else if(strcmp(carte.nom,"FauxPas") == 0)
     {
+        int choix = 0;
         /*Pré-requis : Jouer cette carte durant le tour d’un autre joueur.
 EFFET : Annuler l’action d’un joueur si vous annulez un autre “Faux pas !”. Piochez 2 cartes, sinon rejouez immédiatement.
 */
+        if(carte.nom == "FauxPas")
+        {
+            printf("Piocher 2 carte en Tapant 1 ou rejouez immédiatement en tapant 2 : ");
+            scanf("%d", &choix);
+            if(choix == 1)
+            {
+                for(i=0; i<2; i++)
+                {
+                    piocher(&(*joueurQuiJoue).main,pioche);
+                }
+            }
+            else
+            {
+                (*joueurQuiJoue).rejouer = 1;
+            }
+        }
+
+
     }
     else if(strcmp(carte.nom,"Pillage") == 0)
     {
@@ -230,7 +258,7 @@ EFFET : Annuler l’action d’un joueur si vous annulez un autre “Faux pas !”. Pioc
              piocher(&(*joueurQuiJoue).main,pioche);
         }
 
-
+        (*joueurQuiJoue).rejouer = 1;
         //Comment indiquer de rejouer?
 
     }
