@@ -15,7 +15,8 @@ void supprimer_carte_totem(TPile * pile, TMain * main, int num);
 //Gestion Main
 
 void piocher(TMain *mainJoueur, TPile *pile);
-void DeposerCarte(TPile *totem, int numCarteMain, TMain *main);
+//void DeposerCarte(TPile *totem, int numCarteMain, TMain *main);
+void JouerCarte(TPile *totem, TPile *pioche, int numCarteMain, TJoueur *joueurQuiJoue, TJoueur listeJoueur);
 TCarte Retrait_Carte_Main(TMain *main, int numCarteMain);
 void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur);
 void Afficher_Main(TMain mainJoueur);//Permet d'afficher une liste chaînée

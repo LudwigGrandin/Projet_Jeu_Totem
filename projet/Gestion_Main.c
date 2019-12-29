@@ -54,18 +54,20 @@ void piocher(TMain *mainJoueur, TPile *pile)
 }
 
 
-void DeposerCarte(TPile *totem, int numCarteMain, TMain *mainJoueur)
+void JouerCarte(TPile *totem, TPile *pioche, int numCarteMain, TJoueur *joueurQuiJoue, TJoueur listeJoueur)
 {
+
     TCarte carte;
 
     //On récupère l'adresse dans la liste chainée de la carte que le joueur veut jouer
-    carte = Retrait_Carte_Main(mainJoueur,numCarteMain);
+    carte = Retrait_Carte_Main(&(*joueurQuiJoue).main,numCarteMain);
 
     //Il faut désallouer l'emplacement qui a été supprimé de la main
     //Si c'est une carte totem alors on l'ajoute à la pile totem
     if(carte.type == 1)
     {
         empiler(totem,&carte);
+        //Mettre condition pour immunité etc ..
     }
     else
     {
@@ -369,6 +371,8 @@ void tete_lynx(TJoueur *joueurQuiJoue,TPile *pioche)
 
 void Depot_Carte_Main(TMain *mainJoueur, TCarte carte, int emplacementMain)
 {
+
+
     TPilelem *aux, *prec, *newCell;
     int emplacementMainLocal = 1, trouve = 0;
 
@@ -437,7 +441,7 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
     //Montrer la carte à jouer
     printf("La carte jouee est : %s ",carte.nom);
     //Plusieurs actions possibles:
-
+    empiler(pioche,&carte);
     //TeteCoyote
     //TeteAigle
     //TeteLoup

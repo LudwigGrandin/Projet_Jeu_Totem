@@ -150,8 +150,8 @@ int main()
 
 
 /**MainLudwig**/
-/**
 
+/**
 
 //test de toutes les procédures.
     TPile pile;
@@ -164,27 +164,50 @@ int main()
 	carte.num = 0;
 	carte.type = 0;
 	int nombreCarte = 2;
+	int rejouer = 0;
+	int i;
 
-	TJoueur listeJoueur[10];
+
 	int nbCarte = 64;
 	int nbJoueur = 4;
-
+	int numCarteJoueur;
+    TJoueur newJoueur;
 	TMain mainJoueur;
 	mainJoueur.debut = (TPilelem*) malloc(sizeof(TPilelem));
 	mainJoueur.debut = NULL;
+	TCarte carteJoue;
 
-	listeJoueur[0].id = 1;
-	strcpy(listeJoueur[0].nom, "jackie");
 
-	listeJoueur[1].id = 2;
-	strcpy(listeJoueur[1].nom,"Michel");
+	do
+    {
+        printf("Bienvenue dans le jeu Totem\n");
+        printf("Combien de joueur etes vous ? : ");
+        scanf("%d", &nbJoueur);
+        TJoueur *listeJoueur[nbJoueur];
+        init_Joueurs(listeJoueur, nbJoueur);
+        system("clear");
 
-	listeJoueur[2].id = 3;
-	strcpy(listeJoueur[2].nom, "Louisa");
+       printf("La partie peut commencer\n\n");
 
-	listeJoueur[3].id = 4;
-	strcpy(listeJoueur[3].nom, "Perl");
+       // Début
+       do
+       {
+           for(i=0; i< nbJoueur ; i ++)
+            {
+                printf("%s, Choisissez un numero de carte dans votre main");
+                scanf("%d", &numCarteJoueur);
+                JouerCarte(&totem, &pile,numCarteJoueur, &listeJoueur[i],&listeJoueur);//A corriger
+                //Fonction gestion point pour calcul score joueur
 
+                if(listeJoueur[i].rejouer == 0)
+                {
+                    i++
+                }
+            }
+       }while(pas gagné));
+
+
+    }while(rejouer != 1);
 
     liberer_main(&mainJoueur);
 	liberer_pile(&pile); // libère toute la pile
