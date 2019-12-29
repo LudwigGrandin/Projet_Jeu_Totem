@@ -3,6 +3,8 @@
 #include <string.h>
 #include <time.h>
 #include "libraryProjet.h"
+#include "Gestion_Init_Partie.c"
+#include "Gestion_Main.c"
 
 	/* Définition d'une carte */
 
@@ -216,44 +218,59 @@ int main()
 /**Main Lucas**/
 
 
-//Pas besoin d'avoir de main ici, décommente juste ta partie. Le début du main est tout ne haut
+//------------------------------TEST MENU------------------------------
+/*  VARIABLES */
 
-    //int taille = 0;
-	//struct TPile pile;
+    TPile pioche;
+    int nbJoueurs;
+    int nbCartes = 64;
+    int premier = 0;
+    int gagneManche;
+    int gagnePartie = 0;
 
-//test de toutes les procédures.
-/*
-	int taille = 0;
-	struct TPile pile;
-	struct TPile piletest;
-	init_pile(&pile);
-	struct TCarte carte;
-	carte.num = 0;
-	for(int i = 0; i <= 2; i ++){
-		printf("Entrer un nom de carte \n");
-		fflush(stdout);
-		scanf("%s", carte.nom);
+    nbJoueurs = saisir_entre(2,6);
 
-		printf("Entrer un effet de carte \n");
-		fflush(stdout);
-		scanf("%s", carte.effet);
+    TJoueur listeJoueur[nbJoueurs];
 
-		carte.num++;
-		carte.type = 1;
 
-		empiler(&pile, &carte);
-	}
+/*  INITIALISATIONS */
 
-	afficher_pile(pile);		//affiche la pile avant depiler
-	pile = depiler(&pile);
-	printf("Voici la pile dépilée \n");
-	afficher_pile(pile);
-//	taille = taille_pile(pile);
-//	printf("%d", taille);
-	liberer_pile(&pile); // libère toute la pile
-	afficher_pile(pile);
+    init_Joueurs(listeJoueur, nbJoueurs);
 
-*/
+    printf("\n3er test Seg fault\n");
+
+    Distribuer_Cartes(listeJoueur, &pioche, nbCartes ,nbJoueurs);
+
+/*  JEU  */
+
+
+    do
+    {
+        //INITIALISATION A CHAQUE DEBUT DE MANCHE
+
+        gagneManche = 0;
+        init_pioche(64, nbJoueurs, &pioche);
+        Distribuer_Cartes(listeJoueur, &pioche, nbCartes ,nbJoueurs);
+        premier = Choix_Premier_Joueur(nbJoueurs);
+
+        printf("%d \n", listeJoueur[premier].id);
+        do
+        {
+            tour_joueur(&listeJoueur[premier-1], &pioche, &gagneManche, &gagnePartie);
+            premier = premier +1;
+            if(premier == nbJoueurs+1)
+            {
+                premier = 1;
+            }
+        }while(gagneManche < 1);
+
+        nettoyage_partie(listeJoueur, nbJoueurs, &pioche);
+
+    }while(gagnePartie < 1);
+
+    nettoyage_partie(listeJoueur, nbJoueurs, &pioche);
+   
+
 //Ne commente pas le return ici, c'est la fin du main(peu importe si c'est celui de ludwig, lucas ou killian
 	return 0;
 }
@@ -486,6 +503,7 @@ int saisir_entre(int min, int max)
   int vretour = -1;
   do{
     printf("saisir un nombre entre %d et %d \n",min,max);
+    fflush(stdout);
     scanf("%d", &vretour);
   }while ((vretour < min) || (vretour > max));
   printf("%d",vretour);
@@ -494,10 +512,11 @@ int saisir_entre(int min, int max)
 /**********************************************  FIN PIOCHE  **********************************************/
 
 /**********************************************  JOUEURS  **********************************************/
-void init_Joueurs(TJoueur* listeJoueur,int nbJoueur){
+void init_Joueurs(TJoueur * listeJoueur,int nbJoueur){
     for(int parcouru = 0; parcouru < nbJoueur ; parcouru++){
         TJoueur joueur;
         printf("\nSaisir un pseudonyme pour le joueur %d :",parcouru+1);
+        fflush(stdout);
         scanf("%s", joueur.nom);
         joueur.id = parcouru;
         joueur.points = 0;
@@ -532,7 +551,7 @@ void nettoyage_partie(TJoueur * listeJoueur,int nbJoueur ,TPile * laPioche){
 /**********************************************  POINTS  **********************************************/
 
 //On gagne autant de point qu'on l'on à d'étage avec un minima de 1 points
-void ajout_Points(TJoueur *joueur){
+void ajout_Points(TJoueur *joueur, int *gagnePartie){
     //lexique
     int gainPoints = taille_pile((*joueur).totem);
 
@@ -546,6 +565,7 @@ void ajout_Points(TJoueur *joueur){
     if((*joueur).points >= 24)
     {
         printf("Félicitation vous avez gagné la partie %s",(*joueur).nom);
+        *gagnePartie = 1;
     }
 
 }
@@ -699,93 +719,7 @@ void liberer_main(TMain * main)
 	}
 }
 
-/*
-void menu(TJoueur j, int e, int nbJoueurs, TPile *pioche)
-{
-	int verif = 0;
-	int choix = 0;
-	int rep = 0;
-	int choixCarte = 0;
-	printf("C'est au tour du joueur n° %d \n", e);
 
-	// proposer action soit jouer carte / défausser une carte / piocher deux cartes
-
-	printf("Que voulez-vous faire ? 1 pour jouer une carte de votre main / 2 pour piocher deux cartes / 3 pour défausser une carte de votre main")
-	do
-	{
-		scanf("%d", &choix);
-	}while(choix < 1 || choix > 3);
-
-	if(choix == 1)
-	{
-		printf("Indiquez le nom de la carte que vous voulez jouer \n");
-		do
-		{
-			scanf("%d", &choixCarte);
-			//verif s'il a bien la carte dans sa main / Création d'une fonction verif_carte()?
-			//verif = verif_carte(j.main, choixCarte);/ //prend la main et la carte souhaitée en paramètre
-			//Si la vérif = 0 alors il n'a pas la carte dans sa main et doit en jouer une.
-			if(verif == 0)
-			{
-				printf("Vous ne possédez pas cette carte dans votre main veuillez en choisir une nouvelle.\n");
-			}
-			//Sinon on continue
-		}while(verif != 1);
-
-		//proposer aux autres de contrer
-		printf("Un joueur ayant la carte 'Faux pas !' peut contrer la carte");
-		printf("Entrer le numéro du joueur souhaitant contrer l'action \n");
-		scanf("%d", rep);
-		if(rep == 1)
-		{
-			//on verif si le joueur 1 à la carte "Faux Pas"
-			//si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 1
-			//sinon on demande à un autre joueur s'il veut contrer
-		}
-		else if(rep == 2)
-		{
-			//on verif si le joueur 2 à la carte "Faux Pas"
-			//si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 2
-			//sinon on demande à un autre joueur s'il veut contrer
-		}
-		else if(rep == 3)
-		{
-			//on verif si le joueur 3 à la carte "Faux Pas"
-			//si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 3
-			//sinon on demande à un autre joueur s'il veut contrer
-		}
-		else if(rep == 4)
-		{
-			//on verif si le joueur 4 à la carte "Faux Pas"
-			//si oui on supprime la carté jouée le joueur e et la carte faux pas du joueur 4
-			//sinon on demande à un autre joueur s'il veut contrer
-		}
-		else{
-			//on joue la carte souhaitée par le joueur e
-		}
-	}
-	else if(choix == 2)
-	{
-		printf("Choisir le numéro de la carte à défausser.");
-		scanf("%d", &choixCarte);
-		verif = verif_carte(j.main, choixCarte);
-		if(verif == 0)
-		{
-			printf("Vous ne possédez pas cette carte dans votre main veuillez en choisir une nouvelle.\n");
-		}
-		else
-		{
-			Defausser_Carte(&j.main, choixCarte);
-		}
-	}
-	else
-	{
-		piocher(&j.main, &pioche);
-		piocher(&j.main, &pioche);
-	}
-
-}
-*/
 
 int verif_carte(TMain mainJoueur, int numCarte)
 {
@@ -803,13 +737,100 @@ int verif_carte(TMain mainJoueur, int numCarte)
     {
     	while(aux != NULL || trouve != 1)
     	{
-    		if(numCarte == (*aux).carte.num)
+    		if(strcmp((*aux).carte.nom,"FauxPas") == 0)
     		{
     			trouve = 1;
     		}
+            else
+            {
+                aux = (*aux).suivant;
+            }
     	}
     }
     return trouve;
 
 }
 
+
+void tour_joueur(TJoueur *listeJoueur, TPile *pioche, int *gagneManche, int *gagnePartie)
+{
+    int verif = 0;
+    int choix = 0;
+    int numCarte = 0;
+    int tailleTotem = 0;
+    printf("C'est au joueur n° %d de jouer. \n", (*listeJoueur).id + 1);
+    printf("Voici votre main\n");
+
+    Afficher_Main((*listeJoueur).main);
+
+    printf("Que voulez-vous faire ? 1 pour jouer une carte de votre main / 2 pour piocher deux cartes / 3 pour défausser une carte de votre main");
+    do
+    {
+        fflush(stdout);
+        scanf("%d", &choix);
+    }while(choix < 1 || choix > 3);
+
+    if(choix == 1)
+    {
+        printf("Indiquez le num de la carte que vous voulez jouer \n");
+        do
+        {
+            fflush(stdout);
+            scanf("%s", numCarte);
+            //verif s'il a bien la carte dans sa main / Création d'une fonction verif_carte()?
+            //verif = verif_carte(j.main, choixCarte);/ //prend la main et la carte souhaitée en paramètre
+            //Si la vérif = 0 alors il n'a pas la carte dans sa main et doit en jouer une.
+            verif = verif_carte((*listeJoueur).main, numCarte);
+            if(verif == 0)
+            {
+                printf("Vous ne possédez pas cette carte dans votre main veuillez en choisir une nouvelle.\n");
+            }
+            else
+            {
+                verif = 1;
+            }
+            //Sinon on continue
+        }while(verif != 1);
+
+        //Le joueur pose sa carte
+        DeposerCarte(&(*listeJoueur).totem, numCarte, &(*listeJoueur).main);
+
+        //On affiche son totem et sa taille
+
+        printf("Voici votre totem :\n");
+        afficher_pile((*listeJoueur).totem);
+        printf("De taille :\n");
+        tailleTotem = taille_pile((*listeJoueur).totem);
+
+        //Si la taille de son totem est de 6 il gagne la manche
+        if(tailleTotem == 6){
+            printf("Vous avez gagné la manche ! \n");
+            ajout_Points(listeJoueur, gagnePartie);
+            *gagneManche = 1;
+        }
+
+
+    }
+    else if(choix == 3)
+    {
+        printf("Choisir le num de la carte à défausser.");
+        fflush(stdout);
+        scanf("%s", &numCarte);
+        verif = verif_carte((*listeJoueur).main, numCarte);
+        if(verif == 0)
+        {
+            printf("Vous ne possédez pas cette carte dans votre main veuillez en choisir une nouvelle.\n");
+        }
+        else
+        {
+            Defausser_Carte(&(*listeJoueur).main, numCarte);
+        }
+    }
+    else
+    {
+        piocher(&(*listeJoueur).main, pioche);
+        piocher(&(*listeJoueur).main, pioche);
+    }
+
+
+}
