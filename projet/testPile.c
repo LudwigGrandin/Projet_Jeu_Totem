@@ -199,7 +199,7 @@ int main()
 /*  VARIABLES */
 
     TPile pioche;
-    int nbJoueurs = 0;
+    int nbJoueurs;
     int nbCartes = 64;
     int premier = 0;
     int gagneManche;
@@ -208,12 +208,14 @@ int main()
     nbJoueurs = saisir_entre(2,6);
 
     TJoueur listeJoueur[nbJoueurs];
-    printf("\n1er test Seg fault\n")
 
 
 /*  INITIALISATIONS */
 
     init_Joueurs(listeJoueur, nbJoueurs);
+
+    printf("\n3er test Seg fault\n");
+
     Distribuer_Cartes(listeJoueur, &pioche, nbCartes ,nbJoueurs);
 
 /*  JEU  */
@@ -244,6 +246,7 @@ int main()
     }while(gagnePartie < 1);
 
     nettoyage_partie(listeJoueur, nbJoueurs, &pioche);
+   
 
 //Ne commente pas le return ici, c'est la fin du main(peu importe si c'est celui de ludwig, lucas ou killian
 	return 0;
@@ -486,12 +489,12 @@ int saisir_entre(int min, int max)
 /**********************************************  FIN PIOCHE  **********************************************/
 
 /**********************************************  JOUEURS  **********************************************/
-void init_Joueurs(TJoueur* listeJoueur,int nbJoueur){
+void init_Joueurs(TJoueur * listeJoueur,int nbJoueur){
     for(int parcouru = 0; parcouru < nbJoueur ; parcouru++){
         TJoueur joueur;
         printf("\nSaisir un pseudonyme pour le joueur %d :",parcouru+1);
         fflush(stdout);
-        scanf("%s", &joueur.nom);
+        scanf("%s", joueur.nom);
         joueur.id = parcouru;
         joueur.points = 0;
         joueur.pion = 0;
