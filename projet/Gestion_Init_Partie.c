@@ -12,14 +12,16 @@ void Distribuer_Cartes(TJoueur *listeJoueur, TPile *listeCartes, int nbCartes, i
 
     for (nbJoueurLocal = 0; nbJoueurLocal < nbJoueur; nbJoueurLocal ++)
     {
+
         listeJoueur[nbJoueurLocal].main.debut = (TPilelem*) malloc(sizeof(TPilelem));
         //On met l'adresse de la 1ere carte dans aux
         aux = listeJoueur[nbJoueurLocal].main.debut;
         //On tire la 1ere carte pour le 1er emplacement
         (*aux).carte = (*(*listeCartes).sommet).carte;
+
         depiler(listeCartes);
 
-        for(nbCartesLocales = 1; nbCartesLocales < 5; nbCartesLocales ++)
+        for(nbCartesLocales = 0; nbCartesLocales < 5; nbCartesLocales ++)
         {
             newCell = (TPilelem*) malloc(sizeof(TPilelem));
             (*newCell).carte = (*(*listeCartes).sommet).carte;

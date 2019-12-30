@@ -67,6 +67,7 @@ void JouerCarte(TPile *totem, TPile *pioche, int numCarteMain, TJoueur *joueurQu
     if(carte.type == 1)
     {
         empiler(totem,&carte);
+        JouerCarteTotem(carte,pioche,joueurQuiJoue,*listeJoueur);
         //Mettre condition pour immunité etc ..
     }
     else
@@ -132,7 +133,7 @@ void Afficher_Main(TMain mainJoueur)
 
     if(aux == NULL)
     {
-        printf("vous n'avez pas de cartes en main");
+        printf("vous n'avez pas de cartes en main\n");
     }
     else
     {
@@ -435,9 +436,10 @@ int taille_totem(TPile totem)
     return tailletotem;
 }
 
-void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur)
+void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur listeJoueur)
 {
     int i = 0;
+    TJoueur joueurCible;
     //Montrer la carte à jouer
     printf("La carte jouee est : %s ",carte.nom);
     //Plusieurs actions possibles:
@@ -452,7 +454,7 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
 
     if(strcmp(carte.nom,"TeteCoyote") == 0)
     {
-        tete_coyote(joueurQuiJoue, joueurCible);
+        tete_coyote(joueurQuiJoue, &joueurCible);
     }
     else if(strcmp(carte.nom,"TeteAigle") == 0)
     {
@@ -460,11 +462,11 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
     }
     else if(strcmp(carte.nom,"TeteLoup") == 0)
     {
-        tete_loup(&(*joueurQuiJoue).main,&(*joueurCible).main);
+        tete_loup(&(*joueurQuiJoue).main,&joueurCible.main);
     }
     else if(strcmp(carte.nom,"TeteCorbeau") == 0)
     {
-        tete_corbeau(joueurQuiJoue,joueurCible);
+        tete_corbeau(joueurQuiJoue,&joueurCible);
     }
     else if(strcmp(carte.nom,"TeteLynx") == 0)
     {
@@ -478,14 +480,14 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
     }
     else if(strcmp(carte.nom,"TeteOurs") == 0)
     {
-        if((*joueurCible).immunite == 1)
+        if(joueurCible.immunite == 1)
         {
             printf("Ce joueur est immunisé contre la destruction de totem pour l'instant");
         }
         else
         {
             //on détruit un étage du totem adverse
-            depiler(&(*joueurCible).totem);
+            depiler(&joueurCible.totem);
         }
     }
 
