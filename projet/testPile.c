@@ -505,7 +505,7 @@ int saisir_entre(int min, int max)
   int vretour = -1;
   do{
     printf("saisir un nombre entre %d et %d \n",min,max);
-    fflush(stdout);
+    
     scanf("%d", &vretour);
   }while ((vretour < min) || (vretour > max));
   printf("%d",vretour);
@@ -518,11 +518,10 @@ void init_Joueurs(TJoueur * listeJoueur,int nbJoueur){
     for(int parcouru = 0; parcouru < nbJoueur ; parcouru++){
         TJoueur joueur;
         printf("\nSaisir un pseudonyme pour le joueur %d :",parcouru+1);
-        fflush(stdout);
+        
         scanf("%s", joueur.nom);
         joueur.id = parcouru;
         joueur.points = 0;
-        joueur.pion = 0;
         joueur.immunite = 0;
         joueur.lynx = 0;
         init_pile(&joueur.totem);
@@ -768,7 +767,7 @@ void tour_joueur(TJoueur *listeJoueur, TPile *pioche, int *gagneManche, int *gag
     printf("Que voulez-vous faire ? 1 pour jouer une carte de votre main / 2 pour piocher deux cartes / 3 pour défausser une carte de votre main");
     do
     {
-        fflush(stdout);
+        
         scanf("%d", &choix);
     }while(choix < 1 || choix > 3);
 
@@ -777,7 +776,7 @@ void tour_joueur(TJoueur *listeJoueur, TPile *pioche, int *gagneManche, int *gag
         printf("Indiquez le num de la carte que vous voulez jouer \n");
         do
         {
-            fflush(stdout);
+            
             scanf("%s", numCarte);
             //verif s'il a bien la carte dans sa main / Création d'une fonction verif_carte()?
             //verif = verif_carte(j.main, choixCarte);/ //prend la main et la carte souhaitée en paramètre
@@ -817,7 +816,7 @@ void tour_joueur(TJoueur *listeJoueur, TPile *pioche, int *gagneManche, int *gag
     else if(choix == 3)
     {
         printf("Choisir le num de la carte à défausser.");
-        fflush(stdout);
+        
         scanf("%s", &numCarte);
         verif = verif_carte((*listeJoueur).main, numCarte);
         if(verif == 0)
