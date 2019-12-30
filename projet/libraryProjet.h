@@ -18,7 +18,7 @@ void piocher(TMain *mainJoueur, TPile *pile);
 void DeposerCarte(TPile *totem, int numCarteMain, TMain *main);
 void JouerCarte(TPile *totem, TPile *pioche, int numCarteMain, TJoueur *joueurQuiJoue, TJoueur *listeJoueur);
 TCarte Retrait_Carte_Main(TMain *main, int numCarteMain);
-void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur, int *gagnePartie);
+void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur listeJoueur, int *gagnePartie);
 void Afficher_Main(TMain mainJoueur);//Permet d'afficher une liste chaînée
 int verif_carte(TMain mainJoueur, int numCarte); //Vérifie si le joueur a bien la carte qu'il veut jouer en sa possession renvoie 1 si oui sinon renvoie 0
 void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur listeJoueur);
@@ -26,7 +26,7 @@ void tete_coyote(TJoueur * j1, TJoueur * j2);//échange le totem avec celui d'un 
 void tete_corbeau(TJoueur * j1, TJoueur * j2);//échange la main avec celle d'un autre joueur
 void liberer_main(TMain * main);
 void Donner_Main_Vers_Voisin_Gauche(TJoueur *listeJoueur, int nbJoueur);
-void Donner_Totem_Vers_Voisin_Gauche(TJoueur *listeJoueur, int nbJoueur);
+
 
 
 //Pioche

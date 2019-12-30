@@ -41,22 +41,4 @@ int Choix_Premier_Joueur(int nbJoueur)
 	return rand()%nbJoueur+1;
 }
 
-void Plateau()
-{//Regarder sur internet. A faire en dernier temps
-    printf("||\n");
-    printf("||\n");
-    printf("||\n");
-    printf("||\n");
-    printf("||\n");
-    printf("||\n");
-    printf("||\n");
-    printf("||\n");
-    printf("||\n");
-    printf("||\n");
-    printf("||\n");
-    printf("||\n");
-    printf("||\n");
-    printf("||\n");
-
-}
 

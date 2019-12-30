@@ -4,7 +4,7 @@
 #include <time.h>
 #include "libraryProjet.h"
 
-
+//Fonction permettant de piocher
 void piocher(TMain *mainJoueur, TPile *pile)
 {
 
@@ -53,7 +53,7 @@ void piocher(TMain *mainJoueur, TPile *pile)
 
 }
 
-
+//Fonction appelé permettant de jouer une carte
 void JouerCarte(TPile *totem, TPile *pioche, int numCarteMain, TJoueur *joueurQuiJoue, TJoueur *listeJoueur)
 {
 
@@ -125,6 +125,7 @@ TCarte Retrait_Carte_Main(TMain *main, int numCarteMain)
 
 }
 
+//Fonction permettant d'afficher la main d'un joueur
 void Afficher_Main(TMain mainJoueur)
 {
 
@@ -152,23 +153,17 @@ void Afficher_Main(TMain mainJoueur)
 
 }
 
-void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur *joueurCible, TJoueur listeJoueur, int *gagnePartie)
+//Procédure permettant de jouer une carte Coup Bas. Elle est appellé dans la procédure jouer carte
+void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur listeJoueur, int *gagnePartie)
 {
     int i =0;
+     TJoueur *joueurCible;
     (*joueurQuiJoue).rejouer = 0;
     (*joueurCible).rejouer = 0;
     //Montrer la carte à jouer
     printf("La carte jouee est : %s ",carte.nom);
     //Plusieurs actions possibles:
 
-    //Carte
-    //On arrive v
-    //Et paf v
-    //Esprit Farceur v
-    //Bison Dingo v
-    //Faux PAs v
-    //Pillage v
-    //Eau de Feu
     if(strcmp(carte.nom,"OnArrive") == 0)
     {
         //A jouer en même temps qu'un joueur qui gagne
@@ -269,11 +264,13 @@ EFFET : Annuler l’action d’un joueur si vous annulez un autre “Faux pas !”. Pioc
 
 }
 
+//Procédure permettant de défausser une carte
 void Defausser_Carte(TMain *mainJoueur, int numCarte)
 {
     Retrait_Carte_Main(mainJoueur,numCarte);
 }
 
+//Procédure permettant de donner sa main à son voisin de gauche et de le faire pour tous les joueurs
 void Donner_Main_Vers_Voisin_Gauche(TJoueur *listeJoueur, int nbJoueur)
 {
     int nbJoueurLocal;
@@ -289,6 +286,7 @@ void Donner_Main_Vers_Voisin_Gauche(TJoueur *listeJoueur, int nbJoueur)
     listeJoueur[nbJoueur].totem = totemJoueur0;
 }
 
+//Procédure permettant de donner son totem à son voisin de gauche et de le faire pour tous les joueurs
 void Donner_Totem_Vers_Voisin_Gauche(TJoueur *listeJoueur, int nbJoueur)
 {
     int nbJoueurLocal;
