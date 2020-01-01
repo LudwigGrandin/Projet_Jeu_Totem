@@ -210,7 +210,7 @@ int main()
        }while(gagnePartie != 1);
 
        printf("Voulez vous rejouer ? :");
-       scanf(&choixRejouerPartie);
+       scanf("%d", &choixRejouerPartie);
 
 
     }while(choixRejouerPartie != 1);
@@ -801,7 +801,7 @@ void tour_joueur(TJoueur *listeJoueur, TPile *pioche, int *gagneManche, int *gag
         //Le joueur pose sa carte
         //DeposerCarte(&(*listeJoueur).totem, numCarte, &(*listeJoueur).main);
 
-        JouerCarte(&(*listeJoueur).totem,pioche,numCarte,&(*listeJoueur).main,listeJoueur);
+        JouerCarte(&(*listeJoueur).totem,pioche,numCarte, &listeJoueur[(*listeJoueur).id],listeJoueur);
         printf("test4\n\n");
         //On affiche son totem et sa taille
 

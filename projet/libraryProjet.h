@@ -1,5 +1,5 @@
-#ifndef _PILE_H_
-#define _PILE_H_
+#ifndef _LIBRARY_H_
+#define _LIBRARY_H_
 #include "modele_donnees.c"
 
 //Piles
@@ -26,6 +26,8 @@ void tete_coyote(TJoueur * j1, TJoueur * j2);//échange le totem avec celui d'un 
 void tete_corbeau(TJoueur * j1, TJoueur * j2);//échange la main avec celle d'un autre joueur
 void liberer_main(TMain * main);
 void Donner_Main_Vers_Voisin_Gauche(TJoueur *listeJoueur, int nbJoueur);
+void Depot_Carte_Main(TMain *mainJoueur, TCarte carte, int emplacementMain);
+int taille_main(TMain mainJoueur);
 
 
 

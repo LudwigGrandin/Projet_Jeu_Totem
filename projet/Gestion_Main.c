@@ -172,7 +172,7 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
     }
     else if(strcmp(carte.nom,"EtPaf") == 0)
     {
-        if((*joueurCible).immunite == 1)    // Attention à bien distinguer vol et destruction de totem, je pensais à protection contre le vol quand immunite = 2 / protection contre la destruction immunite = 1
+        if((*joueurCible).immunite == 1)
         {
             printf("Ce joueur est immunisé contre le vol de totem");
         }
@@ -227,12 +227,12 @@ EFFET : Annuler l’action d’un joueur si vous annulez un autre “Faux pas !”. Pioc
     else if(strcmp(carte.nom,"Pillage") == 0)
     {
         TCarte carteTotemAdverse;
-        carteTotemAdverse = (*(*joueurCible).totem.sommet).carte;
-        Depot_Carte_Main(&(*joueurQuiJoue).main,carteTotemAdverse,taille_totem((*joueurQuiJoue).totem));
+        carteTotemAdverse = (*(*joueurCible).totem.sommet).carte; 
+        Depot_Carte_Main(&(*joueurQuiJoue).main,carteTotemAdverse,taille_pile((*joueurQuiJoue).totem));
         depiler(&(*joueurCible).totem);
 
 
-        if(taille_totem((*joueurQuiJoue).totem) <4)
+        if(taille_pile((*joueurQuiJoue).totem) <4)
         {
             (*joueurQuiJoue).rejouer = 1;
             //Comment gérer le fait de rejouer ? Variable dans joueur ?
@@ -418,20 +418,6 @@ int taille_main(TMain mainJoueur)
         tailleMain ++;
     }
     return tailleMain;
-}
-
-int taille_totem(TPile totem)
-{
-    TPilelem *aux;
-    int tailletotem = 0;
-    aux = totem.sommet;
-
-    while(aux != NULL)
-    {
-        aux = (*aux).suivant;
-        tailletotem ++;
-    }
-    return tailletotem;
 }
 
 void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur listeJoueur)
