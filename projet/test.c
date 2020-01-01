@@ -6,12 +6,12 @@
 //#include "Gestion_Init_Partie.c"
 //#include "Gestion_Main.c"
 
-	/* DÃ©finition d'une carte */
+	/* Définition d'une carte */
 
 
         // Test Killian
     /*
-        //TODO : selon le nbr de joueurs des cartes seront Ã  retirer
+        //TODO : selon le nbr de joueurs des cartes seront à retirer
         printf("\nCombien y aura t-il de joueurs ?");
         int nbJoueur = saisir_entre(2,6);
 
@@ -20,7 +20,7 @@
 
         init_pile(&laPioche);
 
-        // crÃ©er la pioche de TCartes mÃ©langÃ© en utilisant le tableau d'entier et la liste de TCartes
+        // créer la pioche de TCartes mélangé en utilisant le tableau d'entier et la liste de TCartes
         init_pioche(taillePioche,nbJoueur,&laPioche);
         printf("\n ");
         afficher_pile(laPioche);
@@ -145,7 +145,7 @@
         printf("\n debug apres nettoyage pioche \n");
 */
 /********************Fin init joueurs********************************/
-       // Ne pas oublier de libÃ©rer la mÃ©moire
+       // Ne pas oublier de libérer la mémoire
 
       // liberer_pile(&laPioche);
 
@@ -154,7 +154,7 @@
 
 
 /*
-//test de toutes les procÃ©dures.
+//test de toutes les procédures.
     TPile pile;
     TPile totem;
 	init_pile(&pile);
@@ -188,15 +188,15 @@
         printf("Combien de joueur etes vous ? : ");
         scanf("%d", &nbJoueur);
         TJoueur listeJoueur[nbJoueur];
-        //creÃ© et mÃ©lange la pioche
+        //creé et mélange la pioche
         init_pioche(nbCarte,nbJoueur,&pile);
-        //crÃ©e la liste de joueur
+        //crée la liste de joueur
         init_Joueurs(listeJoueur, nbJoueur);
         //system("cls");
         printf("nom joueur 0 : %s \n", listeJoueur[0].nom);
         printf("La partie peut commencer\n\n");
 
-       // DÃ©but
+       // Début
        Distribuer_Cartes(listeJoueur,&pile,nbCarte,nbJoueur);
        do
        {
@@ -217,7 +217,7 @@
     }while(choixRejouerPartie != 1);
 
     liberer_main(&mainJoueur);
-	liberer_pile(&pile); // libÃ¨re toute la pile
+	liberer_pile(&pile); // libère toute la pile
 
 */
 /**Main Lucas**/
@@ -276,4 +276,3 @@
     nettoyage_partie(listeJoueur, nbJoueurs, &pioche);
 
 */
-

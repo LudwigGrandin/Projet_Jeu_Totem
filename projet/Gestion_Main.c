@@ -161,7 +161,7 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
     (*joueurQuiJoue).rejouer = 0;
     (*joueurCible).rejouer = 0;
     //Montrer la carte à jouer
-    printf("La carte jouee est : %s ",carte.nom);
+    printf("La carte jouee est : %s \n",carte.nom);
     //Plusieurs actions possibles:
 
     if(strcmp(carte.nom,"OnArrive") == 0)
@@ -174,11 +174,11 @@ void JouerCarteCoupBas(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJou
     {
         if((*joueurCible).immunite == 1)
         {
-            printf("Ce joueur est immunisé contre le vol de totem");
+            printf("Ce joueur est immunisé contre le vol de totem\n");
         }
         else if((*joueurCible).immunite == 1)
         {
-            printf("Ce joueur est immunisé contre la destruction de totem");
+            printf("Ce joueur est immunisé contre la destruction de totem\n");
         }
         else
         {
@@ -207,7 +207,7 @@ EFFET : Annuler l’action d’un joueur si vous annulez un autre “Faux pas !”. Pioc
 */
         if(carte.nom == "FauxPas")
         {
-            printf("Piocher 2 carte en Tapant 1 ou rejouez immédiatement en tapant 2 : ");
+            printf("Piocher 2 carte en Tapant 1 ou rejouez immédiatement en tapant 2 : \n");
             scanf("%d", &choix);
             if(choix == 1)
             {
@@ -227,7 +227,7 @@ EFFET : Annuler l’action d’un joueur si vous annulez un autre “Faux pas !”. Pioc
     else if(strcmp(carte.nom,"Pillage") == 0)
     {
         TCarte carteTotemAdverse;
-        carteTotemAdverse = (*(*joueurCible).totem.sommet).carte; 
+        carteTotemAdverse = (*(*joueurCible).totem.sommet).carte;
         Depot_Carte_Main(&(*joueurQuiJoue).main,carteTotemAdverse,taille_pile((*joueurQuiJoue).totem));
         depiler(&(*joueurCible).totem);
 
@@ -303,8 +303,8 @@ void Donner_Totem_Vers_Voisin_Gauche(TJoueur *listeJoueur, int nbJoueur)
 
 }
 
-
-void tete_coyote(TJoueur * j1, TJoueur * j2) // échange les totems de 2 joueurs
+// Procédure permettant d'échanger les totems de 2 joueurs
+void tete_coyote(TJoueur * j1, TJoueur * j2)
 {
     TPile totemint;
     totemint = (*j1).totem;
@@ -312,8 +312,8 @@ void tete_coyote(TJoueur * j1, TJoueur * j2) // échange les totems de 2 joueurs
     (*j2).totem = totemint;
 
 }
-
-void tete_corbeau(TJoueur * j1, TJoueur * j2) // échange les totems de 2 joueurs
+// Procédure permettant déchanger les totems de 2 joueurs
+void tete_corbeau(TJoueur * j1, TJoueur * j2)
 {
     TMain mainint;
     mainint = (*j1).main;
@@ -322,7 +322,7 @@ void tete_corbeau(TJoueur * j1, TJoueur * j2) // échange les totems de 2 joueurs
 
 }
 
-//Permet d'échanger 2 mains
+//Permet d'échanger les mains de deux TJoueur
 void tete_loup(TMain *mainJoueurQuiJoue,TMain *mainJoueurCible)
 {
     TMain mainTemp;
@@ -347,7 +347,7 @@ void tete_lynx(TJoueur *joueurQuiJoue,TPile *pioche)
         (*joueurQuiJoue).lynx = 1;
 
         //Permet de tirer 3 cartes
-        for(numCarte=0; numCarte = 3; numCarte ++)
+        for(numCarte=0; numCarte == 3; numCarte ++)
         {
             printf("Carte %d : %s", numCarte+1, (*(*pioche).sommet).carte.nom);
             piocher(&main3Cartes,pioche);
@@ -402,10 +402,10 @@ void Depot_Carte_Main(TMain *mainJoueur, TCarte carte, int emplacementMain)
     }
     else
     {
-        printf("veuillez saisir un numéro de carte valide");
+        printf("veuillez saisir un numéro de carte valide\n");
     }
 }
-
+//fonction qui retourne la taille d'une TMain
 int taille_main(TMain mainJoueur)
 {
     TPilelem *aux;
@@ -419,13 +419,13 @@ int taille_main(TMain mainJoueur)
     }
     return tailleMain;
 }
-
+//Permet au différentes TCartes d'être jouées
 void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueur listeJoueur)
 {
     int i = 0;
     TJoueur joueurCible;
     //Montrer la carte à jouer
-    printf("La carte jouee est : %s ",carte.nom);
+    printf("La carte jouee est : %s \n",carte.nom);
     //Plusieurs actions possibles:
     empiler(pioche,&carte);
     //TeteCoyote
@@ -466,7 +466,7 @@ void JouerCarteTotem(TCarte carte, TPile *pioche ,TJoueur *joueurQuiJoue, TJoueu
     {
         if(joueurCible.immunite == 1)
         {
-            printf("Ce joueur est immunisé contre la destruction de totem pour l'instant");
+            printf("Ce joueur est immunisé contre la destruction de totem pour l'instant\n");
         }
         else
         {
